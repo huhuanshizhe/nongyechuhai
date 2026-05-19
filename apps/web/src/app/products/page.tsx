@@ -41,50 +41,81 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     category: resolvedSearchParams.category,
     mode
   });
+  const activeRouteSummary = data.activeMode === 'direct'
+    ? 'The current view is focused on lines already presented with reference pricing and order-ready commercial packs.'
+    : data.activeMode === 'inquiry'
+      ? 'The current view is focused on lines that should begin through qualification, market alignment, and buyer briefing.'
+      : 'The current view combines inquiry-led and direct-order programs so buyers can compare category fit before narrowing by route.';
 
   return (
-    <main className="page-shell">
-      <section className="section-block" data-rise="true">
-        <div className="page-head">
+    <main className="page-shell page-shell--catalog">
+      <section className="portfolio-stage" data-rise="true">
+        <div className="portfolio-stage__intro">
           <span className="section-kicker">Export portfolio</span>
           <h1 className="section-title">A formal export portfolio organized by category and commercial route.</h1>
           <p className="catalog-intro">
             Use category and route filters to move from family overview to product export profile. Each listing signals whether it should begin as an inquiry discussion or a direct order review.
           </p>
+          <div className="portfolio-stage__metrics">
+            <article className="portfolio-stage__metric">
+              <span>All published lines</span>
+              <strong>{data.modeCounts.all}</strong>
+            </article>
+            <article className="portfolio-stage__metric">
+              <span>Inquiry programs</span>
+              <strong>{data.modeCounts.inquiry}</strong>
+            </article>
+            <article className="portfolio-stage__metric">
+              <span>Direct order programs</span>
+              <strong>{data.modeCounts.direct}</strong>
+            </article>
+          </div>
         </div>
-        <div className="filter-pills">
-          <Link className={`filter-pill ${!data.activeMode ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug)}>
-            All routes ({data.modeCounts.all})
-          </Link>
-          <Link className={`filter-pill ${data.activeMode === 'inquiry' ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug, 'inquiry')}>
-            Inquiry programs ({data.modeCounts.inquiry})
-          </Link>
-          <Link className={`filter-pill ${data.activeMode === 'direct' ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug, 'direct')}>
-            Direct order programs ({data.modeCounts.direct})
-          </Link>
-        </div>
+        <aside className="portfolio-stage__filters">
+          <div className="portfolio-stage__panel">
+            <span className="pill">Commercial route</span>
+            <div className="filter-pills">
+              <Link className={`filter-pill ${!data.activeMode ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug)}>
+                All routes ({data.modeCounts.all})
+              </Link>
+              <Link className={`filter-pill ${data.activeMode === 'inquiry' ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug, 'inquiry')}>
+                Inquiry programs ({data.modeCounts.inquiry})
+              </Link>
+              <Link className={`filter-pill ${data.activeMode === 'direct' ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug, 'direct')}>
+                Direct order programs ({data.modeCounts.direct})
+              </Link>
+            </div>
+          </div>
+          <div className="portfolio-stage__panel">
+            <span className="pill">Current view</span>
+            <h2>{data.activeCategory ? `${data.activeCategory.name} portfolio` : 'Published export portfolio'}</h2>
+            <p>{activeRouteSummary}</p>
+          </div>
+        </aside>
       </section>
 
-      <section className="catalog-shell" data-rise="true">
-        <aside className="catalog-sidebar">
-          <div className="sidebar-panel">
-            <span className="section-kicker">Categories</span>
-            <div className="filter-group">
-              <Link className={`filter-pill ${!data.activeCategory ? 'filter-pill--active' : ''}`} href={buildCatalogHref(undefined, data.activeMode ?? undefined)}>
-                All categories
+      <section className="portfolio-layout" data-rise="true">
+        <aside className="portfolio-rail">
+          <div className="portfolio-rail__panel">
+            <span className="section-kicker">Category ledger</span>
+            <div className="portfolio-category-list">
+              <Link className={`portfolio-category-list__item ${!data.activeCategory ? 'portfolio-category-list__item--active' : ''}`} href={buildCatalogHref(undefined, data.activeMode ?? undefined)}>
+                <span>00</span>
+                <strong>All categories</strong>
               </Link>
-              {data.categories.map((category) => (
+              {data.categories.map((category, index) => (
                 <Link
-                  className={`filter-pill ${data.activeCategory?.slug === category.slug ? 'filter-pill--active' : ''}`}
+                  className={`portfolio-category-list__item ${data.activeCategory?.slug === category.slug ? 'portfolio-category-list__item--active' : ''}`}
                   href={buildCatalogHref(category.slug, data.activeMode ?? undefined)}
                   key={category.slug}
                 >
-                  {category.name}
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{category.name}</strong>
                 </Link>
               ))}
             </div>
           </div>
-          <div className="sidebar-panel">
+          <div className="portfolio-rail__panel">
             <span className="section-kicker">Portfolio note</span>
             <strong>
               {data.activeCategory
@@ -96,7 +127,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 'Start broad, then narrow into the product family that matches your target market, pack format, and commercial route.'}
             </p>
           </div>
-          <div className="sidebar-panel">
+          <div className="portfolio-rail__panel">
             <span className="section-kicker">What this view optimizes</span>
             <ul className="clean">
               <li>Clear origin and category context before the buyer opens detail.</li>
@@ -106,22 +137,27 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           </div>
         </aside>
 
-        <div className="catalog-results">
-          <div className="page-head">
-            <span className="section-kicker">{data.products.length} result{data.products.length === 1 ? '' : 's'}</span>
-            <h2 className="section-title">
-              {data.activeCategory ? `${data.activeCategory.name} portfolio` : 'Published export portfolio'}
-            </h2>
-            <p className="catalog-intro">
+        <div className="portfolio-results">
+          <div className="portfolio-results__head">
+            <div className="page-head">
+              <span className="section-kicker">{data.products.length} result{data.products.length === 1 ? '' : 's'}</span>
+              <h2 className="section-title">
+                {data.activeCategory ? `${data.activeCategory.name} portfolio` : 'Published export portfolio'}
+              </h2>
+              <p className="catalog-intro">
               {data.activeMode === 'direct'
                 ? 'These lines already include reference pricing and standard commercial packs for direct order review.'
                 : data.activeMode === 'inquiry'
                   ? 'These lines are better opened through the inquiry desk so destination market, specification, and documentation can be aligned first.'
                   : 'Choose the route that best matches how far your buying brief is already defined.'}
-            </p>
+              </p>
+            </div>
+            <Link className="button button--ghost" href="/rfq">
+              Open inquiry desk
+            </Link>
           </div>
           {data.products.length > 0 ? (
-            <div className="product-grid">
+            <div className="product-grid product-grid--catalog">
               {data.products.map((product) => (
                 <ProductCard key={product.slug} product={product} />
               ))}

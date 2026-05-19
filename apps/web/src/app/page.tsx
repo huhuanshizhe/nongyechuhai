@@ -44,33 +44,44 @@ export const revalidate = 300;
 
 export default async function HomePage() {
   const [homeData, shellData] = await Promise.all([getHomepageData(), getStorefrontShellData()]);
+  const exportSignals = [
+    {
+      label: 'Portfolio scope',
+      value: `${shellData.activeCategoryCount} export families`,
+      description: 'Structured around real category review rather than broad marketplace sprawl.'
+    },
+    {
+      label: 'Supplier coverage',
+      value: `${shellData.approvedSupplierCount} approved programs`,
+      description: 'Presented with origin context, route clarity, and buyer-facing commercial framing.'
+    },
+    {
+      label: 'Products online',
+      value: `${shellData.publishedProductCount} current showcase lines`,
+      description: 'Each profile is published with specification signals and a visible next step.'
+    },
+    {
+      label: 'Inquiry handling',
+      value: '48h response target',
+      description: 'The desk is designed to preserve product, packaging, and market context from the first brief.'
+    }
+  ];
 
   return (
-    <main className="page-shell">
-      <section className="hero-panel" data-rise="true">
-        <div className="hero-copy">
+    <main className="page-shell page-shell--home">
+      <section className="stage-panel" data-rise="true">
+        <div className="stage-copy">
           <span className="section-kicker">China agricultural export showcase</span>
-          <div className="stack">
+          <div className="stage-stack">
             <h1 className="hero-title">Direct Sourcing of Premium Chinese Agricultural Products</h1>
             <p>
               From Farms to Global Markets with Export, Customs, and Cold Chain Support
             </p>
           </div>
-          <div className="hero-standards">
-            <article className="hero-standard">
-              <strong>{shellData.activeCategoryCount} formal export families</strong>
-              <span>Organized the way delegations, importers, and institutional buyers review category coverage.</span>
-            </article>
-            <article className="hero-standard">
-              <strong>{shellData.approvedSupplierCount} approved supplier programs</strong>
-              <span>Presented with origin context, category fit, and a clear commercial route.</span>
-            </article>
-            <article className="hero-standard">
-              <strong>Buyer inquiry desk</strong>
-              <span>Built to capture market, pack, quantity, and documentation needs in one brief.</span>
-            </article>
-          </div>
-          <div className="button-row">
+          <p className="stage-lead">
+            Nongye Chuhai should read like a serious export presentation, not like a generic sourcing directory. The front page now positions origin, commercial route, and delivery capability as one coherent trade narrative.
+          </p>
+          <div className="stage-actions button-row">
             <Link className="button" href="/products">
               View export portfolio
             </Link>
@@ -78,38 +89,46 @@ export default async function HomePage() {
               Open inquiry desk
             </Link>
           </div>
-          <div className="hero-metrics">
-            <article className="metric-card">
-              <span className="metric-card__value">{shellData.publishedProductCount}</span>
-              <span className="metric-card__label">showcase products currently online for formal review</span>
+          <div className="stage-route">
+            <article>
+              <span className="process-index">01</span>
+              <h2>Category and origin first</h2>
+              <p>Buyers begin with the right agricultural family and regional supply story before discussing a single SKU.</p>
             </article>
-            <article className="metric-card">
-              <span className="metric-card__value">{shellData.approvedSupplierCount}</span>
-              <span className="metric-card__label">approved suppliers represented in the presentation portfolio</span>
+            <article>
+              <span className="process-index">02</span>
+              <h2>Commercial format next</h2>
+              <p>The site makes it clear whether a line should start through inquiry, sampling, or direct order review.</p>
             </article>
-            <article className="metric-card">
-              <span className="metric-card__value">48h</span>
-              <span className="metric-card__label">target first response for qualified buyer inquiries</span>
+            <article>
+              <span className="process-index">03</span>
+              <h2>Execution stays visible</h2>
+              <p>Export documentation, cold chain, and buyer follow-up are presented as part of the offer, not as hidden back-office work.</p>
             </article>
           </div>
         </div>
-        <aside className="hero-aside">
-          <div className="hero-aside__panel">
-            <span className="pill">Presentation brief</span>
-            <h2>Designed to show product origin, commercial format, and supplier coverage without marketplace noise.</h2>
-            <ul className="clean">
-              <li>Category architecture aligned to real agricultural export families.</li>
-              <li>Clear distinction between inquiry-led programs and direct-order showcase lines.</li>
-              <li>Inquiry capture structured for supplier follow-up, sample planning, and quote discussion.</li>
-            </ul>
+        <aside className="stage-aside">
+          <div className="stage-brief">
+            <span className="pill">Delegation brief</span>
+            <h2>Built for trade offices, sourcing teams, importers, and institutional buyers who need clarity fast.</h2>
+            <p>
+              The presentation emphasizes category coverage, supplier readiness, and commercial next steps in a format that can hold up in government demonstrations and serious buyer meetings.
+            </p>
+            <div className="stage-brief__meta">
+              <strong>Current focus</strong>
+              <span>Aquatic products, Yunnan fungi, Chinese tea, specialty vegetables, and halal prepared foods.</span>
+            </div>
           </div>
-          <div className="hero-aside__panel">
+          <div className="stage-board">
             <span className="pill">Showcase families</span>
-            <div className="stack">
+            <div className="stage-board__rows">
               {homeData.featuredCategories.map((category) => (
-                <article key={category.slug}>
-                  <strong>{category.name}</strong>
-                  <p>{category.description}</p>
+                <article className="stage-board__row" key={category.slug}>
+                  <div>
+                    <strong>{category.name}</strong>
+                    <p>{category.description}</p>
+                  </div>
+                  <Link href={`/products?category=${category.slug}`}>Review family</Link>
                 </article>
               ))}
             </div>
@@ -117,17 +136,27 @@ export default async function HomePage() {
         </aside>
       </section>
 
-      <section className="section-block" data-rise="true">
+      <section className="signal-band" data-rise="true">
+        {exportSignals.map((item) => (
+          <article className="signal-band__item" key={item.label}>
+            <span>{item.label}</span>
+            <strong>{item.value}</strong>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="section-block section-block--editorial" data-rise="true">
         <div className="section-head">
-          <span className="section-kicker">Why this reads professionally</span>
-          <h2 className="section-title">The showcase makes the right trade signals visible before a buyer reaches out.</h2>
+          <span className="section-kicker">Presentation logic</span>
+          <h2 className="section-title">The design should help a buyer understand the program in one pass, not make them decode interface decoration.</h2>
           <p className="section-description">
-            International agriculture discussions move faster when category structure, origin, pack format, and commercial route are already clear. The storefront is organized around those decisions.
+            International agriculture discussions move faster when category structure, origin, pack format, and commercial route are obvious. The platform is organized around those decisions and removes the noise that usually makes sourcing sites look provisional.
           </p>
         </div>
-        <div className="signal-grid">
+        <div className="editorial-columns">
           {sourcingPrinciples.map((item) => (
-            <article className="section-card" key={item.title}>
+            <article className="editorial-columns__item" key={item.title}>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
             </article>
@@ -135,13 +164,18 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-block" data-rise="true">
-        <div className="section-head">
+      <section className="section-block section-block--portfolio" data-rise="true">
+        <div className="portfolio-head">
           <span className="section-kicker">Featured products</span>
-          <h2 className="section-title">Key showcase lines currently presented to buyers and delegations.</h2>
-          <p className="section-description">
+          <div>
+            <h2 className="section-title">Key showcase lines currently presented to buyers and delegations.</h2>
+            <p className="section-description">
             Each card surfaces the product family, supplier origin, and commercial route before the buyer opens the full export profile.
-          </p>
+            </p>
+          </div>
+          <Link className="button button--ghost" href="/products">
+            Browse all categories
+          </Link>
         </div>
         <div className="product-grid">
           {homeData.featuredProducts.map((product) => (
@@ -150,7 +184,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="editorial-panel" data-rise="true">
+      <section className="editorial-panel editorial-panel--statement" data-rise="true">
         <div className="editorial-panel__copy">
           <span className="section-kicker">Export approach</span>
           <h2 className="section-title">{homeData.editorial.title}</h2>
@@ -164,18 +198,18 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="insight-grid">
-          <article className="insight-card">
+        <div className="statement-rail">
+          <article>
             <span className="pill">Category architecture</span>
             <h3>{shellData.activeCategoryCount} export families</h3>
-            <p>The portfolio is grouped the way institutional buyers and delegations review export categories.</p>
+            <p>The portfolio is grouped the way institutional buyers and delegations actually review export categories.</p>
           </article>
-          <article className="insight-card">
+          <article>
             <span className="pill">Supplier coverage</span>
             <h3>{shellData.approvedSupplierCount} approved programs</h3>
-            <p>Supplier representation already spans multiple origin stories, product families, and commercial formats.</p>
+            <p>Supplier representation spans multiple origins, product families, and commercial formats without looking scattered.</p>
           </article>
-          <article className="insight-card">
+          <article>
             <span className="pill">Inquiry handling</span>
             <h3>Unified buyer brief</h3>
             <p>Buyers can move from portfolio review into a structured inquiry without losing product, market, or packaging context.</p>
@@ -188,9 +222,9 @@ export default async function HomePage() {
           <span className="section-kicker">Trade process</span>
           <h2 className="section-title">The buyer journey is designed to reduce requalification and keep the export discussion moving.</h2>
         </div>
-        <div className="workflow-grid">
+        <div className="process-rail">
           {workflow.map((item) => (
-            <article className="workflow-card" key={item.step}>
+            <article className="process-rail__item" key={item.step}>
               <span className="process-index">{item.step}</span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -199,17 +233,20 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-block" data-rise="true">
+      <section className="section-block section-block--categories" data-rise="true">
         <div className="section-head">
           <span className="section-kicker">Category focus</span>
           <h2 className="section-title">Navigate formal product families, not miscellaneous listing clusters.</h2>
         </div>
-        <div className="category-grid">
-          {homeData.featuredCategories.map((category) => (
-            <article className="category-card" key={category.slug}>
-              <span className="catalog-chip">{category.familyLabel}</span>
-              <h3>{category.name}</h3>
-              <p>{category.description}</p>
+        <div className="category-board">
+          {homeData.featuredCategories.map((category, index) => (
+            <article className="category-board__row" key={category.slug}>
+              <span className="category-board__index">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <span className="catalog-chip">{category.familyLabel}</span>
+                <h3>{category.name}</h3>
+                <p>{category.description}</p>
+              </div>
               <Link className="product-card__link" href={`/products?category=${category.slug}`}>
                 Browse this family
               </Link>
@@ -218,8 +255,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section-block" data-rise="true">
-        <div className="section-head">
+      <section className="closing-banner" data-rise="true">
+        <div>
           <span className="section-kicker">Next move</span>
           <h2 className="section-title">Need a quote, sample plan, or compliance discussion? Start with the inquiry desk.</h2>
         </div>
