@@ -31,7 +31,7 @@ export function createAppAuth(options: CreateAppAuthOptions = {}) {
   const authConfig: NextAuthConfig = {
     adapter: PrismaAdapter(prisma),
     session: {
-      strategy: 'database'
+      strategy: 'jwt'
     },
     trustHost: process.env.AUTH_TRUST_HOST !== 'false',
     pages: {
@@ -98,15 +98,23 @@ export function createAppAuth(options: CreateAppAuthOptions = {}) {
       signIn({ user }) {
         return hasAllowedRole((user as { role?: AppRole }).role, allowedRoles);
       },
-      session({ session, user }) {
+      jwt({ token, user }) {
+        if (user) {
+          token.sub = user.id;
+          (token as typeof token & { role?: AppRole }).role = (user as { role?: AppRole }).role ?? 'BUYER';
+        }
+
+        return token;
+      },
+      session({ session, token }) {
         if (session.user) {
           const sessionUser = session.user as typeof session.user & {
             id?: string;
             role?: AppRole;
           };
 
-          sessionUser.id = user.id;
-          sessionUser.role = (user as { role?: AppRole }).role ?? 'BUYER';
+          sessionUser.id = token.sub ?? '';
+          sessionUser.role = ((token as typeof token & { role?: AppRole }).role ?? 'BUYER') as AppRole;
         }
 
         return session;
@@ -119,7 +127,7 @@ export function createAppAuth(options: CreateAppAuthOptions = {}) {
 
 export const authConfig: NextAuthConfig = {
   session: {
-    strategy: 'database'
+    strategy: 'jwt'
   },
   providers: []
 };
