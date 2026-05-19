@@ -1,0 +1,24 @@
+{
+  "name": "@nongyechuhai/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
+    "@nongyechuhai/db": "workspace:*",
+    "bcrypt": "^6.0.0",
+    "next-auth": "^5.0.0-beta.30",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0"
+  }
+}
