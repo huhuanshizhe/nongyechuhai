@@ -213,6 +213,235 @@
     color: var(--muted);
   }
 
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.site-nav a,
+.footer-meta a {
+  color: var(--foreground);
+}
+
+.site-nav a:hover,
+.footer-meta a:hover,
+.catalog-sidebar a:hover,
+.product-card__link:hover {
+  color: var(--accent);
+}
+
+.header-actions,
+.button-row,
+.detail-action-row,
+.submit-row,
+.product-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header-actions form {
+  display: contents;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #f8f7f2;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(22, 56, 34, 0.16);
+}
+
+.button--ghost {
+  border-color: var(--line);
+  background: rgba(255, 253, 248, 0.82);
+  color: var(--foreground);
+}
+
+.button--soft {
+  border-color: rgba(24, 56, 44, 0.14);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.button--earth {
+  border-color: rgba(143, 98, 51, 0.18);
+  background: var(--earth-soft);
+  color: #6e451e;
+}
+
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid rgba(46, 63, 51, 0.08);
+  border-bottom: 1px solid rgba(46, 63, 51, 0.08);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.trust-strip__item {
+  display: grid;
+  gap: 3px;
+  padding: 16px 20px;
+  border-right: 1px solid rgba(46, 63, 51, 0.08);
+}
+
+.trust-strip__item:last-child {
+  border-right: 0;
+}
+
+.trust-strip__item strong,
+.detail-price,
+.success-banner strong,
+.warning-banner strong {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.trust-strip__item span,
+.eyebrow-note,
+.muted,
+.product-card__meta,
+.footer-copy,
+.footer-meta,
+.process-list,
+.promise-list,
+.rich-copy,
+.detail-aux {
+  color: var(--muted);
+}
+
+.section-kicker,
+.pill,
+.mode-badge,
+.catalog-chip,
+.filter-pill,
+.process-index {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-kicker,
+.pill,
+.catalog-chip,
+.process-index {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.mode-badge {
+  border: 1px solid transparent;
+}
+
+.mode-badge--purchase {
+  background: rgba(28, 94, 67, 0.14);
+  color: #154c34;
+}
+
+.mode-badge--inquiry {
+  background: var(--earth-soft);
+  color: #744920;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(3rem, 5vw, 5.4rem);
+  max-width: 11ch;
+}
+
+.hero-copy p,
+.section-description,
+.detail-description,
+.rfq-story p,
+.catalog-intro {
+  margin: 0;
+  font-size: 1.04rem;
+  line-height: 1.72;
+  color: var(--muted);
+}
+
+.page-shell--home {
+  gap: 34px;
+}
+
+.stage-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent);
+  border-radius: 30px;
+  background: linear-gradient(135deg, rgba(255, 253, 248, 0.98) 0%, rgba(244, 237, 226, 0.98) 100%);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.stage-copy,
+.stage-brief,
+.stage-board,
+.signal-band__item,
+.editorial-columns__item,
+.process-rail__item,
+.category-board__row,
+.closing-banner {
+  position: relative;
+}
+
+.stage-copy {
+  display: grid;
+  gap: 26px;
+  padding: 50px 50px 44px;
+  border-right: 1px solid rgba(46, 63, 51, 0.09);
+}
+
+.stage-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.stage-lead {
+  max-width: 55ch;
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.84;
+  color: var(--muted);
+}
+
+.stage-actions {
+  align-items: center;
+}
+
 .stage-route {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
