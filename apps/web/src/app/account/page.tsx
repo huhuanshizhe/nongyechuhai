@@ -5,8 +5,8 @@ import { auth } from '../../auth';
 import { getBuyerAccountData } from '../../lib/storefront';
 
 export const metadata: Metadata = {
-  title: 'Buyer Account',
-  description: 'Review RFQs, quotes, and orders tied to your buyer account.'
+  title: 'Buyer Workspace',
+  description: 'Review inquiries, quotations, and export orders tied to your buyer workspace.'
 };
 
 export const dynamic = 'force-dynamic';
@@ -29,40 +29,40 @@ export default async function AccountPage() {
     <main className="page-shell">
       <section className="section-block account-hero" data-rise="true">
         <div className="page-head">
-          <span className="section-kicker">Buyer account</span>
-          <h1 className="section-title">{account.buyerName}, your sourcing activity now has a single buyer-side view.</h1>
+          <span className="section-kicker">Buyer workspace</span>
+          <h1 className="section-title">{account.buyerName}, your inquiries, quotations, and order activity now sit in one export-facing view.</h1>
           <p className="catalog-intro">
-            Follow open RFQs, see when quotes are in motion, and keep direct-purchase order visibility without jumping between threads.
+            Follow open inquiries, see when quotations are in motion, and keep order coordination visible without switching between fragmented message threads.
           </p>
         </div>
         <div className="account-mini-meta">
           <span className="catalog-chip">{account.buyerEmail}</span>
           <Link className="button button--ghost" href="/rfq">
-            Create another RFQ
+            Create another inquiry
           </Link>
         </div>
       </section>
 
       <section className="account-grid" data-rise="true">
         <article className="account-card">
-          <span className="section-kicker">Open RFQs</span>
+          <span className="section-kicker">Open inquiries</span>
           <strong>{account.metrics.openInquiryCount}</strong>
-          <p>Still awaiting closure, so procurement follow-up or supplier response is ongoing.</p>
+          <p>Requests that still need supplier response, buyer clarification, or internal follow-up.</p>
         </article>
         <article className="account-card">
-          <span className="section-kicker">Quoted / negotiating</span>
+          <span className="section-kicker">Quotation in progress</span>
           <strong>{account.metrics.quotedInquiryCount}</strong>
-          <p>Requests that already moved past intake and into commercial discussion.</p>
+          <p>Requests that already moved beyond intake and into commercial review or negotiation.</p>
         </article>
         <article className="account-card">
           <span className="section-kicker">Active orders</span>
           <strong>{account.metrics.activeOrderCount}</strong>
-          <p>Orders that are still pending, confirmed, processing, or in shipment movement.</p>
+          <p>Orders that are pending, confirmed, processing, or moving through shipment execution.</p>
         </article>
         <article className="account-card">
           <span className="section-kicker">Paid orders</span>
           <strong>{account.metrics.paidOrderCount}</strong>
-          <p>Orders that reached payment completion in the current mock commerce flow.</p>
+          <p>Orders that reached payment completion within the current presentation environment.</p>
         </article>
       </section>
 
@@ -70,7 +70,7 @@ export default async function AccountPage() {
         <article className="section-block">
           <div className="section-head">
             <span className="section-kicker">Inquiry history</span>
-            <h2 className="section-title">Your recent RFQs</h2>
+            <h2 className="section-title">Your recent inquiries</h2>
           </div>
           {account.inquiries.length > 0 ? (
             <div className="account-list">
@@ -83,16 +83,16 @@ export default async function AccountPage() {
                   <div className="account-item__meta">
                     <span className={`status-pill status-pill--${item.statusTone}`}>{item.status}</span>
                     <span>{item.inquiryNumber}</span>
-                    <span>{item.quoteCount} quotes · {item.createdAt}</span>
+                    <span>{item.quoteCount} quotation record{item.quoteCount === 1 ? '' : 's'} · {item.createdAt}</span>
                   </div>
                 </article>
               ))}
             </div>
           ) : (
             <div className="account-empty">
-              <p>No RFQs are linked to this buyer yet.</p>
+              <p>No inquiries are linked to this buyer yet.</p>
               <Link className="button" href="/rfq">
-                Start your first RFQ
+                Start your first inquiry
               </Link>
             </div>
           )}
@@ -124,7 +124,7 @@ export default async function AccountPage() {
             <div className="account-empty">
               <p>No orders are linked to this buyer yet.</p>
               <Link className="button button--ghost" href="/products">
-                Browse products
+                Browse portfolio
               </Link>
             </div>
           )}

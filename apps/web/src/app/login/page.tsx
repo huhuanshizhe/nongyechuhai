@@ -11,8 +11,8 @@ type LoginPageProps = {
 };
 
 export const metadata: Metadata = {
-  title: 'Buyer Login',
-  description: 'Sign in to review RFQs, orders, and ongoing sourcing activity.'
+  title: 'Buyer Workspace Access',
+  description: 'Sign in to review inquiries, quotations, and export order coordination in one buyer workspace.'
 };
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
@@ -26,42 +26,42 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     <main className="page-shell auth-layout">
       <section className="auth-panel" data-rise="true">
         <div className="section-head">
-          <span className="section-kicker">Buyer login</span>
-          <h1 className="section-title">Return to your RFQs, quotes, and active orders.</h1>
+          <span className="section-kicker">Buyer access</span>
+          <h1 className="section-title">Access your buyer workspace for inquiries, quotations, and export follow-up.</h1>
           <p className="section-description">
-            Buyer login keeps inquiry history, quote progress, and seeded order visibility tied to one procurement-facing account.
+            Sign in to keep inquiry history, supplier replies, quotation progress, and order coordination in one buyer-facing record.
           </p>
         </div>
 
         {resolvedSearchParams.error ? (
           <div className="warning-banner auth-banner">
             <strong>Login failed</strong>
-            <p className="catalog-intro">Please confirm the buyer email, password, and account role.</p>
+            <p className="catalog-intro">Please confirm the buyer email, password, and account role assigned to this workspace.</p>
           </div>
         ) : null}
 
         <form action={loginAction} className="form-grid auth-form-grid">
           <div className="field field--full">
             <label htmlFor="email">Business email</label>
-            <input id="email" name="email" placeholder="buyer@nongyechuhai.local" required type="email" />
+            <input id="email" name="email" placeholder="buyer@importcompany.com" required type="email" />
           </div>
           <div className="field field--full">
             <label htmlFor="password">Password</label>
-            <input id="password" name="password" placeholder="Admin123!" required type="password" />
+            <input id="password" name="password" placeholder="Enter your password" required type="password" />
           </div>
           <div className="submit-row field--full">
             <button className="button" type="submit">
-              Open buyer account
+              Open buyer workspace
             </button>
             <Link className="button button--ghost" href="/rfq">
-              Continue without login
+              Continue as guest buyer
             </Link>
           </div>
         </form>
 
         <div className="auth-note">
-          <strong>Local demo account</strong>
-          <p>Use buyer@nongyechuhai.local with password Admin123! to verify the seeded buyer workflow.</p>
+          <strong>Presentation access</strong>
+          <p>Buyer workspace access is enabled for approved reviewers in the current presentation environment.</p>
         </div>
       </section>
     </main>

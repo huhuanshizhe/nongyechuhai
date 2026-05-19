@@ -4,39 +4,39 @@ import { getHomepageData, getStorefrontShellData } from '../lib/storefront';
 
 const sourcingPrinciples = [
   {
-    title: 'Verified supplier posture',
-    description: 'Shortlist supply partners that already passed approval, identity, and operational review before buyers start conversations.'
+    title: 'Origin-led category structure',
+    description: 'The portfolio is arranged around real export families such as aquatic products, fungi, tea, specialty vegetables, and halal prepared foods.'
   },
   {
-    title: 'Trade-mode clarity',
-    description: 'Every listing makes the commercial route explicit: inquiry-first or payment-ready. No mixed buying logic.'
+    title: 'Commercial route clarity',
+    description: 'Every listing shows whether it should begin through the inquiry desk or can move directly into order review with published reference pricing.'
   },
   {
-    title: 'Procurement-grade UX',
-    description: 'The platform is designed for teams that compare origin, packing, specification, and response speed before pricing.'
+    title: 'Presentation-grade product detail',
+    description: 'Images, specification highlights, and supplier origin are curated for formal demonstration rather than generic marketplace volume.'
   }
 ];
 
 const workflow = [
   {
     step: '01',
-    title: 'Scan the right product families',
-    description: 'Move through category-level sourcing narratives before diving into individual SKUs.'
+    title: 'Review the right category and origin',
+    description: 'Start from the export family that matches the buyer brief before narrowing into a specific showcase line.'
   },
   {
     step: '02',
-    title: 'Compare trade modes and specification fit',
-    description: 'Understand which lines are RFQ-led and which are already structured for direct commercial follow-through.'
+    title: 'Open the export profile',
+    description: 'Use specification highlights, origin notes, and route labels to assess whether the line fits your current commercial stage.'
   },
   {
     step: '03',
-    title: 'Submit a structured RFQ',
-    description: 'Send buyer-side operational details once, with quantity, market, and packaging context already captured.'
+    title: 'Submit the buyer brief',
+    description: 'Send market, quantity, pack format, and certification needs through a single structured inquiry form.'
   },
   {
     step: '04',
-    title: 'Transition into quote and order flow',
-    description: 'The same data model continues into quote, mock payment, and order visibility for the supplier and admin teams.'
+    title: 'Coordinate quote and execution follow-up',
+    description: 'Qualified requests can continue into quotation review, sample planning, and order coordination without restarting the conversation.'
   }
 ];
 
@@ -49,48 +49,62 @@ export default async function HomePage() {
     <main className="page-shell">
       <section className="hero-panel" data-rise="true">
         <div className="hero-copy">
-          <span className="section-kicker">Professional agriculture sourcing</span>
+          <span className="section-kicker">China agricultural export showcase</span>
           <div className="stack">
-            <h1 className="hero-title">A trade-ready agriculture marketplace built for serious international buyers.</h1>
+            <h1 className="hero-title">Direct Sourcing of Premium Chinese Agricultural Products</h1>
             <p>
-              Source export-ready products through a buyer-first interface that emphasizes supplier credibility, trade-mode clarity, and fast RFQ execution instead of catalog noise.
+              From Farms to Global Markets with Export, Customs, and Cold Chain Support
             </p>
+          </div>
+          <div className="hero-standards">
+            <article className="hero-standard">
+              <strong>{shellData.activeCategoryCount} formal export families</strong>
+              <span>Organized the way delegations, importers, and institutional buyers review category coverage.</span>
+            </article>
+            <article className="hero-standard">
+              <strong>{shellData.approvedSupplierCount} approved supplier programs</strong>
+              <span>Presented with origin context, category fit, and a clear commercial route.</span>
+            </article>
+            <article className="hero-standard">
+              <strong>Buyer inquiry desk</strong>
+              <span>Built to capture market, pack, quantity, and documentation needs in one brief.</span>
+            </article>
           </div>
           <div className="button-row">
             <Link className="button" href="/products">
-              Explore product catalog
+              View export portfolio
             </Link>
             <Link className="button button--ghost" href="/rfq">
-              Launch an RFQ
+              Open inquiry desk
             </Link>
           </div>
           <div className="hero-metrics">
             <article className="metric-card">
               <span className="metric-card__value">{shellData.publishedProductCount}</span>
-              <span className="metric-card__label">published product lines ready for buyer review</span>
+              <span className="metric-card__label">showcase products currently online for formal review</span>
             </article>
             <article className="metric-card">
               <span className="metric-card__value">{shellData.approvedSupplierCount}</span>
-              <span className="metric-card__label">approved suppliers visible in the buyer workflow</span>
+              <span className="metric-card__label">approved suppliers represented in the presentation portfolio</span>
             </article>
             <article className="metric-card">
-              <span className="metric-card__value">24h</span>
-              <span className="metric-card__label">RFQ response target for qualified demand</span>
+              <span className="metric-card__value">48h</span>
+              <span className="metric-card__label">target first response for qualified buyer inquiries</span>
             </article>
           </div>
         </div>
         <aside className="hero-aside">
           <div className="hero-aside__panel">
-            <span className="pill">Buyer fit</span>
-            <h2>Designed for importers, ingredient distributors, and private label procurement teams.</h2>
+            <span className="pill">Presentation brief</span>
+            <h2>Designed to show product origin, commercial format, and supplier coverage without marketplace noise.</h2>
             <ul className="clean">
-              <li>Specification-led catalog browsing instead of generic merchandising.</li>
-              <li>Clear visibility into inquiry-only versus direct-purchase commercial paths.</li>
-              <li>RFQ handoff structured to feed supplier and admin workflows without rework.</li>
+              <li>Category architecture aligned to real agricultural export families.</li>
+              <li>Clear distinction between inquiry-led programs and direct-order showcase lines.</li>
+              <li>Inquiry capture structured for supplier follow-up, sample planning, and quote discussion.</li>
             </ul>
           </div>
           <div className="hero-aside__panel">
-            <span className="pill">Coverage snapshot</span>
+            <span className="pill">Showcase families</span>
             <div className="stack">
               {homeData.featuredCategories.map((category) => (
                 <article key={category.slug}>
@@ -105,10 +119,10 @@ export default async function HomePage() {
 
       <section className="section-block" data-rise="true">
         <div className="section-head">
-          <span className="section-kicker">Why buyers trust the flow</span>
-          <h2 className="section-title">The UX is tuned for procurement confidence, not consumer impulse.</h2>
+          <span className="section-kicker">Why this reads professionally</span>
+          <h2 className="section-title">The showcase makes the right trade signals visible before a buyer reaches out.</h2>
           <p className="section-description">
-            International agriculture sourcing needs clear qualification signals, commercial context, and fast escalation into RFQ. The experience below is organized around those decisions.
+            International agriculture discussions move faster when category structure, origin, pack format, and commercial route are already clear. The storefront is organized around those decisions.
           </p>
         </div>
         <div className="signal-grid">
@@ -124,9 +138,9 @@ export default async function HomePage() {
       <section className="section-block" data-rise="true">
         <div className="section-head">
           <span className="section-kicker">Featured products</span>
-          <h2 className="section-title">Start from high-signal product lines that already fit the buyer workflow.</h2>
+          <h2 className="section-title">Key showcase lines currently presented to buyers and delegations.</h2>
           <p className="section-description">
-            Each product card surfaces trade mode, supplier context, and commercial readiness before the buyer clicks deeper.
+            Each card surfaces the product family, supplier origin, and commercial route before the buyer opens the full export profile.
           </p>
         </div>
         <div className="product-grid">
@@ -138,41 +152,41 @@ export default async function HomePage() {
 
       <section className="editorial-panel" data-rise="true">
         <div className="editorial-panel__copy">
-          <span className="section-kicker">Editorial signal</span>
+          <span className="section-kicker">Export approach</span>
           <h2 className="section-title">{homeData.editorial.title}</h2>
           <p>{homeData.editorial.excerpt}</p>
           <div className="button-row">
-              <Link className="button button--soft" href="/about">
-                Review platform approach
+            <Link className="button button--soft" href="/about">
+              Read the export approach
             </Link>
             <Link className="button button--ghost" href="/rfq">
-              Request a sourcing discussion
+              Request a buyer discussion
             </Link>
           </div>
         </div>
         <div className="insight-grid">
           <article className="insight-card">
-            <span className="pill">Catalog structure</span>
+            <span className="pill">Category architecture</span>
             <h3>{shellData.activeCategoryCount} export families</h3>
-            <p>Categories are organized to help buyers qualify the right family before comparing individual products.</p>
+            <p>The portfolio is grouped the way institutional buyers and delegations review export categories.</p>
           </article>
           <article className="insight-card">
-            <span className="pill">Response model</span>
-            <h3>RFQ-first routing</h3>
-            <p>Inquiry submissions are already shaped for the supplier center and backoffice review flow.</p>
+            <span className="pill">Supplier coverage</span>
+            <h3>{shellData.approvedSupplierCount} approved programs</h3>
+            <p>Supplier representation already spans multiple origin stories, product families, and commercial formats.</p>
           </article>
           <article className="insight-card">
-            <span className="pill">Commercial progression</span>
-            <h3>Quote to order continuity</h3>
-            <p>The same platform data model continues into quote, order, and payment adapter states.</p>
+            <span className="pill">Inquiry handling</span>
+            <h3>Unified buyer brief</h3>
+            <p>Buyers can move from portfolio review into a structured inquiry without losing product, market, or packaging context.</p>
           </article>
         </div>
       </section>
 
-      <section className="section-block" id="procurement-system" data-rise="true">
+      <section className="section-block" id="trade-process" data-rise="true">
         <div className="section-head">
-          <span className="section-kicker">Procurement system</span>
-          <h2 className="section-title">The buying journey is designed to reduce requalification and dead-end conversations.</h2>
+          <span className="section-kicker">Trade process</span>
+          <h2 className="section-title">The buyer journey is designed to reduce requalification and keep the export discussion moving.</h2>
         </div>
         <div className="workflow-grid">
           {workflow.map((item) => (
@@ -188,7 +202,7 @@ export default async function HomePage() {
       <section className="section-block" data-rise="true">
         <div className="section-head">
           <span className="section-kicker">Category focus</span>
-          <h2 className="section-title">Move from category narrative to commercial action without losing context.</h2>
+          <h2 className="section-title">Navigate formal product families, not miscellaneous listing clusters.</h2>
         </div>
         <div className="category-grid">
           {homeData.featuredCategories.map((category) => (
@@ -197,7 +211,7 @@ export default async function HomePage() {
               <h3>{category.name}</h3>
               <p>{category.description}</p>
               <Link className="product-card__link" href={`/products?category=${category.slug}`}>
-                Open this sourcing lane
+                Browse this family
               </Link>
             </article>
           ))}
@@ -207,14 +221,14 @@ export default async function HomePage() {
       <section className="section-block" data-rise="true">
         <div className="section-head">
           <span className="section-kicker">Next move</span>
-          <h2 className="section-title">Already know what you need? Send a structured RFQ and skip generic inquiry loops.</h2>
+          <h2 className="section-title">Need a quote, sample plan, or compliance discussion? Start with the inquiry desk.</h2>
         </div>
         <div className="button-row">
           <Link className="button" href="/rfq">
-            Start RFQ desk
+            Start inquiry desk
           </Link>
           <Link className="button button--earth" href="/products">
-            Inspect catalog first
+            Inspect portfolio first
           </Link>
         </div>
       </section>

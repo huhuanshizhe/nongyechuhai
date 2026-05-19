@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { PROJECT_NAME } from '@nongyechuhai/config';
 import { auth } from '../auth';
+import { BrandSignature } from '../components/BrandSignature';
 import { signOutAction } from './actions';
 import { JsonLd } from '../components/JsonLd';
 import { buildOrganizationJsonLd, buildWebsiteJsonLd } from '../lib/structured-data';
@@ -14,15 +15,15 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:4000';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${PROJECT_NAME} | Trusted Export Sourcing for Professional Agriculture Buyers`,
+    default: `${PROJECT_NAME} | China Agricultural Export Showcase`,
     template: `%s | ${PROJECT_NAME}`
   },
   description:
-    'A buyer-first agriculture sourcing platform built for international procurement teams that need verified suppliers, clear trade modes, and fast RFQ execution.',
+    'Direct farm sourcing and end-to-end export delivery for premium Chinese agricultural products, from farms to global markets with export, customs, and cold chain support.',
   openGraph: {
-    title: `${PROJECT_NAME} | Trusted Export Sourcing for Professional Agriculture Buyers`,
+    title: `${PROJECT_NAME} | China Agricultural Export Showcase`,
     description:
-      'Source export-ready agriculture products through a buyer-grade platform designed for RFQ, qualification, and supply confidence.',
+      'Direct sourcing of premium Chinese agricultural products, from farms to global markets with export, customs, and cold chain support.',
     url: siteUrl,
     siteName: PROJECT_NAME,
     type: 'website'
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const [shellData, session] = await Promise.all([getStorefrontShellData(), auth()]);
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'rfq@nongyechuhai.local';
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'export@nongyechuhai.com';
 
   return (
     <html lang="en">
@@ -42,25 +43,24 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <div className="shell site-header__inner">
               <div className="brand-mark">
                 <Link href="/" className="brand-mark__link">
-                  <span className="brand-mark__name">Nongyechuhai</span>
-                  <span className="brand-mark__tag">International sourcing for serious agriculture buyers</span>
+                  <BrandSignature />
                 </Link>
               </div>
               <nav className="site-nav" aria-label="Primary">
                 <Link href="/">Home</Link>
-                <Link href="/products">Products</Link>
+                <Link href="/products">Export Portfolio</Link>
                 <Link href="/about">About</Link>
-                <Link href="/rfq">RFQ Desk</Link>
-                <Link href="/#procurement-system">Procurement System</Link>
+                <Link href="/rfq">Inquiry Desk</Link>
+                <Link href="/#trade-process">Trade Process</Link>
               </nav>
               <div className="header-actions">
                 {session?.user ? (
                   <>
                     <Link className="button button--ghost" href="/account">
-                      Buyer account
+                      Buyer Workspace
                     </Link>
                     <Link className="button button--soft" href="/rfq">
-                      Send RFQ
+                      Send Inquiry
                     </Link>
                     <form action={signOutAction}>
                       <button className="button button--earth" type="submit">
@@ -71,13 +71,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                 ) : (
                   <>
                     <Link className="button button--ghost" href="/products">
-                      Browse catalog
+                      Browse Portfolio
                     </Link>
                     <Link className="button button--soft" href="/login">
                       Buyer login
                     </Link>
                     <Link className="button" href="/rfq">
-                      Send RFQ
+                      Send Inquiry
                     </Link>
                   </>
                 )}
@@ -86,19 +86,19 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <div className="shell trust-strip">
               <div className="trust-strip__item">
                 <strong>{shellData.approvedSupplierCount}</strong>
-                <span>approved suppliers</span>
+                <span>approved supplier programs</span>
               </div>
               <div className="trust-strip__item">
                 <strong>{shellData.publishedProductCount}</strong>
-                <span>published product lines</span>
+                <span>published showcase SKUs</span>
               </div>
               <div className="trust-strip__item">
                 <strong>{shellData.activeCategoryCount}</strong>
                 <span>active export categories</span>
               </div>
               <div className="trust-strip__item">
-                <strong>24h</strong>
-                <span>target RFQ response window</span>
+                <strong>48h</strong>
+                <span>target first response</span>
               </div>
             </div>
           </header>
@@ -106,10 +106,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <footer className="site-footer">
             <div className="shell footer-grid">
               <div>
-                <p className="section-kicker">Buyer operations</p>
-                <h2 className="footer-title">Built for procurement teams that buy with process, not guesswork.</h2>
+                <p className="section-kicker">Export presentation</p>
+                <h2 className="footer-title">A structured storefront for formal product presentation, buyer qualification, and cross-border supply dialogue.</h2>
                 <p className="footer-copy">
-                  Verify supplier readiness, compare trade modes, and move from discovery to RFQ on one shared data model.
+                  The current showcase centers on aquatic products, Yunnan fungi, Chinese tea, specialty vegetables, and halal prepared foods prepared for government and buyer demonstrations.
                 </p>
               </div>
               <div className="footer-meta">
@@ -119,17 +119,17 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                 </div>
                 <div>
                   <span className="footer-meta__label">Best fit</span>
-                  <p>Importers, ingredient distributors, private label buyers, regional sourcing teams.</p>
+                  <p>Importers, retail sourcing teams, foodservice distributors, and institutional buyers.</p>
                 </div>
                 <div>
                   <span className="footer-meta__label">Content</span>
                   <p>
-                    <Link href="/about">About the sourcing platform</Link>
+                    <Link href="/about">About the export approach</Link>
                   </p>
                 </div>
                 <div>
                   <span className="footer-meta__label">Current platform focus</span>
-                  <p>RFQ-first sourcing, supplier qualification visibility, and payment-ready order scaffolding.</p>
+                  <p>Origin visibility, specification clarity, and coordinated buyer inquiry follow-up.</p>
                 </div>
               </div>
             </div>

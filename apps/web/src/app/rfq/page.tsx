@@ -14,15 +14,15 @@ type RfqPageProps = {
 };
 
 const processSteps = [
-  'You select the closest product line or start with a category-level inquiry.',
-  'Your form already carries quantity, market, and commercial notes into the supplier workflow.',
-  'Admin and supplier teams review the same RFQ record without re-entering buyer data.',
-  'The inquiry can then progress into a quote and order record on the same platform.'
+  'Select the closest showcase line or start from a broader category request.',
+  'Share destination market, quantity, pack format, certification, and commercial notes once.',
+  'The platform routes the buyer brief to the relevant supplier program and admin review team.',
+  'Qualified requests can proceed into quotation follow-up and order coordination.'
 ];
 
 export const metadata: Metadata = {
-  title: 'RFQ Desk',
-  description: 'Send a structured RFQ with buyer-side operational context already captured.'
+  title: 'Buyer Inquiry Desk',
+  description: 'Send a structured buyer inquiry with product, market, and commercial context already captured.'
 };
 
 export const revalidate = 300;
@@ -49,17 +49,17 @@ export default async function RfqPage({ searchParams }: RfqPageProps) {
     <main className="page-shell">
       {resolvedSearchParams.submitted === '1' ? (
         <section className="success-banner" data-rise="true">
-          <span className="section-kicker">RFQ submitted</span>
+          <span className="section-kicker">Inquiry submitted</span>
           <strong>{resolvedSearchParams.reference || 'Inquiry created'}</strong>
           <p className="catalog-intro">
-            Your request is now stored in the shared workflow and ready for supplier/admin follow-up.
+            Your request is now stored for coordinated supplier follow-up, internal review, and next-step quotation handling.
           </p>
           <div className="button-row">
             <Link className="button" href="/products">
-              Continue browsing
+              Continue reviewing portfolio
             </Link>
             <Link className="button button--ghost" href="/rfq">
-              Send another RFQ
+              Send another inquiry
             </Link>
           </div>
         </section>
@@ -76,10 +76,10 @@ export default async function RfqPage({ searchParams }: RfqPageProps) {
       <section className="rfq-layout" data-rise="true">
         <article className="rfq-story">
           <div className="section-head">
-            <span className="section-kicker">RFQ desk</span>
-            <h1 className="section-title">A sourcing request form shaped for professional agriculture buying teams.</h1>
+            <span className="section-kicker">Inquiry desk</span>
+            <h1 className="section-title">An inquiry form shaped for professional agriculture buyers and export discussions.</h1>
             <p className="section-description">
-              Capture the commercial context once: target product, destination market, quantity, and negotiation notes. The platform will use the same record across buyer, supplier, and admin operations.
+              Capture product, market, volume, pack, and documentation needs once. The same buyer brief can then support supplier follow-up, internal review, and quotation discussion.
             </p>
           </div>
           <div className="rfq-summary">
@@ -103,13 +103,13 @@ export default async function RfqPage({ searchParams }: RfqPageProps) {
             <p>
               {data.selectedProduct
                 ? `${data.selectedProduct.name} · ${data.selectedProduct.tradeModeLabel}`
-                : 'No product preselected. You can still start with a general sourcing request.'}
+                : 'No product preselected. You can still start from a general export request.'}
             </p>
           </div>
           {session?.user ? (
             <div className="rfq-summary">
               <strong>Signed-in buyer</strong>
-              <p>{session.user.name || session.user.email} · your RFQ will also appear in Buyer Account.</p>
+              <p>{session.user.name || session.user.email} · your inquiry will also appear in Buyer Workspace for later follow-up.</p>
             </div>
           ) : null}
         </article>
@@ -117,20 +117,20 @@ export default async function RfqPage({ searchParams }: RfqPageProps) {
         <section className="rfq-form-panel">
           <div className="section-head">
             <span className="section-kicker">Structured inquiry</span>
-            <h2>Submit the buyer-side brief</h2>
+            <h2>Submit the buyer brief</h2>
           </div>
           <form action={submitInquiryAction} className="form-grid">
             <div className="field field--full">
               <label htmlFor="productSlug">Target product</label>
               <select defaultValue={data.selectedProduct?.slug ?? ''} id="productSlug" name="productSlug">
-                <option value="">General sourcing request</option>
+                <option value="">General export request</option>
                 {data.products.map((product: StorefrontProductCard) => (
                   <option key={product.slug} value={product.slug}>
                     {product.name} · {product.tradeModeLabel}
                   </option>
                 ))}
               </select>
-              <small>Choose the closest current product line, or leave blank for a broader sourcing request.</small>
+              <small>Choose the closest current showcase line, or leave blank for a broader export request.</small>
             </div>
 
             <div className="field">
@@ -199,17 +199,17 @@ export default async function RfqPage({ searchParams }: RfqPageProps) {
 
             <div className="field field--full">
               <small>
-                By sending this RFQ, you are creating a buyer-side sourcing record inside the shared supplier and admin workflow.
+                By sending this inquiry, you create a buyer-side record for coordinated supplier and admin follow-up.
                 {session?.user ? ' This signed-in account will also be linked to the inquiry history.' : ''}
               </small>
             </div>
 
             <div className="submit-row field--full">
               <button className="button" type="submit">
-                Submit structured RFQ
+                Submit buyer inquiry
               </button>
               <Link className="button button--ghost" href="/products">
-                Return to catalog
+                Back to portfolio
               </Link>
             </div>
           </form>

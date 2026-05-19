@@ -56,18 +56,18 @@ export default async function CmsPageRoute({ params }: CmsPageRouteProps) {
 
       <section className="section-block content-hero" data-rise="true">
         <div className="page-head">
-          <span className="section-kicker">Editorial page</span>
+          <span className="section-kicker">Export brief</span>
           <h1 className="section-title">{page.title}</h1>
           <p className="catalog-intro">{page.excerpt}</p>
         </div>
         <div className="account-mini-meta">
-          <span className="catalog-chip">Published {page.publishedAtLabel}</span>
+          <span className="catalog-chip">Updated {page.publishedAtLabel}</span>
           <div className="button-row">
             <Link className="button button--ghost" href="/products">
-              Browse products
+              Browse portfolio
             </Link>
             <Link className="button" href="/rfq">
-              Open RFQ desk
+              Open inquiry desk
             </Link>
           </div>
         </div>
@@ -86,8 +86,8 @@ export default async function CmsPageRoute({ params }: CmsPageRouteProps) {
         {page.faqItems.length > 0 ? (
           <aside className="section-block">
             <div className="section-head">
-              <span className="section-kicker">Page FAQ</span>
-              <h2 className="section-title">Supporting answers</h2>
+              <span className="section-kicker">Frequently asked questions</span>
+              <h2 className="section-title">Supporting notes for buyers and delegates.</h2>
             </div>
             <ul className="detail-faq">
               {page.faqItems.map((item) => (

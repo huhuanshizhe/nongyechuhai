@@ -255,10 +255,10 @@ function formatPriceLabel(
     const max = numberFromDecimal(priceMax);
 
     if (min && max) {
-      return `${formatMoney(min, currency)} - ${formatMoney(max, currency)} indicative range`;
+      return `${formatMoney(min, currency)} - ${formatMoney(max, currency)} reference range`;
     }
 
-    return 'Quoted through RFQ';
+    return 'Quoted through inquiry';
   }
 
   const min = numberFromDecimal(priceMin);
@@ -290,8 +290,8 @@ function humanizeKey(value: string) {
 function mapSpecHighlights(specsJson: unknown) {
   if (!specsJson || typeof specsJson !== 'object' || Array.isArray(specsJson)) {
     return [
-      { label: 'Commercial fit', value: 'RFQ-ready qualification' },
-      { label: 'Packaging', value: 'Negotiable with supplier' }
+      { label: 'Origin program', value: 'Confirmed with supplier' },
+      { label: 'Pack format', value: 'Commercial packaging available' }
     ];
   }
 
@@ -299,8 +299,8 @@ function mapSpecHighlights(specsJson: unknown) {
 
   if (entries.length === 0) {
     return [
-      { label: 'Commercial fit', value: 'RFQ-ready qualification' },
-      { label: 'Packaging', value: 'Negotiable with supplier' }
+      { label: 'Origin program', value: 'Confirmed with supplier' },
+      { label: 'Pack format', value: 'Commercial packaging available' }
     ];
   }
 
@@ -315,13 +315,13 @@ function getTradeModeTone(tradeMode: string) {
 }
 
 function getTradeModeLabel(tradeMode: string) {
-  return tradeMode === 'DIRECT_PURCHASE' ? 'Direct purchase ready' : 'Inquiry only';
+  return tradeMode === 'DIRECT_PURCHASE' ? 'Direct order program' : 'Inquiry program';
 }
 
 function getTradeModeDescription(tradeMode: string) {
   return tradeMode === 'DIRECT_PURCHASE'
-    ? 'This line is already structured for direct commercial follow-through and future payment adapter routing.'
-    : 'This line is better handled through a qualified RFQ so commercial terms can be aligned first.';
+    ? 'Reference pricing and standard commercial packs are already published for direct buyer review.'
+    : 'This line should begin through the inquiry desk so specification, destination market, and documentation can be aligned first.';
 }
 
 function getPrimaryImage(product: ProductQueryResult) {
@@ -357,7 +357,7 @@ function mapProductCard(product: ProductQueryResult): StorefrontProductCard {
     id: product.id,
     slug: product.slug,
     name: product.name,
-    summary: product.summary || product.description || 'Export-ready agriculture product for international sourcing teams.',
+    summary: product.summary || product.description || 'Export-ready agricultural product presented for international buyers.',
     currency: product.currency,
     priceMinValue: numberFromDecimal(product.priceMin),
     priceMaxValue: numberFromDecimal(product.priceMax),
@@ -444,7 +444,7 @@ export const getHomepageData = cache(async () => {
         }
       },
       orderBy: [{ sortOrder: 'asc' }, { name: 'asc' }],
-      take: 4,
+      take: 6,
       select: {
         slug: true,
         name: true,
@@ -479,10 +479,10 @@ export const getHomepageData = cache(async () => {
       familyLabel: category.parent?.name || 'Primary category'
     })),
     editorial: {
-      title: editorialPage?.title || 'Why the platform starts with buyer-grade structure',
+      title: editorialPage?.title || 'How the portfolio is organized for formal export presentation',
       excerpt:
         editorialPage?.excerpt ||
-        'The marketplace is organized around qualification, clarity, and conversion into RFQ instead of generic product listing volume.'
+        'The portfolio is organized around category clarity, origin visibility, and buyer inquiry readiness rather than generic listing volume.'
     }
   };
 });
@@ -580,8 +580,12 @@ export async function getCatalogPageData(filters: CatalogFilters) {
 }
 
 export const getProductDetail = cache(async (slug: string) => {
-  const product = await prisma.product.findUnique({
-    where: { slug },
+  const product = await prisma.product.findFirst({
+    where: {
+      slug,
+      status: 'PUBLISHED',
+      deletedAt: null
+    },
     select: productDetailSelect
   });
 
@@ -620,8 +624,8 @@ export const getProductDetail = cache(async (slug: string) => {
     ? product.faqItems
     : [
         {
-          question: 'Can this line move into a quote workflow quickly?',
-          answer: 'Yes. The platform already routes this product into the shared RFQ, quote, and order data model.'
+          question: 'How should commercial discussion start for this line?',
+          answer: baseProduct.tradeModeDescription
         }
       ];
 
@@ -637,7 +641,7 @@ export const getProductDetail = cache(async (slug: string) => {
         sku: variant.sku,
         title: mapVariantTitle(variant.optionValues),
         priceLabel: formatMoney(Number(variant.price.toString()), variant.currency),
-        stockLabel: `${variant.stockQty} units seeded in sample inventory`
+        stockLabel: `Current reference availability: ${variant.stockQty} units`
       }))
     } satisfies StorefrontProductDetail,
     relatedProducts: relatedProducts.map(mapProductCard)

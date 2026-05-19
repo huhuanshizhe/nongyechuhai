@@ -16,7 +16,7 @@ export function buildWebsiteJsonLd() {
     name: PROJECT_NAME,
     url: getSiteUrl(),
     description:
-      'A buyer-first agriculture sourcing platform for international procurement teams that need verified suppliers, clear trade modes, and fast RFQ execution.'
+      'Direct sourcing of premium Chinese agricultural products with buyer inquiry support, origin visibility, and end-to-end export delivery coordination.'
   };
 }
 
@@ -28,7 +28,7 @@ export function buildOrganizationJsonLd(contactEmail: string) {
     url: getSiteUrl(),
     email: contactEmail,
     description:
-      'International agriculture sourcing platform for professional buyers, supplier qualification, RFQ routing, and procurement-grade workflows.'
+      'China agricultural export organization profile covering direct farm sourcing, supplier presentation, and coordinated export delivery support.'
   };
 }
 

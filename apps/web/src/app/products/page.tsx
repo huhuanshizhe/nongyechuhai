@@ -11,8 +11,8 @@ type ProductsPageProps = {
 };
 
 export const metadata: Metadata = {
-  title: 'Product Catalog',
-  description: 'Browse buyer-ready agriculture products by category, trade mode, and supplier readiness.'
+  title: 'Export Portfolio',
+  description: 'Browse the formal export portfolio by category, commercial route, and supplier origin.'
 };
 
 export const revalidate = 300;
@@ -46,21 +46,21 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     <main className="page-shell">
       <section className="section-block" data-rise="true">
         <div className="page-head">
-          <span className="section-kicker">Catalog</span>
-          <h1 className="section-title">A catalog that helps professional buyers compare commercial routes, not just product names.</h1>
+          <span className="section-kicker">Export portfolio</span>
+          <h1 className="section-title">A formal export portfolio organized by category and commercial route.</h1>
           <p className="catalog-intro">
-            Use category and trade-mode filters to narrow the supply lane before opening product detail. Every listing is aligned to either RFQ-led or direct-purchase commercial behavior.
+            Use category and route filters to move from family overview to product export profile. Each listing signals whether it should begin as an inquiry discussion or a direct order review.
           </p>
         </div>
         <div className="filter-pills">
           <Link className={`filter-pill ${!data.activeMode ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug)}>
-            All trade modes ({data.modeCounts.all})
+            All routes ({data.modeCounts.all})
           </Link>
           <Link className={`filter-pill ${data.activeMode === 'inquiry' ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug, 'inquiry')}>
-            Inquiry only ({data.modeCounts.inquiry})
+            Inquiry programs ({data.modeCounts.inquiry})
           </Link>
           <Link className={`filter-pill ${data.activeMode === 'direct' ? 'filter-pill--active' : ''}`} href={buildCatalogHref(data.activeCategory?.slug, 'direct')}>
-            Direct purchase ready ({data.modeCounts.direct})
+            Direct order programs ({data.modeCounts.direct})
           </Link>
         </div>
       </section>
@@ -85,23 +85,23 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             </div>
           </div>
           <div className="sidebar-panel">
-            <span className="section-kicker">Buyer note</span>
+            <span className="section-kicker">Portfolio note</span>
             <strong>
               {data.activeCategory
-                ? `${data.activeCategory.name} sourcing lane`
-                : 'Catalog overview'}
+                ? `${data.activeCategory.name} export lane`
+                : 'Portfolio overview'}
             </strong>
             <p>
               {data.activeCategory?.description ||
-                'Start broad, then narrow into the product family that matches your target specification, pack format, and trade mode.'}
+                'Start broad, then narrow into the product family that matches your target market, pack format, and commercial route.'}
             </p>
           </div>
           <div className="sidebar-panel">
             <span className="section-kicker">What this view optimizes</span>
             <ul className="clean">
-              <li>Clear supplier and category context before the buyer opens detail.</li>
-              <li>Explicit distinction between negotiation-led and payment-ready lines.</li>
-              <li>Fast routing from catalog review into structured RFQ.</li>
+              <li>Clear origin and category context before the buyer opens detail.</li>
+              <li>Explicit distinction between inquiry-led and direct-order lines.</li>
+              <li>Fast routing from portfolio review into structured buyer inquiry.</li>
             </ul>
           </div>
         </aside>
@@ -110,14 +110,14 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           <div className="page-head">
             <span className="section-kicker">{data.products.length} result{data.products.length === 1 ? '' : 's'}</span>
             <h2 className="section-title">
-              {data.activeCategory ? `${data.activeCategory.name} catalog` : 'Published sourcing catalog'}
+              {data.activeCategory ? `${data.activeCategory.name} portfolio` : 'Published export portfolio'}
             </h2>
             <p className="catalog-intro">
               {data.activeMode === 'direct'
-                ? 'These lines are already structured for direct purchase follow-through and future payment adapter flow.'
+                ? 'These lines already include reference pricing and standard commercial packs for direct order review.'
                 : data.activeMode === 'inquiry'
-                  ? 'These lines keep negotiation in the RFQ path, which is typically the right fit for specification-heavy sourcing.'
-                  : 'Choose the trade mode that best matches the certainty of your pricing, packaging, and lead-time expectations.'}
+                  ? 'These lines are better opened through the inquiry desk so destination market, specification, and documentation can be aligned first.'
+                  : 'Choose the route that best matches how far your buying brief is already defined.'}
             </p>
           </div>
           {data.products.length > 0 ? (
@@ -130,7 +130,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             <div className="not-found-card">
               <span className="section-kicker">No match yet</span>
               <h3>There are no published products for this filter combination.</h3>
-              <p>Try widening the category or switching back to all trade modes.</p>
+              <p>Try widening the category or switching back to all commercial routes.</p>
               <div className="button-row">
                 <Link className="button" href="/products">
                   Reset filters

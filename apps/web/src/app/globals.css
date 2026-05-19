@@ -143,6 +143,47 @@ body::after {
 .brand-mark__link {
   display: grid;
   gap: 2px;
+  align-items: flex-start;
+}
+
+.brand-signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-signature__icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  box-shadow: 0 14px 28px rgba(23, 54, 33, 0.2);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.brand-signature__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-signature__text {
+  display: grid;
+  gap: 4px;
+}
+
+.brand-signature__title {
+  font-family: var(--font-display), serif;
+  font-size: 1.36rem;
+  font-weight: 700;
+  line-height: 0.95;
+}
+
+.brand-signature__subtitle {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .brand-mark__name,
@@ -367,6 +408,7 @@ body::after {
 }
 
 .hero-metrics,
+.hero-standards,
 .signal-grid,
 .category-grid,
 .product-grid,
@@ -385,6 +427,29 @@ body::after {
 
 .hero-metrics {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hero-standards {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hero-standard {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(69, 88, 68, 0.09);
+}
+
+.hero-standard strong {
+  font-size: 0.95rem;
+}
+
+.hero-standard span {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--muted);
 }
 
 .metric-card {
@@ -1006,6 +1071,7 @@ ul.clean,
 
   .trust-strip,
   .hero-metrics,
+  .hero-standards,
   .account-grid,
   .content-layout,
   .detail-spec-grid,
@@ -1043,6 +1109,7 @@ ul.clean,
 
   .trust-strip,
   .hero-metrics,
+  .hero-standards,
   .account-grid,
   .content-layout,
   .detail-spec-grid,

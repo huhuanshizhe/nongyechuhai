@@ -50,7 +50,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         data={[
           buildBreadcrumbJsonLd([
             { name: 'Home', path: '/' },
-            { name: 'Products', path: '/products' },
+            { name: 'Export Portfolio', path: '/products' },
             { name: product.name, path: `/products/${product.slug}` }
           ]),
           buildProductJsonLd(product),
@@ -92,20 +92,20 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           <p className="detail-aux">{product.tradeModeDescription}</p>
           <div className="detail-action-row">
             <Link className="button" href={`/rfq?product=${product.slug}`}>
-              Send RFQ for this product
+              Request quotation
             </Link>
             <Link className="button button--ghost" href="/products">
-              Back to catalog
+              Back to portfolio
             </Link>
           </div>
           <div className="detail-highlights">
             <article className="detail-mini-card">
-              <h3>Commercial path</h3>
+              <h3>Commercial route</h3>
               <p>{product.tradeModeDescription}</p>
             </article>
             <article className="detail-mini-card">
-              <h3>Supplier context</h3>
-              <p>{product.supplierName} operates from {product.supplierLocation} and is already visible in the supplier workflow.</p>
+              <h3>Supply origin</h3>
+              <p>{product.supplierName} is presented from {product.supplierLocation} with this line prepared for export qualification and buyer review.</p>
             </article>
           </div>
         </aside>
@@ -114,15 +114,15 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       <section className="detail-section-grid" data-rise="true">
         <article className="section-block">
           <div className="section-head">
-            <span className="section-kicker">Commercial overview</span>
-            <h2 className="section-title">What a buyer needs to know before opening negotiation.</h2>
+            <span className="section-kicker">Product briefing</span>
+            <h2 className="section-title">Key product and trade notes before opening commercial discussion.</h2>
           </div>
           <div className="rich-copy detail-rich-copy" dangerouslySetInnerHTML={{ __html: product.richDescriptionHtml }} />
         </article>
         <aside className="section-block">
           <div className="section-head">
-            <span className="section-kicker">Spec highlights</span>
-            <h2 className="section-title">Quick qualification panel</h2>
+            <span className="section-kicker">Specification panel</span>
+            <h2 className="section-title">A fast qualification view for buyers and delegations.</h2>
           </div>
           <div className="detail-spec-grid">
             {product.specHighlights.map((spec) => (
@@ -153,13 +153,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         <div className="breadcrumb-row">
           <Link href="/">Home</Link>
           <span>/</span>
-          <Link href="/products">Products</Link>
+          <Link href="/products">Portfolio</Link>
           <span>/</span>
           <span>{product.name}</span>
         </div>
         <div className="section-head">
           <span className="section-kicker">Buyer FAQ</span>
-          <h2 className="section-title">Questions a procurement team typically raises at this stage.</h2>
+          <h2 className="section-title">Questions import teams often raise at this stage.</h2>
         </div>
         <ul className="detail-faq">
           {product.faqItems.map((faq) => (
@@ -174,8 +174,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       {relatedProducts.length > 0 ? (
         <section className="section-block" data-rise="true">
           <div className="section-head">
-            <span className="section-kicker">Related sourcing lane</span>
-            <h2 className="section-title">More products in the same procurement family.</h2>
+            <span className="section-kicker">Related portfolio lines</span>
+            <h2 className="section-title">More products shown within the same export family.</h2>
           </div>
           <div className="product-grid">
             {relatedProducts.map((relatedProduct) => (

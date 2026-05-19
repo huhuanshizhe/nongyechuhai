@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="product-card__footer">
           <span className="product-card__price">{product.priceLabel}</span>
           <Link className="product-card__link" href={`/products/${product.slug}`}>
-            Review sourcing detail
+            View export profile
           </Link>
         </div>
       </div>
