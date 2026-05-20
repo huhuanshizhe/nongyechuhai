@@ -532,7 +532,7 @@ async function main() {
     description: 'A fresh organic mushroom line from Yunnan Huilin for buyers evaluating certified fresh fungi with stable origin and commercial reference pricing.',
     richDescription:
       '<p>Organic Oyster Mushroom introduces Huilin&apos;s fresh organic mushroom range through a product that wholesale buyers and chefs can benchmark immediately.</p><p>The supplier brochure lists the line at CNY 11 per kilogram and describes a meaty cap, tender texture, and light springiness that translate well into fresh distribution, foodservice prep, and trial import programs.</p><p>Because the supplier operates a 700-plus-acre organic demonstration base in Aziying, Kunming, the product also works as a practical proof point for buyers who want to verify origin depth and follow-up capacity before opening a broader mushroom discussion.</p>',
-    tradeMode: TradeMode.INQUIRY_ONLY,
+    tradeMode: TradeMode.DIRECT_PURCHASE,
     currency: 'CNY',
     priceMin: '11.00',
     priceMax: '11.00',
@@ -561,7 +561,7 @@ async function main() {
     description: 'A premium fresh morel program from Yunnan Huilin for buyers comparing high-value mushroom offers with documented supplier origin and category range.',
     richDescription:
       '<p>Organic Morel Mushroom is one of Huilin&apos;s premium fresh mushroom lines, presented for buyers who need a higher-value ingredient with clear origin and commercial reference pricing.</p><p>The supplier brochure quotes a reference range of CNY 125 to 160 per kilogram and describes a rich aroma, varied cap structure, and a crisp, smooth bite suited to hospitality, gifting, and specialty ingredient channels.</p><p>Within the platform, the line is positioned as a qualification product: buyers can use it to discuss seasonal availability, target market fit, and whether fresh morel should be paired with dried or retail-ready follow-on packs from the same supplier program.</p>',
-    tradeMode: TradeMode.INQUIRY_ONLY,
+    tradeMode: TradeMode.DIRECT_PURCHASE,
     currency: 'CNY',
     priceMin: '125.00',
     priceMax: '160.00',
@@ -607,6 +607,442 @@ async function main() {
     coverImageUrl: commonsImage('Boletus_edulis_11.jpg'),
     publishedAt: minutesEarlier(now, 3)
   });
+
+  await Promise.all(
+    [
+      {
+        slug: 'organic-elm-yellow-mushroom',
+        name: 'Organic Elm Yellow Mushroom',
+        model: 'HL-FRESH-EYM-1KG',
+        summary: 'Fresh organic elm yellow mushrooms from Kunming prepared for specialty retail, foodservice prep, and buyers who need an aromatic Yunnan fungi line with a published brochure price.',
+        description: 'A fresh organic elm yellow mushroom line from Huilin for buyers looking for a fragrant, tender mushroom offer from a verified Yunnan supplier program.',
+        richDescription:
+          '<p>Organic Elm Yellow Mushroom extends the Huilin fresh range with a line suited to chefs, specialty distributors, and importers who want a more aromatic mushroom profile than a standard oyster line.</p><p>The supplier brochure lists the product at CNY 15 per kilogram and highlights its rich aroma, fresh taste, and smooth tender texture, making it useful for both premium retail and foodservice preparation.</p><p>On the platform, the line works as a ready-to-review fresh product with a published supplier price, clear origin, and straightforward route into first-order discussion.</p>',
+        priceMin: '15.00',
+        priceMax: '15.00',
+        totalStock: 2200,
+        specsJson: {
+          productForm: 'Fresh organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 15/kg',
+          productTraits: 'Fragrant aroma with a smooth tender bite'
+        },
+        seoTitle: 'Organic Elm Yellow Mushroom Supplier Program',
+        seoDescription: 'Fresh organic elm yellow mushroom line from Kunming with a published brochure price for specialty retail and foodservice buyers.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'organic-yunjizong-mushroom',
+        name: 'Organic Yunjizong Mushroom',
+        model: 'HL-FRESH-YJZ-1KG',
+        summary: 'Fresh organic yunjizong mushrooms from Huilin positioned for premium ingredient sourcing, hospitality menus, and buyers seeking a higher-value Yunnan mushroom line.',
+        description: 'A fresh organic yunjizong program from Yunnan Huilin with a published supplier price and a premium taste profile for professional buyers.',
+        richDescription:
+          '<p>Organic Yunjizong Mushroom is presented as one of the higher-value fresh products in the Huilin brochure, aimed at buyers who need a distinct Yunnan specialty with stronger menu and gifting appeal.</p><p>The brochure lists the line at CNY 80 per kilogram and describes a crisp, tender texture with a sweet aromatic bite, positioning it above everyday fresh mushroom programs.</p><p>That makes it suitable for premium ingredient import, hospitality purchasing, and curated retail programs that need a more differentiated mushroom story.</p>',
+        priceMin: '80.00',
+        priceMax: '80.00',
+        totalStock: 980,
+        specsJson: {
+          productForm: 'Fresh organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 80/kg',
+          productTraits: 'Crisp tender texture with sweet aromatic notes'
+        },
+        seoTitle: 'Organic Yunjizong Mushroom Supplier Program',
+        seoDescription: 'Fresh organic yunjizong mushroom from Kunming with a published brochure price for premium ingredient and hospitality buyers.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'organic-red-pine-mushroom',
+        name: 'Organic Red Pine Mushroom',
+        model: 'HL-FRESH-RPM-1KG',
+        summary: 'Fresh organic red pine mushrooms with grade-based brochure pricing for buyers needing a structured Yunnan supply line for ingredient, retail, and foodservice channels.',
+        description: 'A fresh red pine mushroom line from Huilin with Grade I and Grade II pricing published in the supplier brochure.',
+        richDescription:
+          '<p>Organic Red Pine Mushroom is listed by Huilin as a graded fresh product rather than a single undifferentiated bulk line.</p><p>The brochure quotes Grade I at CNY 40 per kilogram and Grade II at CNY 30 per kilogram, while describing a crisp, firm texture and clean mushroom aroma suited to premium ingredient use.</p><p>For the platform, this line helps show that the supplier program can support more disciplined commercial review where grade and price structure matter.</p>',
+        priceMin: '30.00',
+        priceMax: '40.00',
+        totalStock: 1500,
+        specsJson: {
+          productForm: 'Fresh organic mushroom',
+          availableGrades: 'Grade I / Grade II',
+          referencePrice: 'CNY 40/kg grade I; CNY 30/kg grade II',
+          productTraits: 'Crisp, firm texture with a clean aroma'
+        },
+        seoTitle: 'Organic Red Pine Mushroom Supplier Program',
+        seoDescription: 'Fresh organic red pine mushroom line with grade-based brochure pricing for ingredient and foodservice buyers.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'organic-beifeng-mushroom',
+        name: 'Organic Beifeng Mushroom',
+        model: 'HL-FRESH-BFM-1KG',
+        summary: 'Fresh organic beifeng mushrooms positioned for wholesale fresh supply and premium retail with a published brochure price and a sweet, springy texture profile.',
+        description: 'A fresh organic beifeng mushroom line from Huilin for buyers looking for a smooth, springy Yunnan fungi product with visible supplier pricing.',
+        richDescription:
+          '<p>Organic Beifeng Mushroom broadens the Huilin fresh offering with a line positioned between mainstream edible mushrooms and higher-value premium specialties.</p><p>The supplier brochure lists the product at CNY 30 per kilogram and describes a tender yet springy texture with a sweet crisp bite that can support both wholesale fresh distribution and more premium retail presentation.</p><p>Within the platform, it serves as a practical mid-tier mushroom line for buyers who want visible pricing and a differentiated texture profile without moving all the way into morel-level pricing.</p>',
+        priceMin: '30.00',
+        priceMax: '30.00',
+        totalStock: 1680,
+        specsJson: {
+          productForm: 'Fresh organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 30/kg',
+          productTraits: 'Tender, springy texture with a sweet crisp bite'
+        },
+        seoTitle: 'Organic Beifeng Mushroom Supplier Program',
+        seoDescription: 'Fresh organic beifeng mushroom line from Kunming with a published brochure price for wholesale and premium retail buyers.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'organic-grey-tiger-paw-mushroom',
+        name: 'Organic Grey Tiger Paw Mushroom',
+        model: 'HL-FRESH-GTP-1KG',
+        summary: 'Fresh organic grey tiger paw mushrooms with grade-based brochure pricing for buyers seeking a thicker, premium-texture Yunnan fungi line.',
+        description: 'A fresh grey tiger paw mushroom program from Huilin with Grade I and Grade II pricing published for commercial review.',
+        richDescription:
+          '<p>Organic Grey Tiger Paw Mushroom is one of the thicker-textured fresh mushroom lines in the Huilin brochure, suitable for buyers who need a more premium mouthfeel and stronger specialty positioning.</p><p>The supplier lists Grade I at CNY 40 per kilogram and Grade II at CNY 30 per kilogram, while describing a crisp, thick, fine-textured bite that distinguishes it from standard fresh mushroom programs.</p><p>That makes it a useful product for specialty retail, ingredient buyers, and hospitality programs that want a visible premium step-up within the same supplier portfolio.</p>',
+        priceMin: '30.00',
+        priceMax: '40.00',
+        totalStock: 1320,
+        specsJson: {
+          productForm: 'Fresh organic mushroom',
+          availableGrades: 'Grade I / Grade II',
+          referencePrice: 'CNY 40/kg grade I; CNY 30/kg grade II',
+          productTraits: 'Thick, crisp texture with a refined bite'
+        },
+        seoTitle: 'Organic Grey Tiger Paw Mushroom Supplier Program',
+        seoDescription: 'Fresh organic grey tiger paw mushroom with grade-based brochure pricing for specialty retail and ingredient buyers.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'dried-organic-oyster-mushroom',
+        name: 'Dried Organic Oyster Mushroom',
+        model: 'HL-DRIED-OST-1KG',
+        summary: 'Dried organic oyster mushrooms from Huilin prepared for ingredient buyers, pantry programs, and packaged-food sourcing with a published brochure price.',
+        description: 'A dried organic oyster mushroom line from Yunnan Huilin for ingredient and shelf-stable distribution programs.',
+        richDescription:
+          '<p>Dried Organic Oyster Mushroom translates one of Huilin&apos;s most accessible fresh products into a shelf-stable ingredient line that is easier to move through export and retail channels.</p><p>The brochure lists the dried format at CNY 45 per kilogram while retaining the same meaty texture and familiar appeal that make oyster mushroom a straightforward entry line for buyers.</p><p>It is positioned on the platform for ingredient import, pantry formats, and foodservice buyers who want a lower-complexity dried mushroom starting point.</p>',
+        priceMin: '45.00',
+        priceMax: '45.00',
+        totalStock: 1900,
+        specsJson: {
+          productForm: 'Dried organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 45/kg',
+          productTraits: 'Meaty texture in a shelf-stable dried format'
+        },
+        seoTitle: 'Dried Organic Oyster Mushroom Supplier Program',
+        seoDescription: 'Dried organic oyster mushroom from Kunming with a published brochure price for ingredient and pantry buyers.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'dried-organic-elm-yellow-mushroom',
+        name: 'Dried Organic Elm Yellow Mushroom',
+        model: 'HL-DRIED-EYM-1KG',
+        summary: 'Dried organic elm yellow mushrooms for ingredient, retail, and pantry channels with an aromatic profile and published brochure price.',
+        description: 'A dried elm yellow mushroom line from Huilin for buyers who want a more aromatic shelf-stable mushroom format.',
+        richDescription:
+          '<p>Dried Organic Elm Yellow Mushroom extends the shelf-stable Huilin range with a line that retains the aromatic identity of the fresh product while simplifying export handling.</p><p>The supplier brochure lists the dried line at CNY 85 per kilogram and positions it as a high-nutrition, low-calorie mushroom suited to ingredient and pantry formats.</p><p>For buyers, it offers a stronger aromatic profile than a dried oyster line while still remaining commercially approachable.</p>',
+        priceMin: '85.00',
+        priceMax: '85.00',
+        totalStock: 1280,
+        specsJson: {
+          productForm: 'Dried organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 85/kg',
+          productTraits: 'Aromatic shelf-stable mushroom with a tender bite after rehydration'
+        },
+        seoTitle: 'Dried Organic Elm Yellow Mushroom Supplier Program',
+        seoDescription: 'Dried organic elm yellow mushroom with a published brochure price for ingredient and pantry sourcing.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'dried-organic-yunjizong-mushroom',
+        name: 'Dried Organic Yunjizong Mushroom',
+        model: 'HL-DRIED-YJZ-1KG',
+        summary: 'Dried organic yunjizong mushrooms aimed at premium ingredient, gifting, and specialty pantry channels with a high-value brochure price.',
+        description: 'A premium dried yunjizong line from Huilin for buyers seeking higher-value Yunnan mushroom products in shelf-stable form.',
+        richDescription:
+          '<p>Dried Organic Yunjizong Mushroom is positioned as one of the more premium shelf-stable lines in the Huilin brochure.</p><p>The product is listed at CNY 260 per kilogram and is presented for buyers who need stronger product differentiation, premium ingredient positioning, and easier storage than a chilled fresh line.</p><p>It is suitable for specialty ingredient sourcing, curated retail programs, and gift-oriented food assortments built around Yunnan fungi.</p>',
+        priceMin: '260.00',
+        priceMax: '260.00',
+        totalStock: 760,
+        specsJson: {
+          productForm: 'Dried organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 260/kg',
+          productTraits: 'Premium shelf-stable line with sweet aromatic notes'
+        },
+        seoTitle: 'Dried Organic Yunjizong Mushroom Supplier Program',
+        seoDescription: 'Dried organic yunjizong mushroom with a published brochure price for premium ingredient and specialty retail buyers.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'dried-organic-red-pine-mushroom',
+        name: 'Dried Organic Red Pine Mushroom',
+        model: 'HL-DRIED-RPM-1KG',
+        summary: 'Dried organic red pine mushrooms with a published brochure price for ingredient sourcing, pantry formats, and premium retail programs.',
+        description: 'A dried organic red pine mushroom line from Huilin for buyers seeking a firm, aromatic Yunnan fungi product in shelf-stable form.',
+        richDescription:
+          '<p>Dried Organic Red Pine Mushroom converts one of Huilin&apos;s graded fresh lines into a more transport-friendly dried ingredient format.</p><p>The supplier brochure lists the dried line at CNY 210 per kilogram and emphasizes the same clean aroma and firm texture profile that make red pine mushroom attractive in more premium applications.</p><p>That gives buyers a shelf-stable route into the same mushroom family without relying on fresh-cold-chain execution.</p>',
+        priceMin: '210.00',
+        priceMax: '210.00',
+        totalStock: 940,
+        specsJson: {
+          productForm: 'Dried organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 210/kg',
+          productTraits: 'Firm aromatic dried format for premium ingredient use'
+        },
+        seoTitle: 'Dried Organic Red Pine Mushroom Supplier Program',
+        seoDescription: 'Dried organic red pine mushroom with a published brochure price for ingredient and premium retail buyers.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'dried-organic-beifeng-mushroom',
+        name: 'Dried Organic Beifeng Mushroom',
+        model: 'HL-DRIED-BFM-1KG',
+        summary: 'Dried organic beifeng mushrooms presented for ingredient and retail programs with a mid-tier brochure price and a sweet crisp flavor profile.',
+        description: 'A dried beifeng mushroom line from Huilin for shelf-stable ingredient distribution and curated pantry ranges.',
+        richDescription:
+          '<p>Dried Organic Beifeng Mushroom is positioned as a commercially approachable dried line that still offers a distinct texture and flavor profile.</p><p>The brochure lists the product at CNY 120 per kilogram and describes a sweet crisp bite supported by high amino-acid content, making it suitable for both ingredient sourcing and consumer pantry formats.</p><p>On the platform, it works as a mid-range dried Yunnan mushroom line with visible pricing and clear origin context.</p>',
+        priceMin: '120.00',
+        priceMax: '120.00',
+        totalStock: 1100,
+        specsJson: {
+          productForm: 'Dried organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 120/kg',
+          productTraits: 'Mid-tier dried line with a sweet crisp flavor profile'
+        },
+        seoTitle: 'Dried Organic Beifeng Mushroom Supplier Program',
+        seoDescription: 'Dried organic beifeng mushroom with a published brochure price for ingredient and pantry buyers.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'dried-organic-grey-tiger-paw-mushroom',
+        name: 'Dried Organic Grey Tiger Paw Mushroom',
+        model: 'HL-DRIED-GTP-1KG',
+        summary: 'Dried organic grey tiger paw mushrooms prepared for specialty ingredient and premium pantry programs with a published brochure price.',
+        description: 'A dried grey tiger paw mushroom line from Huilin for buyers needing a more premium-texture shelf-stable fungi product.',
+        richDescription:
+          '<p>Dried Organic Grey Tiger Paw Mushroom keeps the premium positioning of the fresh line while making it easier to handle in export, pantry, and ingredient channels.</p><p>The supplier brochure lists the dried product at CNY 130 per kilogram and highlights its thicker texture and richer nutritional profile compared with more standard mushroom formats.</p><p>That gives specialty ingredient buyers a shelf-stable line with clearer premium cues than everyday dried mushrooms.</p>',
+        priceMin: '130.00',
+        priceMax: '130.00',
+        totalStock: 860,
+        specsJson: {
+          productForm: 'Dried organic mushroom',
+          originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+          referencePrice: 'CNY 130/kg',
+          productTraits: 'Premium-texture dried line for specialty buyers'
+        },
+        seoTitle: 'Dried Organic Grey Tiger Paw Mushroom Supplier Program',
+        seoDescription: 'Dried organic grey tiger paw mushroom with a published brochure price for specialty ingredient sourcing.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'dried-organic-morel-mushroom',
+        name: 'Dried Organic Morel Mushroom',
+        model: 'HL-DRIED-MOR-1KG',
+        summary: 'Dried organic morels positioned for premium ingredient, gifting, and specialty pantry channels with grade-based brochure pricing.',
+        description: 'A premium dried morel line from Huilin with brochure pricing published by grade for higher-value commercial review.',
+        richDescription:
+          '<p>Dried Organic Morel Mushroom is one of the highest-value shelf-stable lines in the Huilin brochure, aimed at buyers who need a premium Yunnan mushroom offer without a fresh-chain dependency.</p><p>The supplier lists CNY 820 per kilogram for 5-7 grade and CNY 580 per kilogram for 3-5 grade, giving buyers a clearer commercial basis for premium dried morel sourcing.</p><p>It is positioned for specialty ingredient import, gifting, and curated premium retail programs where grade and quality perception matter.</p>',
+        priceMin: '580.00',
+        priceMax: '820.00',
+        totalStock: 420,
+        specsJson: {
+          productForm: 'Dried organic morel',
+          availableGrades: '5-7 grade / 3-5 grade',
+          referencePrice: 'CNY 820/kg 5-7; CNY 580/kg 3-5',
+          targetChannels: 'Premium ingredient, gifting, and specialty pantry'
+        },
+        seoTitle: 'Dried Organic Morel Mushroom Supplier Program',
+        seoDescription: 'Dried organic morel mushroom with grade-based brochure pricing for premium ingredient and gifting buyers.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'organic-elm-yellow-retail-box',
+        name: 'Organic Elm Yellow Retail Box',
+        model: 'HL-RETAIL-EYM-60G',
+        summary: 'A 60g organic elm yellow mushroom retail box prepared for supermarket and e-commerce channels with published wholesale and suggested retail pricing.',
+        description: 'A direct-order retail elm yellow mushroom pack from Huilin for shelf review, supermarket buyers, and consumer-channel sourcing.',
+        richDescription:
+          '<p>Organic Elm Yellow Retail Box takes the Huilin mushroom range into a consumer-ready supermarket and e-commerce format.</p><p>The brochure lists a 60g box with a wholesale ex-factory price of CNY 17 and a suggested retail price of CNY 28, with 12-month shelf life guidance for sealed cool storage.</p><p>That makes it a useful entry SKU for buyers who need a ready-made retail product instead of a bulk ingredient line.</p>',
+        priceMin: '17.00',
+        priceMax: '17.00',
+        totalStock: 1400,
+        specsJson: {
+          packFormat: '60g box',
+          shelfLife: '12 months',
+          storage: 'Sealed, cool, dark place',
+          suggestedRetailPrice: 'CNY 28'
+        },
+        seoTitle: 'Organic Elm Yellow Retail Box Direct Order Program',
+        seoDescription: '60g organic elm yellow retail box with published wholesale and suggested retail pricing for supermarket and e-commerce channels.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'organic-grey-tiger-paw-retail-box',
+        name: 'Organic Grey Tiger Paw Retail Box',
+        model: 'HL-RETAIL-GTP-60G',
+        summary: 'A 60g organic grey tiger paw retail box prepared for premium supermarket, e-commerce, and shelf-ready gifting channels.',
+        description: 'A direct-order retail tiger paw mushroom pack from Huilin with published wholesale and suggested retail pricing.',
+        richDescription:
+          '<p>Organic Grey Tiger Paw Retail Box carries one of Huilin&apos;s more premium-feeling mushroom lines into a compact consumer pack.</p><p>The brochure lists the 60g box at CNY 21 wholesale with a suggested retail price of CNY 35, alongside 12-month shelf-life guidance for sealed storage in a cool, dark place.</p><p>This product is intended for buyers evaluating premium retail assortment depth rather than only bulk mushroom supply.</p>',
+        priceMin: '21.00',
+        priceMax: '21.00',
+        totalStock: 960,
+        specsJson: {
+          packFormat: '60g box',
+          shelfLife: '12 months',
+          storage: 'Sealed, cool, dark place',
+          suggestedRetailPrice: 'CNY 35'
+        },
+        seoTitle: 'Organic Grey Tiger Paw Retail Box Direct Order Program',
+        seoDescription: '60g organic grey tiger paw retail box with published wholesale and suggested retail pricing.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'organic-beifeng-retail-box',
+        name: 'Organic Beifeng Retail Box',
+        model: 'HL-RETAIL-BFM-60G',
+        summary: 'A 60g organic beifeng retail box for supermarket and e-commerce channels with published wholesale and suggested retail pricing.',
+        description: 'A direct-order retail beifeng mushroom line from Huilin for buyers seeking a mid-tier packaged mushroom SKU.',
+        richDescription:
+          '<p>Organic Beifeng Retail Box gives buyers a consumer-ready format for one of Huilin&apos;s mid-range specialty mushrooms.</p><p>The brochure lists a 60g box at CNY 21 wholesale and CNY 35 suggested retail, with sealed cool-storage guidance and a 12-month shelf life.</p><p>It is suited to supermarket, e-commerce, and pantry-oriented retail programs that need an approachable but differentiated mushroom SKU.</p>',
+        priceMin: '21.00',
+        priceMax: '21.00',
+        totalStock: 1180,
+        specsJson: {
+          packFormat: '60g box',
+          shelfLife: '12 months',
+          storage: 'Sealed, cool, dark place',
+          suggestedRetailPrice: 'CNY 35'
+        },
+        seoTitle: 'Organic Beifeng Retail Box Direct Order Program',
+        seoDescription: '60g organic beifeng retail box with published wholesale and suggested retail pricing for retail channels.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'organic-red-pine-retail-box',
+        name: 'Organic Red Pine Retail Box',
+        model: 'HL-RETAIL-RPM-60G',
+        summary: 'A 60g organic red pine retail box for packaged retail, gifting, and e-commerce programs with published wholesale and suggested retail pricing.',
+        description: 'A direct-order retail red pine mushroom pack from Huilin for buyers wanting a firmer-texture premium packaged SKU.',
+        richDescription:
+          '<p>Organic Red Pine Retail Box takes one of Huilin&apos;s more premium mushroom types into a shelf-ready packaged product.</p><p>The brochure lists the 60g box at CNY 27 wholesale and CNY 40 suggested retail, with 12-month shelf-life guidance and sealed cool storage conditions.</p><p>This makes it suitable for buyers developing premium retail ranges, seasonal gifting, or more curated consumer mushroom assortments.</p>',
+        priceMin: '27.00',
+        priceMax: '27.00',
+        totalStock: 880,
+        specsJson: {
+          packFormat: '60g box',
+          shelfLife: '12 months',
+          storage: 'Sealed, cool, dark place',
+          suggestedRetailPrice: 'CNY 40'
+        },
+        seoTitle: 'Organic Red Pine Retail Box Direct Order Program',
+        seoDescription: '60g organic red pine retail box with published wholesale and suggested retail pricing for premium retail channels.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'organic-yunjizong-retail-box',
+        name: 'Organic Yunjizong Retail Box',
+        model: 'HL-RETAIL-YJZ-60G',
+        summary: 'A 60g organic yunjizong retail box positioned for premium retail and gifting programs with published wholesale and suggested retail pricing.',
+        description: 'A direct-order yunjizong retail pack from Huilin for buyers needing a more premium packaged mushroom SKU.',
+        richDescription:
+          '<p>Organic Yunjizong Retail Box translates a higher-value mushroom type into a consumer-ready packaged product.</p><p>The Huilin brochure lists the 60g box at CNY 32 wholesale and CNY 50 suggested retail, with sealed cool-storage handling and a published 12-month shelf life.</p><p>For the platform, it is one of the more premium packaged SKUs in the Huilin retail range.</p>',
+        priceMin: '32.00',
+        priceMax: '32.00',
+        totalStock: 760,
+        specsJson: {
+          packFormat: '60g box',
+          shelfLife: '12 months',
+          storage: 'Sealed, cool, dark place',
+          suggestedRetailPrice: 'CNY 50'
+        },
+        seoTitle: 'Organic Yunjizong Retail Box Direct Order Program',
+        seoDescription: '60g organic yunjizong retail box with published wholesale and suggested retail pricing.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'organic-white-matsutake-retail-box',
+        name: 'Organic White Matsutake Retail Box',
+        model: 'HL-RETAIL-WMT-60G',
+        summary: 'A 60g organic white matsutake retail box for premium retail and gifting channels with published wholesale and suggested retail pricing.',
+        description: 'A direct-order white matsutake retail pack from Huilin for higher-end consumer mushroom assortments.',
+        richDescription:
+          '<p>Organic White Matsutake Retail Box adds a premium consumer-facing SKU to the Huilin packaged mushroom range.</p><p>The brochure lists the 60g box at CNY 29 wholesale and CNY 60 suggested retail, putting it among the higher-priced retail SKUs in the current lineup.</p><p>It is suited to more premium retail shelves, gifting assortments, and curated e-commerce mushroom collections.</p>',
+        priceMin: '29.00',
+        priceMax: '29.00',
+        totalStock: 620,
+        specsJson: {
+          packFormat: '60g box',
+          shelfLife: '12 months',
+          storage: 'Sealed, cool, dark place',
+          suggestedRetailPrice: 'CNY 60'
+        },
+        seoTitle: 'Organic White Matsutake Retail Box Direct Order Program',
+        seoDescription: '60g organic white matsutake retail box with published wholesale and suggested retail pricing.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      },
+      {
+        slug: 'organic-dried-mushroom-soup-pack',
+        name: 'Organic Dried Mushroom Soup Pack',
+        model: 'HL-RETAIL-SOUP-60G',
+        summary: 'A 60g organic dried mushroom soup pack prepared for supermarket, pantry, and e-commerce channels with published wholesale and suggested retail pricing.',
+        description: 'A direct-order dried soup pack from Huilin for consumer retail channels that want a convenient mushroom-based meal accessory SKU.',
+        richDescription:
+          '<p>Organic Dried Mushroom Soup Pack packages the Huilin mushroom range into a more convenient retail-ready soup format.</p><p>The supplier brochure lists the 60g box at CNY 20 wholesale with a suggested retail price of CNY 30, plus 12-month shelf-life guidance for sealed cool storage.</p><p>This gives buyers a packaged pantry SKU that can complement the single-mushroom retail boxes with a more usage-driven consumer proposition.</p>',
+        priceMin: '20.00',
+        priceMax: '20.00',
+        totalStock: 1540,
+        specsJson: {
+          packFormat: '60g box',
+          shelfLife: '12 months',
+          storage: 'Sealed, cool, dark place',
+          suggestedRetailPrice: 'CNY 30'
+        },
+        seoTitle: 'Organic Dried Mushroom Soup Pack Direct Order Program',
+        seoDescription: '60g organic dried mushroom soup pack with published wholesale and suggested retail pricing.',
+        coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg')
+      },
+      {
+        slug: 'organic-seasonal-fresh-mushroom-soup-pack',
+        name: 'Organic Seasonal Fresh Mushroom Soup Pack',
+        model: 'HL-RETAIL-FRESH-SOUP-1KG',
+        summary: 'A seasonal 1kg fresh mushroom soup pack shipped in foam box and ice bag format for premium fresh retail and gifting programs with published wholesale pricing.',
+        description: 'A direct-order seasonal fresh mushroom soup pack from Huilin for buyers evaluating chilled consumer packs and seasonal fresh gifting formats.',
+        richDescription:
+          '<p>Organic Seasonal Fresh Mushroom Soup Pack is the most perishable consumer-format item in the Huilin brochure, built around seasonal fresh mushroom assortment rather than dried shelf-stable ingredients.</p><p>The published format is a 1kg foam box with ice bag at CNY 120 wholesale and CNY 188 suggested retail, with storage guidance of 1-2 days at ambient temperature or 3-5 days chilled.</p><p>The brochure also notes a MOQ of 100 boxes, making the line better suited to organized retail, seasonal campaigns, and premium gifting programs than to ad hoc sampling.</p>',
+        priceMin: '120.00',
+        priceMax: '120.00',
+        totalStock: 540,
+        specsJson: {
+          packFormat: '1kg foam box with ice bag',
+          storageWindow: '1-2 days ambient / 3-5 days chilled',
+          suggestedRetailPrice: 'CNY 188',
+          minOrderQty: '100 boxes'
+        },
+        seoTitle: 'Organic Seasonal Fresh Mushroom Soup Pack Direct Order Program',
+        seoDescription: 'Seasonal 1kg fresh mushroom soup pack with published wholesale and suggested retail pricing for premium fresh retail programs.',
+        coverImageUrl: commonsImage('Boletus_edulis_11.jpg')
+      }
+    ].map((line, index) =>
+      upsertProductLine({
+        supplierId: yunnanSupplier.id,
+        categoryId: fungiCategory.id,
+        brand: 'Huilin Organic',
+        tradeMode: TradeMode.DIRECT_PURCHASE,
+        currency: 'CNY',
+        hasVariants: false,
+        publishedAt: minutesEarlier(now, 4 + index),
+        ...line
+      })
+    )
+  );
 
   const westLakeLongjing = await upsertProductLine({
     supplierId: westLakeSupplier.id,
