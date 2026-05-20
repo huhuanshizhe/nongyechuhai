@@ -229,6 +229,7 @@
   .brand-signature__text {
     display: grid;
     gap: 5px;
+    min-width: 0;
   }
 
   .brand-signature__title {
@@ -240,10 +241,11 @@
   }
 
   .brand-signature__subtitle {
-    font-size: 0.68rem;
+    max-width: 31ch;
+    font-size: 0.64rem;
     font-weight: 800;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
     color: var(--muted);
   }
 

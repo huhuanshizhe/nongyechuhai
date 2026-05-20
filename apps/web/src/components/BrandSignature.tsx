@@ -15,7 +15,7 @@ export function BrandSignature() {
       </span>
       <span className="brand-signature__text">
         <span className="brand-signature__title">farmetra</span>
-        <span className="brand-signature__subtitle">Global Agricultural Sales Platform</span>
+        <span className="brand-signature__subtitle">Direct Farm Sourcing with End-to-End Export Delivery</span>
       </span>
     </span>
   );

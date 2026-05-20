@@ -106,9 +106,9 @@ export default async function HomePage() {
             <span className="hero-stage__tag">China supply programs • buyer qualification • export delivery</span>
           </div>
           <div className="hero-stage__headline">
-            <h1 className="hero-title">farmetra connects vetted Chinese agricultural supply programs with global buyers through one disciplined commercial platform.</h1>
+            <h1 className="hero-title">Direct Sourcing of Premium Chinese Agricultural Products</h1>
             <p className="hero-stage__lead">
-              Built for importers, distributors, retail sourcing teams, and public-sector trade offices, the platform combines portfolio review, supplier readiness, documentation alignment, cold-chain planning, and buyer follow-up in one buyer-facing system.
+              From Farms to Global Markets with Export, Customs, and Cold Chain Support
             </p>
           </div>
           <div className="hero-stage__actions button-row">

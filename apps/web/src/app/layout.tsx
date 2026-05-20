@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
               </div>
               <div className="site-header__summary">
                 <span className="site-header__eyebrow">Global agricultural sales platform</span>
-                <p>Vetted Chinese supply programs for importers, distributors, retail sourcing teams, and public-sector trade offices.</p>
+                <p>Direct sourcing, export coordination, customs handling, and cold-chain support for global agricultural buyers.</p>
               </div>
               <div className="header-actions">
                 {session?.user ? (
