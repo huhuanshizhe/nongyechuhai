@@ -182,11 +182,32 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             </Link>
           </div>
           {data.products.length > 0 ? (
-            <div className="product-grid product-grid--catalog">
-              {data.products.map((product) => (
-                <ProductCard key={product.slug} product={product} />
-              ))}
-            </div>
+            data.productGroups.length > 0 ? (
+              <div className="portfolio-group-stack">
+                {data.productGroups.map((group) => (
+                  <section className="portfolio-group" key={group.key}>
+                    <div className="portfolio-group__head">
+                      <span className="section-kicker">{group.products.length} line{group.products.length === 1 ? '' : 's'}</span>
+                      <div>
+                        <h3>{group.title}</h3>
+                        <p>{group.description}</p>
+                      </div>
+                    </div>
+                    <div className="product-grid product-grid--catalog">
+                      {group.products.map((product) => (
+                        <ProductCard key={product.slug} product={product} />
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            ) : (
+              <div className="product-grid product-grid--catalog">
+                {data.products.map((product) => (
+                  <ProductCard key={product.slug} product={product} />
+                ))}
+              </div>
+            )
           ) : (
             <div className="not-found-card">
               <span className="section-kicker">No match yet</span>

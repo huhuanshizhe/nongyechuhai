@@ -20,9 +20,42 @@ const adminPasswordHash = '$2b$10$S2Nmrk.4N81Pxqm.Hyb9Eem3m2Qbv/OSRZgw3pjKYwn0FL
 const supplierPasswordHash = '$2b$10$j8bQVlcayD7DNBubB4bQpOOgFs71/tcVLYYYW2GDqwsxDPmp5RE3a';
 const legacyProductSlugs = ['premium-dried-chili', 'dehydrated-garlic-flakes', 'yunnan-wild-boletus'];
 const legacyCategorySlugs = ['spices-seasonings', 'dehydrated-vegetables'];
+const huilinProductSlugs = new Set([
+  'organic-oyster-mushroom',
+  'organic-elm-yellow-mushroom',
+  'organic-yunjizong-mushroom',
+  'organic-red-pine-mushroom',
+  'organic-beifeng-mushroom',
+  'organic-grey-tiger-paw-mushroom',
+  'organic-morel-mushroom',
+  'dried-organic-oyster-mushroom',
+  'dried-organic-elm-yellow-mushroom',
+  'dried-organic-yunjizong-mushroom',
+  'dried-organic-red-pine-mushroom',
+  'dried-organic-beifeng-mushroom',
+  'dried-organic-grey-tiger-paw-mushroom',
+  'dried-organic-morel-mushroom',
+  'organic-morel-retail-box',
+  'organic-elm-yellow-retail-box',
+  'organic-grey-tiger-paw-retail-box',
+  'organic-beifeng-retail-box',
+  'organic-red-pine-retail-box',
+  'organic-yunjizong-retail-box',
+  'organic-white-matsutake-retail-box',
+  'organic-dried-mushroom-soup-pack',
+  'organic-seasonal-fresh-mushroom-soup-pack'
+]);
 
 function commonsImage(fileName: string) {
   return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(fileName)}`;
+}
+
+function huilinImage(slug: string) {
+  return `/images/huilin/${slug}.jpg`;
+}
+
+function resolveCoverImage(slug: string, fallbackUrl: string) {
+  return huilinProductSlugs.has(slug) ? huilinImage(slug) : fallbackUrl;
 }
 
 function minutesEarlier(date: Date, minutes: number) {
@@ -150,6 +183,8 @@ type ProductLineSeed = {
 };
 
 async function upsertProductLine(line: ProductLineSeed) {
+  const resolvedCoverImageUrl = resolveCoverImage(line.slug, line.coverImageUrl);
+
   return prisma.product.upsert({
     where: { slug: line.slug },
     update: {
@@ -171,7 +206,7 @@ async function upsertProductLine(line: ProductLineSeed) {
       specsJson: line.specsJson,
       seoTitle: line.seoTitle,
       seoDescription: line.seoDescription,
-      coverImageUrl: line.coverImageUrl,
+      coverImageUrl: resolvedCoverImageUrl,
       publishedAt: line.publishedAt
     },
     create: {
@@ -194,7 +229,7 @@ async function upsertProductLine(line: ProductLineSeed) {
       specsJson: line.specsJson,
       seoTitle: line.seoTitle,
       seoDescription: line.seoDescription,
-      coverImageUrl: line.coverImageUrl,
+      coverImageUrl: resolvedCoverImageUrl,
       publishedAt: line.publishedAt
     }
   });
@@ -1187,54 +1222,6 @@ async function main() {
         productId: chineseMittenCrab.id,
         url: commonsImage('Roe_inside_steamed_female_hairy_crab.jpg'),
         altText: 'Chinese mitten crab premium product detail',
-        type: ProductImageType.DETAIL,
-        sortOrder: 1,
-        isPrimary: false
-      },
-      {
-        productId: organicOysterMushroom.id,
-        url: commonsImage('Boletus_edulis_11.jpg'),
-        altText: 'Organic oyster mushroom supplier program image',
-        type: ProductImageType.MAIN,
-        sortOrder: 0,
-        isPrimary: true
-      },
-      {
-        productId: organicOysterMushroom.id,
-        url: commonsImage('Steinpilz_2006_08_3.jpg'),
-        altText: 'Organic oyster mushroom detail image',
-        type: ProductImageType.DETAIL,
-        sortOrder: 1,
-        isPrimary: false
-      },
-      {
-        productId: organicMorelMushroom.id,
-        url: commonsImage('Steinpilz_2006_08_3.jpg'),
-        altText: 'Organic morel mushroom supplier program image',
-        type: ProductImageType.MAIN,
-        sortOrder: 0,
-        isPrimary: true
-      },
-      {
-        productId: organicMorelMushroom.id,
-        url: commonsImage('Boletus_edulis_11.jpg'),
-        altText: 'Organic morel mushroom detail image',
-        type: ProductImageType.DETAIL,
-        sortOrder: 1,
-        isPrimary: false
-      },
-      {
-        productId: organicMorelRetailBox.id,
-        url: commonsImage('Boletus_edulis_11.jpg'),
-        altText: 'Organic morel retail pack supplier program image',
-        type: ProductImageType.MAIN,
-        sortOrder: 0,
-        isPrimary: true
-      },
-      {
-        productId: organicMorelRetailBox.id,
-        url: commonsImage('Steinpilz_2006_08_3.jpg'),
-        altText: 'Organic morel retail pack detail image',
         type: ProductImageType.DETAIL,
         sortOrder: 1,
         isPrimary: false

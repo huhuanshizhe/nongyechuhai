@@ -1357,6 +1357,35 @@ ul.clean,
   gap: 22px;
 }
 
+.portfolio-group-stack {
+  display: grid;
+  gap: 28px;
+}
+
+.portfolio-group {
+  display: grid;
+  gap: 18px;
+}
+
+.portfolio-group__head {
+  display: grid;
+  gap: 10px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(46, 63, 51, 0.1);
+}
+
+.portfolio-group__head h3 {
+  margin: 0;
+  font-size: 1.24rem;
+  font-family: var(--font-display), serif;
+}
+
+.portfolio-group__head p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
 .portfolio-results__head {
   display: flex;
   align-items: end;

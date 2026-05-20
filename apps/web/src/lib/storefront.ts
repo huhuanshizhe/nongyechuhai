@@ -95,6 +95,8 @@ type ProductDetailQueryResult = Prisma.ProductGetPayload<{
   select: typeof productDetailSelect;
 }>;
 
+type PortfolioGroupKey = 'fresh' | 'dried' | 'retail';
+
 export type StorefrontProductCard = {
   id: string;
   slug: string;
@@ -111,6 +113,7 @@ export type StorefrontProductCard = {
   primaryImageAlt: string;
   categoryName: string;
   categorySlug: string;
+  portfolioGroup: PortfolioGroupKey | null;
   supplierName: string;
   supplierLocation: string;
   supplierDescription: string | null;
@@ -148,6 +151,13 @@ export type StorefrontSupplierProgram = {
   description: string;
   lineCount: number;
   isVerified: boolean;
+};
+
+export type StorefrontCatalogGroup = {
+  key: PortfolioGroupKey;
+  title: string;
+  description: string;
+  products: StorefrontProductCard[];
 };
 
 export type CmsPageContent = {
@@ -323,6 +333,51 @@ function mapSpecHighlights(specsJson: unknown) {
   }));
 }
 
+const mushroomPortfolioGroupMeta: Record<PortfolioGroupKey, { title: string; description: string }> = {
+  fresh: {
+    title: 'Fresh products',
+    description: 'Fresh mushroom lines with origin detail and published brochure pricing for wholesale, ingredient, and hospitality buyers.'
+  },
+  dried: {
+    title: 'Dried products',
+    description: 'Shelf-stable dried mushroom lines prepared for ingredient import, pantry programs, and premium specialty sourcing.'
+  },
+  retail: {
+    title: 'Retail packs',
+    description: 'Supermarket and e-commerce SKUs with published retail pack formats, storage guidance, and brochure-based reference pricing.'
+  }
+};
+
+function getPortfolioGroup(product: ProductQueryResult): PortfolioGroupKey | null {
+  if (product.category.slug !== 'premium-mushrooms') {
+    return null;
+  }
+
+  if (product.slug.includes('retail') || product.slug.includes('soup-pack')) {
+    return 'retail';
+  }
+
+  if (!product.specsJson || typeof product.specsJson !== 'object' || Array.isArray(product.specsJson)) {
+    return null;
+  }
+
+  const productForm = (product.specsJson as Record<string, unknown>).productForm;
+
+  if (typeof productForm === 'string') {
+    const normalizedValue = productForm.toLowerCase();
+
+    if (normalizedValue.includes('fresh')) {
+      return 'fresh';
+    }
+
+    if (normalizedValue.includes('dried')) {
+      return 'dried';
+    }
+  }
+
+  return null;
+}
+
 function getTradeModeTone(tradeMode: string) {
   return tradeMode === 'DIRECT_PURCHASE' ? 'purchase' : 'inquiry';
 }
@@ -382,6 +437,7 @@ function mapProductCard(product: ProductQueryResult): StorefrontProductCard {
     primaryImageAlt: primaryImage.alt,
     categoryName: product.category.name,
     categorySlug: product.category.slug,
+    portfolioGroup: getPortfolioGroup(product),
     supplierName: product.supplier.organization.name,
     supplierLocation: location || 'Origin to be confirmed',
     supplierDescription: product.supplier.description,
@@ -575,6 +631,7 @@ export async function getCatalogPageData(filters: CatalogFilters) {
   ]);
 
   const activeCategory = categories.find((category) => category.slug === filters.category) || null;
+  const mappedProducts = products.map(mapProductCard);
   const supplierPrograms = Array.from(
     products.reduce((programs, product) => {
       const location = [product.supplier.organization.city, product.supplier.organization.country]
@@ -602,15 +659,34 @@ export async function getCatalogPageData(filters: CatalogFilters) {
     }, new Map<string, StorefrontSupplierProgram>())
       .values()
   ).slice(0, 3);
+  const productGroups = activeCategory?.slug === 'premium-mushrooms'
+    ? (['fresh', 'dried', 'retail'] as PortfolioGroupKey[])
+        .map((key) => {
+          const groupedProducts = mappedProducts.filter((product) => product.portfolioGroup === key);
+
+          if (groupedProducts.length === 0) {
+            return null;
+          }
+
+          return {
+            key,
+            title: mushroomPortfolioGroupMeta[key].title,
+            description: mushroomPortfolioGroupMeta[key].description,
+            products: groupedProducts
+          } satisfies StorefrontCatalogGroup;
+        })
+        .filter((group): group is StorefrontCatalogGroup => group !== null)
+    : [];
 
   return {
-    products: products.map(mapProductCard),
+    products: mappedProducts,
     categories: categories.map((category) => ({
       slug: category.slug,
       name: category.name,
       description: category.description || 'Export-ready category',
       familyLabel: category.parent?.name || 'Primary category'
     })),
+    productGroups,
     supplierPrograms,
     activeCategory,
     activeMode: filters.mode || null,
