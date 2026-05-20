@@ -2,18 +2,20 @@ export function BrandSignature() {
   return (
     <span className="brand-signature">
       <span aria-hidden="true" className="brand-signature__icon">
-        <svg viewBox="0 0 72 72">
-          <rect x="5" y="5" width="62" height="62" rx="16" fill="#173628" />
-          <rect x="11" y="11" width="50" height="50" rx="12" fill="none" stroke="#d3b06d" strokeWidth="2" />
-          <path d="M18 49c7-2 13-7 18-17 4 6 10 11 18 14" fill="none" stroke="#f3e6c8" strokeLinecap="round" strokeWidth="4" />
-          <path d="M18 54h36" fill="none" stroke="#d3b06d" strokeLinecap="round" strokeWidth="3.2" />
-          <path d="M28 22c6 0 10 4 12 11-8 0-12-4-12-11Z" fill="#d7dfb1" />
-          <path d="M45 23c5 1 8 5 8 10-6 0-9-3-8-10Z" fill="#9bb68c" />
+        <svg viewBox="0 0 88 88">
+          <rect x="5" y="5" width="78" height="78" rx="20" fill="#163629" />
+          <circle cx="44" cy="44" r="26" fill="none" stroke="#dcc28d" strokeWidth="2.4" />
+          <path d="M18 44h52" fill="none" stroke="#dcc28d" strokeOpacity="0.72" strokeWidth="1.8" />
+          <path d="M44 18c-8 8-12 17-12 26s4 18 12 26" fill="none" stroke="#dcc28d" strokeOpacity="0.7" strokeWidth="1.8" />
+          <path d="M44 18c8 8 12 17 12 26s-4 18-12 26" fill="none" stroke="#dcc28d" strokeOpacity="0.7" strokeWidth="1.8" />
+          <path d="M28 57c5-1 9-5 13-11 5 5 10 8 18 9" fill="none" stroke="#f4ead3" strokeLinecap="round" strokeWidth="4.2" />
+          <path d="M39 24c7 1 12 6 14 14-11 1-16-3-14-14Z" fill="#b9cf8f" />
+          <path d="M24 63h40" fill="none" stroke="#c89b55" strokeLinecap="round" strokeWidth="3.2" />
         </svg>
       </span>
       <span className="brand-signature__text">
-        <span className="brand-signature__title">Nongye Chuhai</span>
-        <span className="brand-signature__subtitle">Direct Farm Sourcing &amp; End-to-End Export Delivery</span>
+        <span className="brand-signature__title">farmetra</span>
+        <span className="brand-signature__subtitle">Global Agricultural Sales Platform</span>
       </span>
     </span>
   );

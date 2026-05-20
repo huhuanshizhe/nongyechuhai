@@ -36,6 +36,9 @@ const productCardSelect = Prisma.validator<Prisma.ProductSelect>()({
   },
   supplier: {
     select: {
+      id: true,
+      description: true,
+      isVerified: true,
       organization: {
         select: {
           name: true,
@@ -110,6 +113,8 @@ export type StorefrontProductCard = {
   categorySlug: string;
   supplierName: string;
   supplierLocation: string;
+  supplierDescription: string | null;
+  supplierVerified: boolean;
   model: string | null;
   specHighlights: Array<{
     label: string;
@@ -135,6 +140,14 @@ export type StorefrontProductDetail = StorefrontProductCard & {
     priceLabel: string;
     stockLabel: string;
   }>;
+};
+
+export type StorefrontSupplierProgram = {
+  name: string;
+  location: string;
+  description: string;
+  lineCount: number;
+  isVerified: boolean;
 };
 
 export type CmsPageContent = {
@@ -371,6 +384,8 @@ function mapProductCard(product: ProductQueryResult): StorefrontProductCard {
     categorySlug: product.category.slug,
     supplierName: product.supplier.organization.name,
     supplierLocation: location || 'Origin to be confirmed',
+    supplierDescription: product.supplier.description,
+    supplierVerified: product.supplier.isVerified,
     model: product.model,
     specHighlights: mapSpecHighlights(product.specsJson),
     seoTitle: product.seoTitle,
@@ -560,6 +575,33 @@ export async function getCatalogPageData(filters: CatalogFilters) {
   ]);
 
   const activeCategory = categories.find((category) => category.slug === filters.category) || null;
+  const supplierPrograms = Array.from(
+    products.reduce((programs, product) => {
+      const location = [product.supplier.organization.city, product.supplier.organization.country]
+        .filter(Boolean)
+        .join(', ');
+      const key = `${product.supplier.organization.name}::${location}`;
+      const existing = programs.get(key);
+
+      if (existing) {
+        existing.lineCount += 1;
+        return programs;
+      }
+
+      programs.set(key, {
+        name: product.supplier.organization.name,
+        location: location || 'Origin to be confirmed',
+        description:
+          product.supplier.description ||
+          'Verified supplier program presented through this category for buyer qualification and commercial follow-up.',
+        lineCount: 1,
+        isVerified: product.supplier.isVerified
+      });
+
+      return programs;
+    }, new Map<string, StorefrontSupplierProgram>())
+      .values()
+  ).slice(0, 3);
 
   return {
     products: products.map(mapProductCard),
@@ -569,6 +611,7 @@ export async function getCatalogPageData(filters: CatalogFilters) {
       description: category.description || 'Export-ready category',
       familyLabel: category.parent?.name || 'Primary category'
     })),
+    supplierPrograms,
     activeCategory,
     activeMode: filters.mode || null,
     modeCounts: {

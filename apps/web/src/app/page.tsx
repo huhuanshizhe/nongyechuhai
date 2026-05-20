@@ -2,18 +2,48 @@ import Link from 'next/link';
 import { ProductCard } from '../components/ProductCard';
 import { getHomepageData, getStorefrontShellData } from '../lib/storefront';
 
-const sourcingPrinciples = [
+const platformStandards = [
   {
-    title: 'Origin-led category structure',
-    description: 'The portfolio is arranged around real export families such as aquatic products, fungi, tea, specialty vegetables, and halal prepared foods.'
+    title: 'Vetted program structure',
+    description: 'Each supply line is framed with category logic, supplier context, and commercial route before a quotation discussion begins.'
   },
   {
-    title: 'Commercial route clarity',
-    description: 'Every listing shows whether it should begin through the inquiry desk or can move directly into order review with published reference pricing.'
+    title: 'Buyer-facing qualification',
+    description: 'Importers and sourcing teams can review packaging, compliance direction, and execution fit without digging through generic marketplace clutter.'
   },
   {
-    title: 'Presentation-grade product detail',
-    description: 'Images, specification highlights, and supplier origin are curated for formal demonstration rather than generic marketplace volume.'
+    title: 'Cross-border execution discipline',
+    description: 'The platform presents sourcing, documentation, cold-chain planning, and follow-up as one commercial workflow rather than disconnected steps.'
+  }
+];
+
+const tradeCapabilities = [
+  {
+    title: 'Supply qualification',
+    description: 'Origin, category fit, pack format, and documentation direction are visible before the buyer requests pricing.'
+  },
+  {
+    title: 'Commercial alignment',
+    description: 'The platform distinguishes inquiry-led programs from direct-order lines so buyers enter the right route immediately.'
+  },
+  {
+    title: 'Delivery coordination',
+    description: 'Export paperwork, customs handling, and cold-chain planning are treated as part of the same operating model.'
+  }
+];
+
+const marketLanes = [
+  {
+    title: 'Asia-Pacific buyers',
+    description: 'Retail, foodservice, and distribution teams seeking reliable chilled and ambient agricultural programs.'
+  },
+  {
+    title: 'Gulf region importers',
+    description: 'Buyers needing halal lines, compliant packaging, and export-ready commercial coordination.'
+  },
+  {
+    title: 'Trade offices and delegations',
+    description: 'Institutional reviewers who need a credible presentation of product families, supplier readiness, and delivery capability.'
   }
 ];
 
@@ -44,133 +74,108 @@ export const revalidate = 300;
 
 export default async function HomePage() {
   const [homeData, shellData] = await Promise.all([getHomepageData(), getStorefrontShellData()]);
-  const exportSignals = [
+  const credibilitySignals = [
     {
-      label: 'Portfolio scope',
-      value: `${shellData.activeCategoryCount} export families`,
-      description: 'Structured around real category review rather than broad marketplace sprawl.'
+      label: 'Vetted programs',
+      value: `${shellData.approvedSupplierCount}`,
+      description: 'Supplier programs already positioned for buyer-facing review.'
     },
     {
-      label: 'Supplier coverage',
-      value: `${shellData.approvedSupplierCount} approved programs`,
-      description: 'Presented with origin context, route clarity, and buyer-facing commercial framing.'
+      label: 'Product families',
+      value: `${shellData.activeCategoryCount}`,
+      description: 'Formal agricultural categories, not miscellaneous listing clusters.'
     },
     {
-      label: 'Products online',
-      value: `${shellData.publishedProductCount} current showcase lines`,
-      description: 'Each profile is published with specification signals and a visible next step.'
+      label: 'Buyer-ready lines',
+      value: `${shellData.publishedProductCount}`,
+      description: 'Published products with visible route, specifications, and next-step logic.'
     },
     {
-      label: 'Inquiry handling',
+      label: 'Response target',
       value: '48h response target',
-      description: 'The desk is designed to preserve product, packaging, and market context from the first brief.'
+      description: 'Inquiry handling is structured to preserve market, pack, and delivery context from the first brief.'
     }
   ];
 
   return (
     <main className="page-shell page-shell--home">
-      <section className="stage-panel" data-rise="true">
-        <div className="stage-copy">
-          <span className="section-kicker">China agricultural export showcase</span>
-          <div className="stage-stack">
-            <h1 className="hero-title">Direct Sourcing of Premium Chinese Agricultural Products</h1>
-            <p>
-              From Farms to Global Markets with Export, Customs, and Cold Chain Support
+      <section className="hero-stage" data-rise="true">
+        <div className="hero-stage__main">
+          <div className="hero-stage__eyebrow">
+            <span className="section-kicker">Global agricultural sales platform</span>
+            <span className="hero-stage__tag">China supply programs • buyer qualification • export delivery</span>
+          </div>
+          <div className="hero-stage__headline">
+            <h1 className="hero-title">farmetra connects vetted Chinese agricultural supply programs with global buyers through one disciplined commercial platform.</h1>
+            <p className="hero-stage__lead">
+              Built for importers, distributors, retail sourcing teams, and public-sector trade offices, the platform combines portfolio review, supplier readiness, documentation alignment, cold-chain planning, and buyer follow-up in one buyer-facing system.
             </p>
           </div>
-          <p className="stage-lead">
-            Nongye Chuhai should read like a serious export presentation, not like a generic sourcing directory. The front page now positions origin, commercial route, and delivery capability as one coherent trade narrative.
-          </p>
-          <div className="stage-actions button-row">
+          <div className="hero-stage__actions button-row">
             <Link className="button" href="/products">
-              View export portfolio
+              Explore export portfolio
             </Link>
             <Link className="button button--ghost" href="/rfq">
-              Open inquiry desk
+              Start buyer inquiry
             </Link>
           </div>
-          <div className="stage-route">
-            <article>
-              <span className="process-index">01</span>
-              <h2>Category and origin first</h2>
-              <p>Buyers begin with the right agricultural family and regional supply story before discussing a single SKU.</p>
-            </article>
-            <article>
-              <span className="process-index">02</span>
-              <h2>Commercial format next</h2>
-              <p>The site makes it clear whether a line should start through inquiry, sampling, or direct order review.</p>
-            </article>
-            <article>
-              <span className="process-index">03</span>
-              <h2>Execution stays visible</h2>
-              <p>Export documentation, cold chain, and buyer follow-up are presented as part of the offer, not as hidden back-office work.</p>
-            </article>
+          <div className="hero-stage__proof">
+            {credibilitySignals.map((item) => (
+              <article className="hero-stage__proof-item" key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+                <p>{item.description}</p>
+              </article>
+            ))}
           </div>
         </div>
-        <aside className="stage-aside">
-          <div className="stage-brief">
-            <span className="pill">Delegation brief</span>
-            <h2>Built for trade offices, sourcing teams, importers, and institutional buyers who need clarity fast.</h2>
+
+        <aside className="hero-stage__aside">
+          <article className="hero-stage__panel hero-stage__panel--primary">
+            <span className="pill">International buyer desk</span>
+            <h2>Designed to look and operate like a credible global sales platform, not a generic product listing.</h2>
             <p>
-              The presentation emphasizes category coverage, supplier readiness, and commercial next steps in a format that can hold up in government demonstrations and serious buyer meetings.
+              farmetra brings sourcing qualification, commercial alignment, documentation handling, and delivery planning into one operating environment so global buyers can assess readiness before they ask for price or sample execution.
             </p>
-            <div className="stage-brief__meta">
-              <strong>Current focus</strong>
-              <span>Aquatic products, Yunnan fungi, Chinese tea, specialty vegetables, and halal prepared foods.</span>
-            </div>
-          </div>
-          <div className="stage-board">
-            <span className="pill">Showcase families</span>
-            <div className="stage-board__rows">
-              {homeData.featuredCategories.map((category) => (
-                <article className="stage-board__row" key={category.slug}>
-                  <div>
-                    <strong>{category.name}</strong>
-                    <p>{category.description}</p>
-                  </div>
-                  <Link href={`/products?category=${category.slug}`}>Review family</Link>
+            <div className="hero-stage__ledger">
+              {tradeCapabilities.map((item) => (
+                <article key={item.title}>
+                  <strong>{item.title}</strong>
+                  <p>{item.description}</p>
                 </article>
               ))}
             </div>
-          </div>
+          </article>
+          <article className="hero-stage__panel">
+            <span className="pill">Current market fit</span>
+            <div className="hero-stage__markets">
+              {marketLanes.map((lane) => (
+                <article className="hero-stage__market" key={lane.title}>
+                  <strong>{lane.title}</strong>
+                  <p>{lane.description}</p>
+                </article>
+              ))}
+            </div>
+          </article>
         </aside>
       </section>
 
-      <section className="signal-band" data-rise="true">
-        {exportSignals.map((item) => (
-          <article className="signal-band__item" key={item.label}>
-            <span>{item.label}</span>
-            <strong>{item.value}</strong>
+      <section className="credibility-strip" data-rise="true">
+        {platformStandards.map((item) => (
+          <article className="credibility-strip__item" key={item.title}>
+            <h2>{item.title}</h2>
             <p>{item.description}</p>
           </article>
         ))}
       </section>
 
-      <section className="section-block section-block--editorial" data-rise="true">
-        <div className="section-head">
-          <span className="section-kicker">Presentation logic</span>
-          <h2 className="section-title">The design should help a buyer understand the program in one pass, not make them decode interface decoration.</h2>
-          <p className="section-description">
-            International agriculture discussions move faster when category structure, origin, pack format, and commercial route are obvious. The platform is organized around those decisions and removes the noise that usually makes sourcing sites look provisional.
-          </p>
-        </div>
-        <div className="editorial-columns">
-          {sourcingPrinciples.map((item) => (
-            <article className="editorial-columns__item" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="section-block section-block--portfolio" data-rise="true">
         <div className="portfolio-head">
-          <span className="section-kicker">Featured products</span>
+          <span className="section-kicker">Featured programs</span>
           <div>
-            <h2 className="section-title">Key showcase lines currently presented to buyers and delegations.</h2>
+            <h2 className="section-title">Current supply lines presented for importers, distributors, and institutional buyers.</h2>
             <p className="section-description">
-            Each card surfaces the product family, supplier origin, and commercial route before the buyer opens the full export profile.
+              Each card signals product family, supplier origin, and the right commercial route before a buyer opens the full export profile.
             </p>
           </div>
           <Link className="button button--ghost" href="/products">
@@ -186,41 +191,43 @@ export default async function HomePage() {
 
       <section className="editorial-panel editorial-panel--statement" data-rise="true">
         <div className="editorial-panel__copy">
-          <span className="section-kicker">Export approach</span>
-          <h2 className="section-title">{homeData.editorial.title}</h2>
-          <p>{homeData.editorial.excerpt}</p>
+          <span className="section-kicker">Operating model</span>
+          <h2 className="section-title">How farmetra turns agricultural sourcing into a structured cross-border sales workflow.</h2>
+          <p>
+            Product discovery, supplier qualification, export documentation, cold-chain planning, and buyer follow-up are presented as one operating system. That lets global buyers judge commercial readiness before they open a sampling or pricing discussion.
+          </p>
           <div className="button-row">
             <Link className="button button--soft" href="/about">
-              Read the export approach
+              Review platform approach
             </Link>
             <Link className="button button--ghost" href="/rfq">
-              Request a buyer discussion
+              Open buyer discussion
             </Link>
           </div>
         </div>
         <div className="statement-rail">
-          <article>
-            <span className="pill">Category architecture</span>
-            <h3>{shellData.activeCategoryCount} export families</h3>
-            <p>The portfolio is grouped the way institutional buyers and delegations actually review export categories.</p>
-          </article>
-          <article>
-            <span className="pill">Supplier coverage</span>
-            <h3>{shellData.approvedSupplierCount} approved programs</h3>
-            <p>Supplier representation spans multiple origins, product families, and commercial formats without looking scattered.</p>
-          </article>
-          <article>
-            <span className="pill">Inquiry handling</span>
-            <h3>Unified buyer brief</h3>
-            <p>Buyers can move from portfolio review into a structured inquiry without losing product, market, or packaging context.</p>
-          </article>
-        </div>
+            <article>
+            <span className="pill">Platform coverage</span>
+            <h3>{shellData.activeCategoryCount} formal product families</h3>
+            <p>The portfolio is grouped the way importers, delegations, and retail sourcing teams actually review agricultural supply.</p>
+            </article>
+            <article>
+            <span className="pill">Supplier readiness</span>
+            <h3>{shellData.approvedSupplierCount} vetted programs</h3>
+            <p>Supplier representation is curated to signal commercial discipline, not to inflate the catalog with undifferentiated listings.</p>
+            </article>
+            <article>
+            <span className="pill">Buyer workflow</span>
+            <h3>One inquiry desk</h3>
+            <p>Market, quantity, certification, packaging, and delivery requirements remain attached to the same conversation from first brief to follow-up.</p>
+            </article>
+          </div>
       </section>
 
       <section className="section-block" id="trade-process" data-rise="true">
         <div className="section-head">
           <span className="section-kicker">Trade process</span>
-          <h2 className="section-title">The buyer journey is designed to reduce requalification and keep the export discussion moving.</h2>
+          <h2 className="section-title">The buyer journey is designed to keep qualification, pricing, and execution moving without restarting the conversation.</h2>
         </div>
         <div className="process-rail">
           {workflow.map((item) => (
@@ -236,7 +243,7 @@ export default async function HomePage() {
       <section className="section-block section-block--categories" data-rise="true">
         <div className="section-head">
           <span className="section-kicker">Category focus</span>
-          <h2 className="section-title">Navigate formal product families, not miscellaneous listing clusters.</h2>
+          <h2 className="section-title">Navigate disciplined product families, not miscellaneous listing clusters.</h2>
         </div>
         <div className="category-board">
           {homeData.featuredCategories.map((category, index) => (
@@ -258,14 +265,14 @@ export default async function HomePage() {
       <section className="closing-banner" data-rise="true">
         <div>
           <span className="section-kicker">Next move</span>
-          <h2 className="section-title">Need a quote, sample plan, or compliance discussion? Start with the inquiry desk.</h2>
+          <h2 className="section-title">Need a quotation, sample plan, or market-entry discussion? Start with the buyer desk.</h2>
         </div>
         <div className="button-row">
           <Link className="button" href="/rfq">
-            Start inquiry desk
+            Start buyer inquiry
           </Link>
           <Link className="button button--earth" href="/products">
-            Inspect portfolio first
+            Review portfolio first
           </Link>
         </div>
       </section>

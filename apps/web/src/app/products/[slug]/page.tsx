@@ -102,6 +102,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             <span className="catalog-chip">{product.categoryName}</span>
             <span className="catalog-chip">{product.supplierName}</span>
             <span className="catalog-chip">{product.supplierLocation}</span>
+            {product.supplierVerified ? <span className="catalog-chip">Verified supplier program</span> : null}
             {product.model ? <span className="catalog-chip">Model {product.model}</span> : null}
           </div>
 
@@ -123,8 +124,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
           <div className="detail-stage__briefs">
             <article className="detail-stage__brief">
-              <h2>Supplier brief</h2>
-              <p>{product.supplierName} is presented from {product.supplierLocation} with this line prepared for export qualification and buyer review.</p>
+              <h2>Supplier snapshot</h2>
+              <p>
+                {product.supplierDescription ||
+                  `${product.supplierName} is presented from ${product.supplierLocation} with this line prepared for export qualification and buyer review.`}
+              </p>
             </article>
             <article className="detail-stage__brief">
               <h2>Execution note</h2>

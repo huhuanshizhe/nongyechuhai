@@ -15,15 +15,15 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:4000';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${PROJECT_NAME} | China Agricultural Export Showcase`,
+    default: `${PROJECT_NAME} | Global Agricultural Sales Platform`,
     template: `%s | ${PROJECT_NAME}`
   },
   description:
-    'Direct farm sourcing and end-to-end export delivery for premium Chinese agricultural products, from farms to global markets with export, customs, and cold chain support.',
+    'A global agricultural sales platform connecting vetted Chinese supply programs with importers, distributors, retail sourcing teams, and trade offices.',
   openGraph: {
-    title: `${PROJECT_NAME} | China Agricultural Export Showcase`,
+    title: `${PROJECT_NAME} | Global Agricultural Sales Platform`,
     description:
-      'Direct sourcing of premium Chinese agricultural products, from farms to global markets with export, customs, and cold chain support.',
+      'Vetted Chinese agricultural supply programs presented for global buyers with sourcing, qualification, export coordination, and delivery support.',
     url: siteUrl,
     siteName: PROJECT_NAME,
     type: 'website'
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const [shellData, session] = await Promise.all([getStorefrontShellData(), auth()]);
-  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'export@nongyechuhai.com';
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'export@farmetra.com';
 
   return (
     <html lang="en">
@@ -40,41 +40,35 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <JsonLd data={[buildWebsiteJsonLd(), buildOrganizationJsonLd(contactEmail)]} />
         <div className="site-shell">
           <header className="site-header">
-            <div className="shell site-header__inner">
+            <div className="shell site-header__band">
               <div className="brand-mark">
                 <Link href="/" className="brand-mark__link">
                   <BrandSignature />
                 </Link>
               </div>
-              <nav className="site-nav" aria-label="Primary">
-                <Link href="/">Home</Link>
-                <Link href="/products">Export Portfolio</Link>
-                <Link href="/about">About</Link>
-                <Link href="/rfq">Inquiry Desk</Link>
-                <Link href="/#trade-process">Trade Process</Link>
-              </nav>
+              <div className="site-header__summary">
+                <span className="site-header__eyebrow">Global agricultural sales platform</span>
+                <p>Vetted Chinese supply programs for importers, distributors, retail sourcing teams, and public-sector trade offices.</p>
+              </div>
               <div className="header-actions">
                 {session?.user ? (
                   <>
-                    <Link className="button button--ghost" href="/account">
+                    <Link className="header-link" href="/account">
                       Buyer Workspace
                     </Link>
-                    <Link className="button button--soft" href="/rfq">
+                    <Link className="button" href="/rfq">
                       Send Inquiry
                     </Link>
                     <form action={signOutAction}>
-                      <button className="button button--earth" type="submit">
+                      <button className="header-link header-link--button" type="submit">
                         Sign out
                       </button>
                     </form>
                   </>
                 ) : (
                   <>
-                    <Link className="button button--ghost" href="/products">
-                      Browse Portfolio
-                    </Link>
-                    <Link className="button button--soft" href="/login">
-                      Buyer login
+                    <Link className="header-link" href="/login">
+                      Buyer Login
                     </Link>
                     <Link className="button" href="/rfq">
                       Send Inquiry
@@ -83,22 +77,19 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                 )}
               </div>
             </div>
-            <div className="shell trust-strip">
-              <div className="trust-strip__item">
-                <strong>{shellData.approvedSupplierCount}</strong>
-                <span>approved supplier programs</span>
-              </div>
-              <div className="trust-strip__item">
-                <strong>{shellData.publishedProductCount}</strong>
-                <span>published showcase SKUs</span>
-              </div>
-              <div className="trust-strip__item">
-                <strong>{shellData.activeCategoryCount}</strong>
-                <span>active export categories</span>
-              </div>
-              <div className="trust-strip__item">
-                <strong>48h</strong>
-                <span>target first response</span>
+            <div className="shell site-header__navrow">
+              <nav className="site-nav" aria-label="Primary">
+                <Link href="/">Home</Link>
+                <Link href="/products">Export Portfolio</Link>
+                <Link href="/about">About</Link>
+                <Link href="/rfq">Inquiry Desk</Link>
+                <Link href="/#trade-process">Trade Process</Link>
+              </nav>
+              <div className="site-header__signals" aria-label="Platform signals">
+                <span>{shellData.approvedSupplierCount} supplier programs</span>
+                <span>{shellData.activeCategoryCount} categories</span>
+                <span>{shellData.publishedProductCount} online lines</span>
+                <span>48h first response</span>
               </div>
             </div>
           </header>
@@ -106,10 +97,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <footer className="site-footer">
             <div className="shell footer-grid">
               <div>
-                <p className="section-kicker">Export presentation</p>
-                <h2 className="footer-title">A structured storefront for formal product presentation, buyer qualification, and cross-border supply dialogue.</h2>
+                <p className="section-kicker">Global sales platform</p>
+                <h2 className="footer-title">A buyer-facing agricultural platform for sourcing, qualification, and cross-border sales coordination.</h2>
                 <p className="footer-copy">
-                  The current showcase centers on aquatic products, Yunnan fungi, Chinese tea, specialty vegetables, and halal prepared foods prepared for government and buyer demonstrations.
+                  farmetra presents vetted agricultural supply programs with category logic, supplier readiness, and export-delivery coordination for serious global buyers.
                 </p>
               </div>
               <div className="footer-meta">
@@ -129,7 +120,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                 </div>
                 <div>
                   <span className="footer-meta__label">Current platform focus</span>
-                  <p>Origin visibility, specification clarity, and coordinated buyer inquiry follow-up.</p>
+                  <p>Supplier qualification, commercial clarity, and disciplined inquiry-to-delivery follow-up.</p>
                 </div>
               </div>
             </div>

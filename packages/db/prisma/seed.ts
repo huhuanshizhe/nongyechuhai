@@ -18,7 +18,7 @@ const prisma = new PrismaClient();
 
 const adminPasswordHash = '$2b$10$S2Nmrk.4N81Pxqm.Hyb9Eem3m2Qbv/OSRZgw3pjKYwn0FLiMzQ6wK';
 const supplierPasswordHash = '$2b$10$j8bQVlcayD7DNBubB4bQpOOgFs71/tcVLYYYW2GDqwsxDPmp5RE3a';
-const legacyProductSlugs = ['premium-dried-chili', 'dehydrated-garlic-flakes'];
+const legacyProductSlugs = ['premium-dried-chili', 'dehydrated-garlic-flakes', 'yunnan-wild-boletus'];
 const legacyCategorySlugs = ['spices-seasonings', 'dehydrated-vegetables'];
 
 function commonsImage(fileName: string) {
@@ -146,6 +146,7 @@ type ProductLineSeed = {
   seoDescription: string;
   coverImageUrl: string;
   publishedAt: Date;
+  currency?: string;
 };
 
 async function upsertProductLine(line: ProductLineSeed) {
@@ -162,7 +163,7 @@ async function upsertProductLine(line: ProductLineSeed) {
       richDescription: line.richDescription,
       tradeMode: line.tradeMode,
       status: ProductStatus.PUBLISHED,
-      currency: 'USD',
+      currency: line.currency ?? 'USD',
       priceMin: line.priceMin,
       priceMax: line.priceMax,
       hasVariants: line.hasVariants,
@@ -185,7 +186,7 @@ async function upsertProductLine(line: ProductLineSeed) {
       richDescription: line.richDescription,
       tradeMode: line.tradeMode,
       status: ProductStatus.PUBLISHED,
-      currency: 'USD',
+      currency: line.currency ?? 'USD',
       priceMin: line.priceMin,
       priceMax: line.priceMax,
       hasVariants: line.hasVariants,
@@ -285,20 +286,20 @@ async function main() {
 
   const yunnanSupplier = await upsertSupplierProgram({
     slug: 'yunnan-highland-harvest',
-    name: 'Yunnan Highland Harvest Co., Ltd.',
-    legalName: 'Yunnan Highland Harvest Co., Ltd.',
-    email: 'sales@yunnanhighland.example',
-    phone: '+86-871-0000-2780',
-    website: 'https://yunnanhighland.example',
+    name: 'Yunnan Huilin Biotechnology Co., Ltd.',
+    legalName: 'Yunnan Huilin Biotechnology Co., Ltd.',
+    email: 'sales@huilinbio.example',
+    phone: '+86-189-8827-2512',
+    website: '',
     country: 'China',
     city: 'Kunming',
-    addressLine1: 'No. 88 Plateau Produce Road',
+    addressLine1: 'Muyang Village, Aziying Subdistrict, Panlong District',
     postalCode: '650000',
     description:
-      'Premium edible fungi sourcing program serving retail, ingredient, and hospitality buyers looking for Yunnan mountain origin stories.',
-    contactName: 'Yang Xue',
-    contactEmail: 'sales@yunnanhighland.example',
-    contactPhone: '+86-871-0000-2780'
+      'Edible mushroom supplier established in 2006 with a 700-plus-acre organic demonstration base in Aziying, Kunming, and a 3,000-square-meter innovation center supporting spawn R&D, cultivation demonstration, technical service, processing, sales, and category education across fresh, dried, and retail mushroom programs.',
+    contactName: 'Huilin Sales Desk',
+    contactEmail: 'sales@huilinbio.example',
+    contactPhone: '+86-189-8827-2512'
   });
 
   const westLakeSupplier = await upsertSupplierProgram({
@@ -407,13 +408,13 @@ async function main() {
     update: {
       parentId: rootCategory.id,
       name: 'Premium Mushrooms',
-      description: 'Premium fungi programs from Yunnan for retail, ingredient, hospitality, and high-value specialty distribution.'
+      description: 'Organic mushroom programs from Yunnan spanning fresh fungi, dried ingredient lines, and supermarket or e-commerce retail packs. Current supplier coverage includes oyster, morel, tiger paw, yunjizong, and seasonal mixed soup-pack formats.'
     },
     create: {
       parentId: rootCategory.id,
       name: 'Premium Mushrooms',
       slug: 'premium-mushrooms',
-      description: 'Premium fungi programs from Yunnan for retail, ingredient, hospitality, and high-value specialty distribution.',
+      description: 'Organic mushroom programs from Yunnan spanning fresh fungi, dried ingredient lines, and supermarket or e-commerce retail packs. Current supplier coverage includes oyster, morel, tiger paw, yunjizong, and seasonal mixed soup-pack formats.',
       sortOrder: 2,
       isActive: true
     }
@@ -520,32 +521,91 @@ async function main() {
     publishedAt: minutesEarlier(now, 0)
   });
 
-  const yunnanBoletus = await upsertProductLine({
+  const organicOysterMushroom = await upsertProductLine({
     supplierId: yunnanSupplier.id,
     categoryId: fungiCategory.id,
-    slug: 'yunnan-wild-boletus',
-    name: 'Yunnan Wild Boletus',
-    brand: 'Highland Harvest',
-    model: 'YHH-BOLETUS-5KG',
-    summary: 'A premium Yunnan boletus selection prepared for specialty retail, ingredient sourcing, and hospitality menus.',
-    description: 'A wild mushroom export line combining origin story, hand sorting, and handling notes for professional buyers.',
+    slug: 'organic-oyster-mushroom',
+    name: 'Organic Oyster Mushroom',
+    brand: 'Huilin Organic',
+    model: 'HL-FRESH-OST-1KG',
+    summary: 'Fresh organic oyster mushrooms from Kunming, positioned for wholesale fresh supply, foodservice prep, and import programs that need an accessible entry product in the Yunnan fungi range.',
+    description: 'A fresh organic mushroom line from Yunnan Huilin for buyers evaluating certified fresh fungi with stable origin and commercial reference pricing.',
     richDescription:
-      '<p>The Yunnan Wild Boletus program presents southwest China&apos;s premium edible fungi resources in a format suited to high-value ingredient distribution, hospitality purchasing, and specialty retail merchandising.</p><p>Rather than reading as a generic mushroom listing, the line is framed around mountain origin, hand grading, pre-cooling, carton presentation, and the practical handling steps buyers need to evaluate freshness and destination-market fit.</p><p>This makes the product particularly effective for presentations where provenance, quality discipline, and the ability to translate regional Chinese ingredients into export-ready supply are central to the story.</p>',
+      '<p>Organic Oyster Mushroom introduces Huilin&apos;s fresh organic mushroom range through a product that wholesale buyers and chefs can benchmark immediately.</p><p>The supplier brochure lists the line at CNY 11 per kilogram and describes a meaty cap, tender texture, and light springiness that translate well into fresh distribution, foodservice prep, and trial import programs.</p><p>Because the supplier operates a 700-plus-acre organic demonstration base in Aziying, Kunming, the product also works as a practical proof point for buyers who want to verify origin depth and follow-up capacity before opening a broader mushroom discussion.</p>',
     tradeMode: TradeMode.INQUIRY_ONLY,
-    priceMin: '18.00',
-    priceMax: '32.00',
+    currency: 'CNY',
+    priceMin: '11.00',
+    priceMax: '11.00',
     hasVariants: false,
-    totalStock: 1600,
+    totalStock: 3600,
     specsJson: {
-      originRegion: 'Yunnan mountain collection zones',
-      grade: 'Hand-sorted premium caps',
-      packFormats: ['5kg export carton', 'Chilled or IQF option'],
-      handling: 'Pre-cooling and customs coordination'
+      productForm: 'Fresh organic mushroom',
+      originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+      referencePrice: 'CNY 11/kg',
+      productTraits: 'Meaty caps with tender texture and light springiness'
     },
-    seoTitle: 'Yunnan Wild Boletus Export Program',
-    seoDescription: 'Premium Yunnan boletus export line for ingredient, specialty retail, and hospitality sourcing.',
+    seoTitle: 'Organic Oyster Mushroom Supplier Program',
+    seoDescription: 'Fresh organic oyster mushroom supply program from Kunming for wholesale, foodservice, and fresh import review.',
     coverImageUrl: commonsImage('Boletus_edulis_11.jpg'),
     publishedAt: minutesEarlier(now, 1)
+  });
+
+  const organicMorelMushroom = await upsertProductLine({
+    supplierId: yunnanSupplier.id,
+    categoryId: fungiCategory.id,
+    slug: 'organic-morel-mushroom',
+    name: 'Organic Morel Mushroom',
+    brand: 'Huilin Organic',
+    model: 'HL-FRESH-MOREL-1KG',
+    summary: 'Fresh organic morel mushrooms positioned for premium ingredient sourcing, hospitality menus, gifting, and specialty import programs that need a high-value Yunnan line with reference pricing.',
+    description: 'A premium fresh morel program from Yunnan Huilin for buyers comparing high-value mushroom offers with documented supplier origin and category range.',
+    richDescription:
+      '<p>Organic Morel Mushroom is one of Huilin&apos;s premium fresh mushroom lines, presented for buyers who need a higher-value ingredient with clear origin and commercial reference pricing.</p><p>The supplier brochure quotes a reference range of CNY 125 to 160 per kilogram and describes a rich aroma, varied cap structure, and a crisp, smooth bite suited to hospitality, gifting, and specialty ingredient channels.</p><p>Within the platform, the line is positioned as a qualification product: buyers can use it to discuss seasonal availability, target market fit, and whether fresh morel should be paired with dried or retail-ready follow-on packs from the same supplier program.</p>',
+    tradeMode: TradeMode.INQUIRY_ONLY,
+    currency: 'CNY',
+    priceMin: '125.00',
+    priceMax: '160.00',
+    hasVariants: false,
+    totalStock: 920,
+    specsJson: {
+      productForm: 'Fresh organic morel',
+      originBase: 'Muyang Village, Aziying, Panlong District, Kunming',
+      referencePrice: 'CNY 125-160/kg',
+      targetChannels: 'Hospitality, gifting, and specialty ingredient import'
+    },
+    seoTitle: 'Organic Morel Mushroom Supplier Program',
+    seoDescription: 'Fresh organic morel mushroom line from Kunming for premium ingredient, gifting, and hospitality sourcing.',
+    coverImageUrl: commonsImage('Steinpilz_2006_08_3.jpg'),
+    publishedAt: minutesEarlier(now, 2)
+  });
+
+  const organicMorelRetailBox = await upsertProductLine({
+    supplierId: yunnanSupplier.id,
+    categoryId: fungiCategory.id,
+    slug: 'organic-morel-retail-box',
+    name: 'Organic Morel Retail Box',
+    brand: 'Huilin Organic',
+    model: 'HL-RETAIL-MOREL',
+    summary: 'Retail-ready organic morel packs prepared for supermarket, e-commerce, gifting, and first-order shelf review, with published 30g and 50g formats from the supplier brochure.',
+    description: 'A direct-order retail mushroom line translating Huilin&apos;s organic morel supply into consumer-facing pouch and box formats.',
+    richDescription:
+      '<p>The Organic Morel Retail Box translates Huilin&apos;s mushroom supply into a supermarket and e-commerce-ready format rather than a bulk ingredient line.</p><p>The current supplier brochure lists two commercial packs: a 30g pouch at CNY 31 and a 50g box at CNY 48, both stored sealed in a cool, dark place with a published shelf life of 12 months.</p><p>This makes the line suitable for buyers who want a smaller test order, retail shelf review, gift-pack evaluation, or a more structured discussion about labeling, channel fit, and minimum order quantity before expanding into a broader mushroom program.</p>',
+    tradeMode: TradeMode.DIRECT_PURCHASE,
+    currency: 'CNY',
+    priceMin: '31.00',
+    priceMax: '48.00',
+    hasVariants: true,
+    totalStock: 1800,
+    specsJson: {
+      packFormats: ['30g pouch', '50g box'],
+      shelfLife: '12 months',
+      storage: 'Sealed, cool, dark place',
+      minOrderQty: '100 boxes'
+    },
+    seoTitle: 'Organic Morel Retail Box Direct Order Program',
+    seoDescription: 'Retail-ready organic morel packs for supermarket, e-commerce, and gifting channels with published 30g and 50g formats.',
+    coverImageUrl: commonsImage('Boletus_edulis_11.jpg'),
+    publishedAt: minutesEarlier(now, 3)
   });
 
   const westLakeLongjing = await upsertProductLine({
@@ -665,7 +725,9 @@ async function main() {
       productId: {
         in: [
           chineseMittenCrab.id,
-          yunnanBoletus.id,
+          organicOysterMushroom.id,
+          organicMorelMushroom.id,
+          organicMorelRetailBox.id,
           westLakeLongjing.id,
           freshJiaobai.id,
           greenAsparagus.id,
@@ -694,17 +756,49 @@ async function main() {
         isPrimary: false
       },
       {
-        productId: yunnanBoletus.id,
+        productId: organicOysterMushroom.id,
         url: commonsImage('Boletus_edulis_11.jpg'),
-        altText: 'Yunnan wild boletus export presentation image',
+        altText: 'Organic oyster mushroom supplier program image',
         type: ProductImageType.MAIN,
         sortOrder: 0,
         isPrimary: true
       },
       {
-        productId: yunnanBoletus.id,
+        productId: organicOysterMushroom.id,
         url: commonsImage('Steinpilz_2006_08_3.jpg'),
-        altText: 'Yunnan premium mushroom selection detail',
+        altText: 'Organic oyster mushroom detail image',
+        type: ProductImageType.DETAIL,
+        sortOrder: 1,
+        isPrimary: false
+      },
+      {
+        productId: organicMorelMushroom.id,
+        url: commonsImage('Steinpilz_2006_08_3.jpg'),
+        altText: 'Organic morel mushroom supplier program image',
+        type: ProductImageType.MAIN,
+        sortOrder: 0,
+        isPrimary: true
+      },
+      {
+        productId: organicMorelMushroom.id,
+        url: commonsImage('Boletus_edulis_11.jpg'),
+        altText: 'Organic morel mushroom detail image',
+        type: ProductImageType.DETAIL,
+        sortOrder: 1,
+        isPrimary: false
+      },
+      {
+        productId: organicMorelRetailBox.id,
+        url: commonsImage('Boletus_edulis_11.jpg'),
+        altText: 'Organic morel retail pack supplier program image',
+        type: ProductImageType.MAIN,
+        sortOrder: 0,
+        isPrimary: true
+      },
+      {
+        productId: organicMorelRetailBox.id,
+        url: commonsImage('Steinpilz_2006_08_3.jpg'),
+        altText: 'Organic morel retail pack detail image',
         type: ProductImageType.DETAIL,
         sortOrder: 1,
         isPrimary: false
@@ -842,6 +936,72 @@ async function main() {
     }
   });
 
+  await prisma.productVariant.upsert({
+    where: { sku: 'HL-MOREL-30G-POUCH' },
+    update: {
+      productId: organicMorelRetailBox.id,
+      optionValues: {
+        packaging: '30g pouch',
+        shelfLife: '12 months'
+      },
+      price: '31.00',
+      currency: 'CNY',
+      stockQty: 960,
+      weightKg: '0.030',
+      imageUrl: commonsImage('Boletus_edulis_11.jpg'),
+      isActive: true,
+      sortOrder: 0
+    },
+    create: {
+      productId: organicMorelRetailBox.id,
+      sku: 'HL-MOREL-30G-POUCH',
+      optionValues: {
+        packaging: '30g pouch',
+        shelfLife: '12 months'
+      },
+      price: '31.00',
+      currency: 'CNY',
+      stockQty: 960,
+      weightKg: '0.030',
+      imageUrl: commonsImage('Boletus_edulis_11.jpg'),
+      isActive: true,
+      sortOrder: 0
+    }
+  });
+
+  await prisma.productVariant.upsert({
+    where: { sku: 'HL-MOREL-50G-BOX' },
+    update: {
+      productId: organicMorelRetailBox.id,
+      optionValues: {
+        packaging: '50g box',
+        shelfLife: '12 months'
+      },
+      price: '48.00',
+      currency: 'CNY',
+      stockQty: 840,
+      weightKg: '0.050',
+      imageUrl: commonsImage('Steinpilz_2006_08_3.jpg'),
+      isActive: true,
+      sortOrder: 1
+    },
+    create: {
+      productId: organicMorelRetailBox.id,
+      sku: 'HL-MOREL-50G-BOX',
+      optionValues: {
+        packaging: '50g box',
+        shelfLife: '12 months'
+      },
+      price: '48.00',
+      currency: 'CNY',
+      stockQty: 840,
+      weightKg: '0.050',
+      imageUrl: commonsImage('Steinpilz_2006_08_3.jpg'),
+      isActive: true,
+      sortOrder: 1
+    }
+  });
+
   const halalMealCaseVariant = await prisma.productVariant.upsert({
     where: { sku: 'EHF-CURRY-12X320' },
     update: {
@@ -916,27 +1076,27 @@ async function main() {
       }
     },
     update: {
-      title: 'How Nongye Chuhai organizes direct farm sourcing and export delivery',
+      title: 'How farmetra organizes agricultural sourcing and cross-border sales delivery',
       excerpt:
-        'Nongye Chuhai is organized as a formal export presentation platform, connecting premium Chinese agricultural products with buyer inquiry, supplier coordination, and end-to-end delivery support.',
+        'farmetra is organized as a buyer-facing agricultural sales platform, connecting vetted Chinese supply programs with qualification, supplier coordination, and cross-border delivery support.',
       content:
-        '<p>Nongye Chuhai is designed to present premium Chinese agricultural products in a format suitable for formal buyer meetings, institutional review, and government demonstration, rather than as a high-volume generic marketplace.</p><p>The portfolio is organized around clear export families including aquatic products, Yunnan mushrooms, Chinese tea, specialty vegetables, and halal prepared foods, allowing visitors to understand both category breadth and the distinct regional strengths behind each line.</p><p>Each product is paired with origin context, specification highlights, pack formats, and a visible commercial route so buyers can judge not only what the product is, but how it can move from farm or factory into a credible export program.</p><p>Direct farm sourcing, customs coordination, documentation handling, cold-chain planning, and buyer inquiry follow-up are treated as part of the same commercial story, helping the platform communicate delivery capability alongside product presentation.</p>',
+        '<p>farmetra is designed to present vetted Chinese agricultural supply programs in a format suitable for formal buyer meetings, institutional review, and trade-promotion use, rather than as a high-volume generic marketplace.</p><p>The portfolio is organized around clear export families including aquatic products, Yunnan mushrooms, Chinese tea, specialty vegetables, and halal prepared foods, allowing visitors to understand both category breadth and the distinct regional strengths behind each line.</p><p>Each product is paired with origin context, specification highlights, pack formats, and a visible commercial route so buyers can judge not only what the product is, but how it can move from farm or factory into a credible export program.</p><p>Sourcing qualification, customs coordination, documentation handling, cold-chain planning, and buyer inquiry follow-up are treated as part of the same commercial story, helping the platform communicate delivery capability alongside product presentation.</p>',
       status: PageStatus.PUBLISHED,
-      seoTitle: 'About Nongye Chuhai Export Portfolio',
-      seoDescription: 'Formal overview of Nongye Chuhai direct farm sourcing and export delivery approach.',
+      seoTitle: 'About farmetra Agricultural Sales Platform',
+      seoDescription: 'Overview of farmetra sourcing qualification, supplier coordination, and cross-border agricultural delivery approach.',
       publishedAt: now
     },
     create: {
       slug: 'about',
       locale: 'en',
-      title: 'How Nongye Chuhai organizes direct farm sourcing and export delivery',
+      title: 'How farmetra organizes agricultural sourcing and cross-border sales delivery',
       excerpt:
-        'Nongye Chuhai is organized as a formal export presentation platform, connecting premium Chinese agricultural products with buyer inquiry, supplier coordination, and end-to-end delivery support.',
+        'farmetra is organized as a buyer-facing agricultural sales platform, connecting vetted Chinese supply programs with qualification, supplier coordination, and cross-border delivery support.',
       content:
-        '<p>Nongye Chuhai is designed to present premium Chinese agricultural products in a format suitable for formal buyer meetings, institutional review, and government demonstration, rather than as a high-volume generic marketplace.</p><p>The portfolio is organized around clear export families including aquatic products, Yunnan mushrooms, Chinese tea, specialty vegetables, and halal prepared foods, allowing visitors to understand both category breadth and the distinct regional strengths behind each line.</p><p>Each product is paired with origin context, specification highlights, pack formats, and a visible commercial route so buyers can judge not only what the product is, but how it can move from farm or factory into a credible export program.</p><p>Direct farm sourcing, customs coordination, documentation handling, cold-chain planning, and buyer inquiry follow-up are treated as part of the same commercial story, helping the platform communicate delivery capability alongside product presentation.</p>',
+        '<p>farmetra is designed to present vetted Chinese agricultural supply programs in a format suitable for formal buyer meetings, institutional review, and trade-promotion use, rather than as a high-volume generic marketplace.</p><p>The portfolio is organized around clear export families including aquatic products, Yunnan mushrooms, Chinese tea, specialty vegetables, and halal prepared foods, allowing visitors to understand both category breadth and the distinct regional strengths behind each line.</p><p>Each product is paired with origin context, specification highlights, pack formats, and a visible commercial route so buyers can judge not only what the product is, but how it can move from farm or factory into a credible export program.</p><p>Sourcing qualification, customs coordination, documentation handling, cold-chain planning, and buyer inquiry follow-up are treated as part of the same commercial story, helping the platform communicate delivery capability alongside product presentation.</p>',
       status: PageStatus.PUBLISHED,
-      seoTitle: 'About Nongye Chuhai Export Portfolio',
-      seoDescription: 'Formal overview of Nongye Chuhai direct farm sourcing and export delivery approach.',
+      seoTitle: 'About farmetra Agricultural Sales Platform',
+      seoDescription: 'Overview of farmetra sourcing qualification, supplier coordination, and cross-border agricultural delivery approach.',
       publishedAt: now
     }
   });
@@ -947,7 +1107,14 @@ async function main() {
         { pageId: aboutPage.id },
         {
           productId: {
-            in: [chineseMittenCrab.id, westLakeLongjing.id, halalReadyMeal.id]
+            in: [
+              chineseMittenCrab.id,
+              organicOysterMushroom.id,
+              organicMorelMushroom.id,
+              organicMorelRetailBox.id,
+              westLakeLongjing.id,
+              halalReadyMeal.id
+            ]
           }
         }
       ]
@@ -999,6 +1166,33 @@ async function main() {
         locale: 'en',
         sortOrder: 1,
         productId: westLakeLongjing.id,
+        isPublished: true
+      },
+      {
+        question: 'Is the oyster mushroom price quoted on fresh bulk weight?',
+        answer:
+          'Yes. The current supplier brochure presents organic oyster mushrooms at a reference price of CNY 11 per kilogram for the fresh line. Final pack format and route are aligned through inquiry.',
+        locale: 'en',
+        sortOrder: 1,
+        productId: organicOysterMushroom.id,
+        isPublished: true
+      },
+      {
+        question: 'How is the organic morel line positioned commercially?',
+        answer:
+          'The fresh organic morel program is shown as a premium inquiry-led line with a brochure reference range of CNY 125 to 160 per kilogram, suitable for hospitality, gifting, and specialty ingredient sourcing.',
+        locale: 'en',
+        sortOrder: 1,
+        productId: organicMorelMushroom.id,
+        isPublished: true
+      },
+      {
+        question: 'What retail formats and MOQ are available for the organic morel packs?',
+        answer:
+          'The current published retail formats are a 30g pouch at CNY 31 and a 50g box at CNY 48. Both list a 12-month shelf life with sealed cool-storage guidance, and the supplier brochure notes a MOQ of 100 boxes.',
+        locale: 'en',
+        sortOrder: 1,
+        productId: organicMorelRetailBox.id,
         isPublished: true
       },
       {

@@ -127,6 +127,31 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 'Start broad, then narrow into the product family that matches your target market, pack format, and commercial route.'}
             </p>
           </div>
+          {data.supplierPrograms.length > 0 ? (
+            <div className="portfolio-rail__panel">
+              <span className="section-kicker">Representative supplier programs</span>
+              <strong>
+                {data.activeCategory
+                  ? `Vetted programs in ${data.activeCategory.name}`
+                  : 'Vetted programs in the current portfolio view'}
+              </strong>
+              <div className="stack">
+                {data.supplierPrograms.map((supplier) => (
+                  <article className="stack" key={`${supplier.name}-${supplier.location}`}>
+                    <div>
+                      <strong>{supplier.name}</strong>
+                    </div>
+                    <div className="button-row">
+                      <span className="catalog-chip">{supplier.location}</span>
+                      <span className="catalog-chip">{supplier.lineCount} published line{supplier.lineCount === 1 ? '' : 's'}</span>
+                      {supplier.isVerified ? <span className="catalog-chip">Verified program</span> : null}
+                    </div>
+                    <p>{supplier.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ) : null}
           <div className="portfolio-rail__panel">
             <span className="section-kicker">What this view optimizes</span>
             <ul className="clean">
