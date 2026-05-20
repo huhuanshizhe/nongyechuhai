@@ -19,31 +19,31 @@ const platformStandards = [
 
 const tradeCapabilities = [
   {
-    title: 'Supply qualification',
-    description: 'Origin, category fit, pack format, and documentation direction are visible before the buyer requests pricing.'
+    title: 'What you can confirm here',
+    description: 'Product family, supplier origin, pack format, and whether the line is inquiry-led or already published for direct review.'
   },
   {
-    title: 'Commercial alignment',
-    description: 'The platform distinguishes inquiry-led programs from direct-order lines so buyers enter the right route immediately.'
+    title: 'What support is already visible',
+    description: 'Export coordination, customs handling, and cold-chain requirements are surfaced before you request pricing or samples.'
   },
   {
-    title: 'Delivery coordination',
-    description: 'Export paperwork, customs handling, and cold-chain planning are treated as part of the same operating model.'
+    title: 'What to send in your brief',
+    description: 'Target market, quantity, packaging, certifications, and timeline so the supplier reply can be commercially usable.'
   }
 ];
 
 const marketLanes = [
   {
-    title: 'Asia-Pacific buyers',
-    description: 'Retail, foodservice, and distribution teams seeking reliable chilled and ambient agricultural programs.'
+    title: 'Importers and distributors',
+    description: 'Buyers comparing origin, route, and execution readiness before opening a quotation discussion.'
   },
   {
-    title: 'Gulf region importers',
-    description: 'Buyers needing halal lines, compliant packaging, and export-ready commercial coordination.'
+    title: 'Retail sourcing teams',
+    description: 'Teams reviewing packaged lines, labeling fit, shelf formats, and supplier follow-up capability.'
   },
   {
-    title: 'Trade offices and delegations',
-    description: 'Institutional reviewers who need a credible presentation of product families, supplier readiness, and delivery capability.'
+    title: 'Foodservice and institutional buyers',
+    description: 'Procurement teams that need clear route labels, product context, and delivery support before samples move.'
   }
 ];
 
@@ -110,6 +110,9 @@ export default async function HomePage() {
             <p className="hero-stage__lead">
               From Farms to Global Markets with Export, Customs, and Cold Chain Support
             </p>
+            <p className="hero-stage__body">
+              Review buyer-ready product lines, supplier programs, and export routes before opening a quotation or sample discussion.
+            </p>
           </div>
           <div className="hero-stage__actions button-row">
             <Link className="button" href="/products">
@@ -132,10 +135,10 @@ export default async function HomePage() {
 
         <aside className="hero-stage__aside">
           <article className="hero-stage__panel hero-stage__panel--primary">
-            <span className="pill">International buyer desk</span>
-            <h2>Designed to look and operate like a credible global sales platform, not a generic product listing.</h2>
+            <span className="pill">Buyer quick brief</span>
+            <h2>What a buyer should be able to confirm before sending an inquiry.</h2>
             <p>
-              farmetra brings sourcing qualification, commercial alignment, documentation handling, and delivery planning into one operating environment so global buyers can assess readiness before they ask for price or sample execution.
+              This section is meant to answer the first practical questions: what can be sourced, how it can move, and what information you should send to get a usable commercial reply.
             </p>
             <div className="hero-stage__ledger">
               {tradeCapabilities.map((item) => (
@@ -147,7 +150,7 @@ export default async function HomePage() {
             </div>
           </article>
           <article className="hero-stage__panel">
-            <span className="pill">Current market fit</span>
+            <span className="pill">Best fit buyers</span>
             <div className="hero-stage__markets">
               {marketLanes.map((lane) => (
                 <article className="hero-stage__market" key={lane.title}>

@@ -468,8 +468,9 @@
 
 .hero-title {
   margin: 0;
-  font-size: clamp(3rem, 5vw, 5.4rem);
-  max-width: 11ch;
+  max-width: 14ch;
+  font-size: clamp(2.9rem, 4.3vw, 4.7rem);
+  line-height: 0.98;
 }
 
 .hero-copy p,
@@ -538,14 +539,22 @@
 
 .hero-stage__headline {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .hero-stage__lead {
+  max-width: 42ch;
+  margin: 0;
+  font-size: 1.14rem;
+  line-height: 1.68;
+  color: var(--foreground);
+}
+
+.hero-stage__body {
   max-width: 60ch;
   margin: 0;
-  font-size: 1.08rem;
-  line-height: 1.8;
+  font-size: 1.02rem;
+  line-height: 1.76;
   color: var(--muted);
 }
 
@@ -607,9 +616,9 @@
 
 .hero-stage__panel h2 {
   margin: 0;
-  font-size: clamp(1.6rem, 2.2vw, 2.24rem);
+  font-size: clamp(1.34rem, 1.8vw, 1.92rem);
   font-family: var(--font-display), serif;
-  line-height: 1.04;
+  line-height: 1.08;
 }
 
 .hero-stage__panel p {
