@@ -1,11 +1,11 @@
 // Components
-export { Button } from './components/Button';
-export type { ButtonVariant, ButtonSize } from './components/Button';
+export { Button } from './Button';
+export type { ButtonVariant, ButtonSize } from './Button';
 
-export { Badge, StatusBadge, TradeModeBadge } from './components/Badge';
-export type { BadgeVariant, StatusType, TradeMode } from './components/Badge';
+export { Badge, StatusBadge, TradeModeBadge } from './Badge';
+export type { BadgeVariant, StatusType, TradeMode } from './Badge';
 
-export { Card, CardHeader, CardBody, CardFooter, DataCard } from './components/Card';
+export { Card, CardHeader, CardBody, CardFooter, DataCard } from './Card';
 
-export { DataTable, DataRow } from './components/DataTable';
-export type { Column } from './components/DataTable';
+export { DataTable, DataRow } from './DataTable';
+export type { Column } from './DataTable';
