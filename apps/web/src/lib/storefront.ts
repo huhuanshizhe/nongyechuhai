@@ -979,3 +979,32 @@ export const getBuyerAccountData = cache(async (userId: string) => {
     }))
   } satisfies BuyerAccountData;
 });
+
+// Get buyer inquiries by user ID
+export async function getBuyerInquiries(userId: string) {
+  const inquiries = await prisma.inquiry.findMany({
+    where: { buyerUserId: userId },
+    orderBy: { createdAt: 'desc' },
+    select: {
+      id: true,
+      inquiryNumber: true,
+      status: true,
+      createdAt: true,
+      customerCountry: true,
+      quantityRequested: true,
+      requirements: true,
+      product: { select: { name: true } }
+    }
+  });
+
+  return inquiries.map((inquiry) => ({
+    id: inquiry.id,
+    inquiryNumber: inquiry.inquiryNumber,
+    status: inquiry.status.toLowerCase(),
+    createdAt: inquiry.createdAt,
+    destinationCountry: inquiry.customerCountry || 'Not specified',
+    quantityRequested: inquiry.quantityRequested,
+    requirements: inquiry.requirements || '',
+    productName: inquiry.product?.name || null
+  }));
+}

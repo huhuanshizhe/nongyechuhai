@@ -27,8 +27,8 @@ export default async function SupplierProductsPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Products</span>
-        <h1 className="hero-title">供应商看的是自己的商品产能，而不是后台全量噪音。</h1>
-        <p className="muted">当前工作台已经按当前登录供应商自动过滤，只显示与你组织相关的商品线。</p>
+        <h1 className="hero-title">我的商品</h1>
+        <p className="muted">管理您组织下的所有商品线，包括已发布、待审核和草稿状态的商品。</p>
       </div>
 
       <div className="summary-grid">

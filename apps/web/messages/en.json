@@ -1,0 +1,220 @@
+{
+  "site": {
+    "name": "Farmetra",
+    "tagline": "Global Agricultural Sales Platform",
+    "description": "A global agricultural sales platform connecting vetted Chinese supply programs with importers, distributors, retail sourcing teams, and trade offices."
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Export Portfolio",
+    "about": "About",
+    "rfq": "Inquiry Desk",
+    "tradeProcess": "Trade Process",
+    "login": "Buyer Login",
+    "account": "Buyer Workspace",
+    "signOut": "Sign out",
+    "sendInquiry": "Send Inquiry"
+  },
+  "header": {
+    "eyebrow": "Direct Farm Sourcing with End-to-End Export Delivery",
+    "summary": "Buyer-facing export portfolio with supplier programs, route visibility, customs handling, and cold-chain coordination for international agricultural trade.",
+    "signals": {
+      "suppliers": "supplier programs",
+      "categories": "categories",
+      "products": "online lines",
+      "response": "48h first response"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Qualified Agricultural Export Programs",
+      "subtitle": "Connecting Global Buyers with Vetted Chinese Supply Sources",
+      "description": "Transparent sourcing, documented supplier readiness, and coordinated export logistics for serious agricultural trade partners."
+    },
+    "features": {
+      "title": "Platform Features",
+      "supplierQualification": {
+        "title": "Supplier Qualification",
+        "description": "Verified production capacity, export licenses, and quality documentation."
+      },
+      "exportCoordination": {
+        "title": "Export Coordination",
+        "description": "Route planning, customs documentation, and cold-chain management."
+      },
+      "commercialClarity": {
+        "title": "Commercial Clarity",
+        "description": "Transparent pricing, volume tiers, and payment terms."
+      },
+      "responseCommitment": {
+        "title": "Response Commitment",
+        "description": "48-hour first response to all buyer inquiries."
+      }
+    },
+    "tradeProcess": {
+      "title": "Trade Process",
+      "step1": {
+        "title": "Browse & Qualify",
+        "description": "Review supplier programs and product specifications."
+      },
+      "step2": {
+        "title": "Submit Inquiry",
+        "description": "Detail your sourcing requirements and volume targets."
+      },
+      "step3": {
+        "title": "Receive Proposal",
+        "description": "Get tailored pricing and logistics recommendations."
+      },
+      "step4": {
+        "title": "Confirm & Ship",
+        "description": "Finalize terms and coordinate export delivery."
+      }
+    },
+    "cta": {
+      "title": "Ready to Source?",
+      "description": "Connect with qualified agricultural suppliers for your import needs.",
+      "button": "Submit Inquiry"
+    }
+  },
+  "products": {
+    "title": "Export Portfolio",
+    "description": "Browse qualified agricultural supply programs from verified Chinese exporters.",
+    "filter": {
+      "category": "Category",
+      "all": "All Categories",
+      "search": "Search products..."
+    },
+    "card": {
+      "viewDetails": "View Details",
+      "requestQuote": "Request Quote",
+      "minOrder": "Min. Order",
+      "supplyCapacity": "Supply Capacity",
+      "origin": "Origin",
+      "exportReady": "Export Ready"
+    },
+    "empty": "No products found matching your criteria."
+  },
+  "product": {
+    "detail": {
+      "backToProducts": "Back to Portfolio",
+      "specifications": "Product Specifications",
+      "supplierInfo": "Supplier Information",
+      "exportDetails": "Export Details",
+      "logistics": "Logistics & Delivery",
+      "requestQuote": "Request Quote for This Product",
+      "addToInquiry": "Add to Inquiry"
+    },
+    "specs": {
+      "category": "Category",
+      "origin": "Origin Region",
+      "harvestSeason": "Harvest Season",
+      "grade": "Quality Grade",
+      "packaging": "Packaging Options",
+      "shelfLife": "Shelf Life",
+      "certifications": "Certifications"
+    },
+    "supplier": {
+      "name": "Supplier",
+      "location": "Location",
+      "verified": "Verified Exporter",
+      "capacity": "Production Capacity",
+      "experience": "Export Experience"
+    },
+    "export": {
+      "minOrder": "Minimum Order",
+      "leadTime": "Lead Time",
+      "paymentTerms": "Payment Terms",
+      "shippingOptions": "Shipping Options",
+      "documentation": "Documentation Included"
+    }
+  },
+  "rfq": {
+    "title": "Inquiry Desk",
+    "subtitle": "Submit your sourcing requirements for qualified supplier matching.",
+    "form": {
+      "companyName": "Company Name",
+      "contactName": "Contact Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "country": "Destination Country",
+      "products": "Products of Interest",
+      "productsPlaceholder": "Describe the products you're looking to source...",
+      "volume": "Estimated Volume",
+      "volumePlaceholder": "e.g., 10 tons per month, 1000 kg quarterly",
+      "timeline": "Expected Timeline",
+      "timelinePlaceholder": "e.g., Q3 2026, Within 60 days",
+      "requirements": "Additional Requirements",
+      "requirementsPlaceholder": "Certifications, packaging preferences, delivery terms...",
+      "submit": "Submit Inquiry",
+      "success": "Inquiry submitted successfully. We'll respond within 48 hours.",
+      "error": "Failed to submit inquiry. Please try again."
+    },
+    "guest": {
+      "title": "Quick Inquiry",
+      "description": "Submit an inquiry without creating an account. You'll receive updates via email."
+    },
+    "registered": {
+      "title": "Buyer Inquiry",
+      "description": "As a registered buyer, your inquiry will be tracked in your workspace."
+    }
+  },
+  "account": {
+    "title": "Buyer Workspace",
+    "welcome": "Welcome back",
+    "inquiries": {
+      "title": "My Inquiries",
+      "status": "Status",
+      "date": "Submitted",
+      "products": "Products",
+      "actions": "Actions",
+      "view": "View Details",
+      "empty": "No inquiries submitted yet."
+    },
+    "profile": {
+      "title": "Profile Settings",
+      "company": "Company Information",
+      "contacts": "Contact Preferences"
+    }
+  },
+  "login": {
+    "title": "Buyer Login",
+    "subtitle": "Access your sourcing workspace and inquiry history.",
+    "email": "Email Address",
+    "password": "Password",
+    "submit": "Sign In",
+    "forgot": "Forgot password?",
+    "register": "Need an account? Contact us.",
+    "error": "Invalid credentials. Please try again."
+  },
+  "footer": {
+    "platform": "Global sales platform",
+    "description": "A buyer-facing agricultural platform for sourcing, qualification, and cross-border sales coordination.",
+    "contact": "Contact",
+    "bestFit": "Best fit",
+    "bestFitDescription": "Importers, retail sourcing teams, foodservice distributors, and institutional buyers.",
+    "content": "Content",
+    "aboutLink": "About the export approach",
+    "focus": "Current platform focus",
+    "focusDescription": "Supplier qualification, commercial clarity, and structured inquiry-to-delivery coordination."
+  },
+  "status": {
+    "pending": "Pending",
+    "reviewing": "Under Review",
+    "quoted": "Quote Provided",
+    "accepted": "Accepted",
+    "rejected": "Declined",
+    "completed": "Completed"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Try Again",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "required": "Required",
+    "optional": "Optional"
+  }
+}

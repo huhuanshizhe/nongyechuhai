@@ -9,10 +9,8 @@ export default async function DashboardPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Dashboard</span>
-        <h1 className="hero-title">运营总览已经接上真实工作流数据。</h1>
-        <p className="muted">
-          这里集中显示供应商准入、商品治理、询盘响应和内容资产状态，方便后台团队快速决定优先级。
-        </p>
+        <h1 className="hero-title">运营总览</h1>
+        <p className="muted">供应商审核、商品治理、询盘流转与内容发布 — 核心运营数据一目了然。</p>
       </div>
 
       <div className="metrics-grid">
@@ -38,7 +36,7 @@ export default async function DashboardPage() {
         <section className="section-panel">
           <div className="panel-header">
             <div>
-              <span className="eyebrow">Recent inquiries</span>
+              <span className="eyebrow">询盘概览</span>
               <h2>最新买家询盘</h2>
             </div>
           </div>
@@ -63,7 +61,7 @@ export default async function DashboardPage() {
         <section className="section-panel">
           <div className="panel-header">
             <div>
-              <span className="eyebrow">Supplier watch</span>
+              <span className="eyebrow">供应商概览</span>
               <h2>供应商审核与产出</h2>
             </div>
           </div>
@@ -90,7 +88,7 @@ export default async function DashboardPage() {
         <section className="section-panel">
           <div className="panel-header">
             <div>
-              <span className="eyebrow">Catalog governance</span>
+              <span className="eyebrow">商品概览</span>
               <h2>待治理商品</h2>
             </div>
           </div>
@@ -114,7 +112,7 @@ export default async function DashboardPage() {
         <section className="section-panel">
           <div className="panel-header">
             <div>
-              <span className="eyebrow">Content readiness</span>
+              <span className="eyebrow">内容概览</span>
               <h2>内容资产状态</h2>
             </div>
           </div>

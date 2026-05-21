@@ -9,7 +9,7 @@ export default async function InquiriesPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Inquiries</span>
-        <h1 className="hero-title">后台用同一视角管理买家来源、产品上下文和报价推进。</h1>
+        <h1 className="hero-title">询盘管理</h1>
         <p className="muted">当前列表已经接上真实询盘数据，可以直接验证 RFQ 如何进入运营和供应商团队。</p>
       </div>
       <section className="section-panel">

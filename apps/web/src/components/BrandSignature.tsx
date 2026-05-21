@@ -2,20 +2,27 @@ export function BrandSignature() {
   return (
     <span className="brand-signature">
       <span aria-hidden="true" className="brand-signature__icon">
-        <svg viewBox="0 0 88 88">
-          <rect x="5" y="5" width="78" height="78" rx="20" fill="#163629" />
-          <circle cx="44" cy="44" r="26" fill="none" stroke="#dcc28d" strokeWidth="2.4" />
-          <path d="M18 44h52" fill="none" stroke="#dcc28d" strokeOpacity="0.72" strokeWidth="1.8" />
-          <path d="M44 18c-8 8-12 17-12 26s4 18 12 26" fill="none" stroke="#dcc28d" strokeOpacity="0.7" strokeWidth="1.8" />
-          <path d="M44 18c8 8 12 17 12 26s-4 18-12 26" fill="none" stroke="#dcc28d" strokeOpacity="0.7" strokeWidth="1.8" />
-          <path d="M28 57c5-1 9-5 13-11 5 5 10 8 18 9" fill="none" stroke="#f4ead3" strokeLinecap="round" strokeWidth="4.2" />
-          <path d="M39 24c7 1 12 6 14 14-11 1-16-3-14-14Z" fill="#b9cf8f" />
-          <path d="M24 63h40" fill="none" stroke="#c89b55" strokeLinecap="round" strokeWidth="3.2" />
+        <svg viewBox="0 0 96 96" role="img">
+          <defs>
+            <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1a3c2d" />
+              <stop offset="60%" stopColor="#234a38" />
+              <stop offset="100%" stopColor="#c4a04a" />
+            </linearGradient>
+          </defs>
+          <rect x="8" y="8" width="80" height="80" rx="16" fill="url(#brandGradient)" />
+          <path d="M24 61c10-6 23-10 40-10 10 0 19 1 28 4" fill="none" stroke="rgba(255,255,255,0.6)" strokeLinecap="round" strokeWidth="3.6" />
+          <path d="M24 48c11-5 24-8 40-8 10 0 19 1 28 3" fill="none" stroke="rgba(255,255,255,0.4)" strokeLinecap="round" strokeWidth="2.8" />
+          <path d="M31 69 48 50 68 29" fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4.8" />
+          <circle cx="68" cy="29" r="4.5" fill="#fef08a" />
         </svg>
       </span>
       <span className="brand-signature__text">
-        <span className="brand-signature__title">farmetra</span>
-        <span className="brand-signature__subtitle">Direct Farm Sourcing with End-to-End Export Delivery</span>
+        <span aria-label="farmetra" className="brand-signature__wordmark">
+          <span className="brand-signature__wordmark-farm">farm</span>
+          <span className="brand-signature__wordmark-etra">etra</span>
+        </span>
+        <span className="brand-signature__subtitle">Direct Farm Sourcing · End-to-End Export</span>
       </span>
     </span>
   );

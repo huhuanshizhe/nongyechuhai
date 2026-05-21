@@ -1,0 +1,220 @@
+{
+  "site": {
+    "name": "Farmetra",
+    "tagline": "全球农业销售平台",
+    "description": "连接中国优质农产品供应与全球进口商、分销商、零售采购团队及贸易机构的跨境贸易平台。"
+  },
+  "nav": {
+    "home": "首页",
+    "products": "出口产品",
+    "about": "关于我们",
+    "rfq": "询盘中心",
+    "tradeProcess": "贸易流程",
+    "login": "买家登录",
+    "account": "买家工作台",
+    "signOut": "退出登录",
+    "sendInquiry": "发起询盘"
+  },
+  "header": {
+    "eyebrow": "直采农场，全链路出口交付",
+    "summary": "面向买家的出口产品展示，包含供应商资质、物流路线、清关处理及冷链协调等跨境贸易服务。",
+    "signals": {
+      "suppliers": "个供应商项目",
+      "categories": "个品类",
+      "products": "个在线产品",
+      "response": "48小时响应"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "优质农产品出口项目",
+      "subtitle": "连接全球买家与中国认证供应源",
+      "description": "透明采购、供应商资质认证、出口物流协调，为专业农产品贸易伙伴提供一站式服务。"
+    },
+    "features": {
+      "title": "平台特色",
+      "supplierQualification": {
+        "title": "供应商资质认证",
+        "description": "验证产能、出口许可及质量认证文件。"
+      },
+      "exportCoordination": {
+        "title": "出口协调服务",
+        "description": "路线规划、清关文件及冷链管理。"
+      },
+      "commercialClarity": {
+        "title": "商业透明度",
+        "description": "透明定价、阶梯报价及付款条款。"
+      },
+      "responseCommitment": {
+        "title": "响应承诺",
+        "description": "48小时内首次响应所有买家询盘。"
+      }
+    },
+    "tradeProcess": {
+      "title": "贸易流程",
+      "step1": {
+        "title": "浏览与筛选",
+        "description": "查看供应商项目及产品规格。"
+      },
+      "step2": {
+        "title": "提交询盘",
+        "description": "详细说明采购需求及目标采购量。"
+      },
+      "step3": {
+        "title": "获取报价",
+        "description": "获取定制化定价及物流建议。"
+      },
+      "step4": {
+        "title": "确认与发货",
+        "description": "确认条款并协调出口交付。"
+      }
+    },
+    "cta": {
+      "title": "准备采购?",
+      "description": "对接优质农产品供应商满足您的进口需求。",
+      "button": "提交询盘"
+    }
+  },
+  "products": {
+    "title": "出口产品目录",
+    "description": "浏览来自认证中国出口商的优质农产品供应项目。",
+    "filter": {
+      "category": "品类筛选",
+      "all": "全部品类",
+      "search": "搜索产品..."
+    },
+    "card": {
+      "viewDetails": "查看详情",
+      "requestQuote": "询价",
+      "minOrder": "最小订量",
+      "supplyCapacity": "供应能力",
+      "origin": "产地",
+      "exportReady": "出口就绪"
+    },
+    "empty": "未找到符合条件的产品。"
+  },
+  "product": {
+    "detail": {
+      "backToProducts": "返回产品目录",
+      "specifications": "产品规格",
+      "supplierInfo": "供应商信息",
+      "exportDetails": "出口详情",
+      "logistics": "物流与交付",
+      "requestQuote": "询价此产品",
+      "addToInquiry": "加入询盘"
+    },
+    "specs": {
+      "category": "品类",
+      "origin": "产地地区",
+      "harvestSeason": "采收季节",
+      "grade": "质量等级",
+      "packaging": "包装选项",
+      "shelfLife": "保质期",
+      "certifications": "认证资质"
+    },
+    "supplier": {
+      "name": "供应商",
+      "location": "所在地",
+      "verified": "认证出口商",
+      "capacity": "产能",
+      "experience": "出口经验"
+    },
+    "export": {
+      "minOrder": "最小订量",
+      "leadTime": "交货周期",
+      "paymentTerms": "付款条款",
+      "shippingOptions": "运输选项",
+      "documentation": "包含文件"
+    }
+  },
+  "rfq": {
+    "title": "询盘中心",
+    "subtitle": "提交您的采购需求，获取优质供应商匹配。",
+    "form": {
+      "companyName": "公司名称",
+      "contactName": "联系人姓名",
+      "email": "电子邮箱",
+      "phone": "电话号码",
+      "country": "目的国家",
+      "products": "意向产品",
+      "productsPlaceholder": "描述您希望采购的产品...",
+      "volume": "预估采购量",
+      "volumePlaceholder": "例如：每月10吨，每季度1000公斤",
+      "timeline": "预期时间",
+      "timelinePlaceholder": "例如：2024年第三季度，60天内",
+      "requirements": "附加要求",
+      "requirementsPlaceholder": "认证要求、包装偏好、交货条款...",
+      "submit": "提交询盘",
+      "success": "询盘已成功提交。我们将在48小时内回复。",
+      "error": "提交失败，请重试。"
+    },
+    "guest": {
+      "title": "快速询盘",
+      "description": "无需注册即可提交询盘，我们将通过邮件发送更新。"
+    },
+    "registered": {
+      "title": "买家询盘",
+      "description": "注册买家可在工作台追踪询盘进度。"
+    }
+  },
+  "account": {
+    "title": "买家工作台",
+    "welcome": "欢迎回来",
+    "inquiries": {
+      "title": "我的询盘",
+      "status": "状态",
+      "date": "提交时间",
+      "products": "产品",
+      "actions": "操作",
+      "view": "查看详情",
+      "empty": "暂无提交的询盘。"
+    },
+    "profile": {
+      "title": "账户设置",
+      "company": "公司信息",
+      "contacts": "联系方式"
+    }
+  },
+  "login": {
+    "title": "买家登录",
+    "subtitle": "访问采购工作台及询盘记录。",
+    "email": "电子邮箱",
+    "password": "密码",
+    "submit": "登录",
+    "forgot": "忘记密码?",
+    "register": "需要账户？联系我们。",
+    "error": "登录信息无效，请重试。"
+  },
+  "footer": {
+    "platform": "全球销售平台",
+    "description": "面向买家的农产品采购、资质认证及跨境销售协调平台。",
+    "contact": "联系方式",
+    "bestFit": "适用对象",
+    "bestFitDescription": "进口商、零售采购团队、餐饮分销商及机构买家。",
+    "content": "内容",
+    "aboutLink": "了解出口服务",
+    "focus": "平台定位",
+    "focusDescription": "供应商认证、商业透明及询盘至交付全程跟进。"
+  },
+  "status": {
+    "pending": "待处理",
+    "reviewing": "审核中",
+    "quoted": "已报价",
+    "accepted": "已接受",
+    "rejected": "已拒绝",
+    "completed": "已完成"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "retry": "重试",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "back": "返回",
+    "next": "下一步",
+    "submit": "提交",
+    "required": "必填",
+    "optional": "选填"
+  }
+}

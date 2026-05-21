@@ -535,10 +535,10 @@ async function main() {
     name: 'Chinese Mitten Crab',
     brand: 'Jiangnan Fresh',
     model: 'JFE-CRAB-220',
-    summary: 'A premium seasonal hairy crab program prepared for live export, chilled gifting, and festive retail presentation.',
-    description: 'An origin-led aquatic export line for importers, hospitality groups, and premium seasonal retail programs.',
+    summary: 'Seasonal live Chinese mitten crab from lower Yangtze farms. Available September–December for live export, chilled gift-box, and premium festive retail programs. Oxygenated transport and cold-chain documentation included.',
+    description: 'Lower Yangtze-bred Eriocheir sinensis for importers, hospitality groups, and seasonal premium retail. Harvest timing, packaging, and route confirmed through inquiry.',
     richDescription:
-      '<p>Chinese Mitten Crab is one of the portfolio&apos;s signature seasonal products, positioned for premium festive retail, hospitality gifting, and destination markets that value origin-led aquatic sourcing.</p><p>The program is organized around lower Yangtze breeding resources, live oxygenated shipment planning, chilled gift-box presentation, and the export documentation needed to support a controlled cold-chain journey from farm to overseas arrival.</p><p>Buyers typically begin with harvest timing, target market entry requirements, packaging presentation, and transport format, allowing the commercial discussion to stay grounded in seasonality and delivery realism from the outset.</p>',
+      '<p>The Chinese mitten crab (Eriocheir sinensis) is a prized seasonal delicacy across East and Southeast Asian markets, with established demand during the Mid-Autumn and year-end festive window. This program sources from lower Yangtze breeding bases in Jiangsu, where water quality, feed management, and harvest scheduling are controlled for export consistency.</p><p>Each crab ships in oxygenated live-transport crates with individual compartmenting. For gift-market buyers, chilled presentation boxes with cold-chain monitoring are also available. All shipments include origin certification, health inspection documentation, and bilingual (CN/EN) labeling.</p><p>Typical buyer discussions begin with harvest window confirmation, destination-market import requirements, packaging format, and transport routing — allowing commercial terms to be structured around real seasonal and logistical parameters rather than estimates.</p>',
     tradeMode: TradeMode.INQUIRY_ONLY,
     priceMin: '26.00',
     priceMax: '42.00',
@@ -552,7 +552,7 @@ async function main() {
     },
     seoTitle: 'Chinese Mitten Crab Export Program',
     seoDescription: 'Seasonal Chinese mitten crab export program with gifting formats, cold-chain planning, and delivery coordination.',
-    coverImageUrl: commonsImage('Gekochte_Wollhandkrabben.jpg'),
+    coverImageUrl: commonsImage('HK SW 上環 Sheung Wan 永樂街 120 Wing Lok Street shop 成隆行 Shing Lung Hong 大閘蟹 live Chinese mitten crabs water tank December 2021 SS2 03.jpg'),
     publishedAt: minutesEarlier(now, 0)
   });
 
@@ -563,10 +563,10 @@ async function main() {
     name: 'Organic Oyster Mushroom',
     brand: 'Huilin Organic',
     model: 'HL-FRESH-OST-1KG',
-    summary: 'Fresh organic oyster mushrooms from Kunming, positioned for wholesale fresh supply, foodservice prep, and import programs that need an accessible entry product in the Yunnan fungi range.',
-    description: 'A fresh organic mushroom line from Yunnan Huilin for buyers evaluating certified fresh fungi with stable origin and commercial reference pricing.',
+    summary: 'Fresh organic oyster mushrooms from Kunming, Yunnan. Meaty caps, tender texture. Reference price CNY 11/kg. Suitable for wholesale fresh supply, foodservice prep, and fresh import programs.',
+    description: 'Fresh organic Pleurotus ostreatus from Huilin&apos;s 700-acre organic demonstration base in Aziying, Kunming. Direct-order with published CNY pricing.',
     richDescription:
-      '<p>Organic Oyster Mushroom introduces Huilin&apos;s fresh organic mushroom range through a product that wholesale buyers and chefs can benchmark immediately.</p><p>The supplier brochure lists the line at CNY 11 per kilogram and describes a meaty cap, tender texture, and light springiness that translate well into fresh distribution, foodservice prep, and trial import programs.</p><p>Because the supplier operates a 700-plus-acre organic demonstration base in Aziying, Kunming, the product also works as a practical proof point for buyers who want to verify origin depth and follow-up capacity before opening a broader mushroom discussion.</p>',
+      '<p>Organic oyster mushrooms from Huilin&apos;s certified organic base in Aziying, Panlong District, Kunming. The 700-acre facility operates under organic cultivation protocols with documented soil, water, and input management. Oyster mushrooms are grown in climate-controlled houses with regulated humidity and ventilation to produce consistent cap size and texture.</p><p>Fresh product is reference-priced at CNY 11/kg. Caps are meaty with tender texture and light springiness — characteristics that hold up well in fresh distribution, foodservice preparation, and trial import programs. The supplier ships in foam-box packaging with ice packs for short-haul distribution; longer-distance cold-chain arrangements are discussed per order.</p><p>This product serves as an accessible entry point into Huilin&apos;s broader organic mushroom range, backed by the supplier&apos;s 3,000 m² innovation center supporting spawn R&D, cultivation, processing, and technical service.</p>',
     tradeMode: TradeMode.DIRECT_PURCHASE,
     currency: 'CNY',
     priceMin: '11.00',
@@ -592,10 +592,10 @@ async function main() {
     name: 'Organic Morel Mushroom',
     brand: 'Huilin Organic',
     model: 'HL-FRESH-MOREL-1KG',
-    summary: 'Fresh organic morel mushrooms positioned for premium ingredient sourcing, hospitality menus, gifting, and specialty import programs that need a high-value Yunnan line with reference pricing.',
-    description: 'A premium fresh morel program from Yunnan Huilin for buyers comparing high-value mushroom offers with documented supplier origin and category range.',
+    summary: 'Fresh organic morel mushrooms (Morchella) from Kunming, Yunnan. Rich aroma, honeycomb cap structure, crisp-smooth texture. Reference price CNY 125–160/kg. For premium ingredient sourcing, hospitality, and specialty import.',
+    description: 'Fresh organic morels from Huilin&apos;s Kunming base. Higher-value line with grade-dependent pricing. Suitable for premium hospitality, gifting, and specialty ingredient import.',
     richDescription:
-      '<p>Organic Morel Mushroom is one of Huilin&apos;s premium fresh mushroom lines, presented for buyers who need a higher-value ingredient with clear origin and commercial reference pricing.</p><p>The supplier brochure quotes a reference range of CNY 125 to 160 per kilogram and describes a rich aroma, varied cap structure, and a crisp, smooth bite suited to hospitality, gifting, and specialty ingredient channels.</p><p>Within the platform, the line is positioned as a qualification product: buyers can use it to discuss seasonal availability, target market fit, and whether fresh morel should be paired with dried or retail-ready follow-on packs from the same supplier program.</p>',
+      '<p>Organic morel mushrooms (Morchella spp.) are among the most sought-after fungi in global culinary and ingredient markets. Huilin cultivates these under organic protocol at its Aziying, Kunming facility, with controlled substrate, humidity, and harvest timing to produce consistent cap development and aroma profile.</p><p>The fresh line is reference-priced at CNY 125–160/kg depending on grade. Morels exhibit a rich, earthy aroma with a honeycomb cap structure and a crisp, smooth bite that holds texture through cooking. Primary commercial channels include premium hospitality purchasing, seasonal gifting, and specialty ingredient import for high-end retail and foodservice.</p><p>Buyers evaluating this product typically discuss seasonal availability windows, grade selection, cold-chain routing to destination, and whether the fresh line should be paired with dried or retail-ready formats from the same supplier for a more complete program.</p>',
     tradeMode: TradeMode.DIRECT_PURCHASE,
     currency: 'CNY',
     priceMin: '125.00',
@@ -621,10 +621,10 @@ async function main() {
     name: 'Organic Morel Retail Box',
     brand: 'Huilin Organic',
     model: 'HL-RETAIL-MOREL',
-    summary: 'Retail-ready organic morel packs prepared for supermarket, e-commerce, gifting, and first-order shelf review, with published 30g and 50g formats from the supplier brochure.',
-    description: 'A direct-order retail mushroom line translating Huilin&apos;s organic morel supply into consumer-facing pouch and box formats.',
+    summary: '60 g organic morel retail box. Two SKUs: 30 g pouch (CNY 31) and 50 g box (CNY 48). 12-month shelf life, sealed packaging. Direct-order for supermarket, e-commerce, and gifting channels.',
+    description: 'Retail-ready organic morel packs from Huilin in consumer-facing pouch and box formats with published wholesale pricing.',
     richDescription:
-      '<p>The Organic Morel Retail Box translates Huilin&apos;s mushroom supply into a supermarket and e-commerce-ready format rather than a bulk ingredient line.</p><p>The current supplier brochure lists two commercial packs: a 30g pouch at CNY 31 and a 50g box at CNY 48, both stored sealed in a cool, dark place with a published shelf life of 12 months.</p><p>This makes the line suitable for buyers who want a smaller test order, retail shelf review, gift-pack evaluation, or a more structured discussion about labeling, channel fit, and minimum order quantity before expanding into a broader mushroom program.</p>',
+      '<p>The Organic Morel Retail Box translates Huilin&apos;s organic morel supply into a supermarket and e-commerce-ready format rather than a bulk ingredient line.</p><p>The current supplier brochure lists two commercial packs: a 30 g pouch at CNY 31 and a 50 g box at CNY 48, both stored sealed in a cool, dark place with a published shelf life of 12 months.</p><p>These formats are suitable for buyers wanting a smaller test order, retail shelf review, gift-pack evaluation, or a more structured discussion about labeling, channel fit, and minimum order quantity before expanding into a broader mushroom program.</p>',
     tradeMode: TradeMode.DIRECT_PURCHASE,
     currency: 'CNY',
     priceMin: '31.00',
@@ -652,7 +652,7 @@ async function main() {
         summary: 'Fresh organic elm yellow mushrooms from Kunming prepared for specialty retail, foodservice prep, and buyers who need an aromatic Yunnan fungi line with a published brochure price.',
         description: 'A fresh organic elm yellow mushroom line from Huilin for buyers looking for a fragrant, tender mushroom offer from a verified Yunnan supplier program.',
         richDescription:
-          '<p>Organic Elm Yellow Mushroom extends the Huilin fresh range with a line suited to chefs, specialty distributors, and importers who want a more aromatic mushroom profile than a standard oyster line.</p><p>The supplier brochure lists the product at CNY 15 per kilogram and highlights its rich aroma, fresh taste, and smooth tender texture, making it useful for both premium retail and foodservice preparation.</p><p>On the platform, the line works as a ready-to-review fresh product with a published supplier price, clear origin, and straightforward route into first-order discussion.</p>',
+          '<p>Organic Elm Yellow Mushroom extends the Huilin fresh range with a line suited to chefs, specialty distributors, and importers who want a more aromatic mushroom profile than a standard oyster line.</p><p>The supplier brochure lists the product at CNY 15 per kilogram and highlights its rich aroma, fresh taste, and smooth tender texture, making it useful for both premium retail and foodservice preparation.</p><p>The line is a ready-to-review fresh product with a published supplier price, clear origin, and straightforward route into first-order discussion.</p>',
         priceMin: '15.00',
         priceMax: '15.00',
         totalStock: 2200,
@@ -694,7 +694,7 @@ async function main() {
         summary: 'Fresh organic red pine mushrooms with grade-based brochure pricing for buyers needing a structured Yunnan supply line for ingredient, retail, and foodservice channels.',
         description: 'A fresh red pine mushroom line from Huilin with Grade I and Grade II pricing published in the supplier brochure.',
         richDescription:
-          '<p>Organic Red Pine Mushroom is listed by Huilin as a graded fresh product rather than a single undifferentiated bulk line.</p><p>The brochure quotes Grade I at CNY 40 per kilogram and Grade II at CNY 30 per kilogram, while describing a crisp, firm texture and clean mushroom aroma suited to premium ingredient use.</p><p>For the platform, this line helps show that the supplier program can support more disciplined commercial review where grade and price structure matter.</p>',
+          '<p>Organic Red Pine Mushroom is listed by Huilin as a graded fresh product rather than a single undifferentiated bulk line.</p><p>The brochure quotes Grade I at CNY 40 per kilogram and Grade II at CNY 30 per kilogram, while describing a crisp, firm texture and clean mushroom aroma suited to premium ingredient use.</p><p>This line demonstrates the supplier&apos;s ability to support more disciplined commercial review where grade and price structure matter.</p>',
         priceMin: '30.00',
         priceMax: '40.00',
         totalStock: 1500,
@@ -715,7 +715,7 @@ async function main() {
         summary: 'Fresh organic beifeng mushrooms positioned for wholesale fresh supply and premium retail with a published brochure price and a sweet, springy texture profile.',
         description: 'A fresh organic beifeng mushroom line from Huilin for buyers looking for a smooth, springy Yunnan fungi product with visible supplier pricing.',
         richDescription:
-          '<p>Organic Beifeng Mushroom broadens the Huilin fresh offering with a line positioned between mainstream edible mushrooms and higher-value premium specialties.</p><p>The supplier brochure lists the product at CNY 30 per kilogram and describes a tender yet springy texture with a sweet crisp bite that can support both wholesale fresh distribution and more premium retail presentation.</p><p>Within the platform, it serves as a practical mid-tier mushroom line for buyers who want visible pricing and a differentiated texture profile without moving all the way into morel-level pricing.</p>',
+          '<p>Organic Beifeng Mushroom broadens the Huilin fresh offering with a line positioned between mainstream edible mushrooms and higher-value premium specialties.</p><p>The supplier brochure lists the product at CNY 30 per kilogram and describes a tender yet springy texture with a sweet crisp bite that can support both wholesale fresh distribution and more premium retail presentation.</p><p>It is a practical mid-tier mushroom line for buyers wanting visible pricing and a differentiated texture profile without moving all the way into morel-level pricing.</p>',
         priceMin: '30.00',
         priceMax: '30.00',
         totalStock: 1680,
@@ -757,7 +757,7 @@ async function main() {
         summary: 'Dried organic oyster mushrooms from Huilin prepared for ingredient buyers, pantry programs, and packaged-food sourcing with a published brochure price.',
         description: 'A dried organic oyster mushroom line from Yunnan Huilin for ingredient and shelf-stable distribution programs.',
         richDescription:
-          '<p>Dried Organic Oyster Mushroom translates one of Huilin&apos;s most accessible fresh products into a shelf-stable ingredient line that is easier to move through export and retail channels.</p><p>The brochure lists the dried format at CNY 45 per kilogram while retaining the same meaty texture and familiar appeal that make oyster mushroom a straightforward entry line for buyers.</p><p>It is positioned on the platform for ingredient import, pantry formats, and foodservice buyers who want a lower-complexity dried mushroom starting point.</p>',
+          '<p>Dried Organic Oyster Mushroom translates one of Huilin&apos;s most accessible fresh products into a shelf-stable ingredient line that is easier to move through export and retail channels.</p><p>The brochure lists the dried format at CNY 45 per kilogram while retaining the same meaty texture and familiar appeal that make oyster mushroom a straightforward entry line for buyers.</p><p>It is positioned on the platform for ingredient import, pantry formats, and foodservice buyers wanting a lower-complexity dried mushroom starting point.</p>',
         priceMin: '45.00',
         priceMax: '45.00',
         totalStock: 1900,
@@ -776,7 +776,7 @@ async function main() {
         name: 'Dried Organic Elm Yellow Mushroom',
         model: 'HL-DRIED-EYM-1KG',
         summary: 'Dried organic elm yellow mushrooms for ingredient, retail, and pantry channels with an aromatic profile and published brochure price.',
-        description: 'A dried elm yellow mushroom line from Huilin for buyers who want a more aromatic shelf-stable mushroom format.',
+        description: 'A dried elm yellow mushroom line from Huilin for buyers wanting a more aromatic shelf-stable mushroom format.',
         richDescription:
           '<p>Dried Organic Elm Yellow Mushroom extends the shelf-stable Huilin range with a line that retains the aromatic identity of the fresh product while simplifying export handling.</p><p>The supplier brochure lists the dried line at CNY 85 per kilogram and positions it as a high-nutrition, low-calorie mushroom suited to ingredient and pantry formats.</p><p>For buyers, it offers a stronger aromatic profile than a dried oyster line while still remaining commercially approachable.</p>',
         priceMin: '85.00',
@@ -883,7 +883,7 @@ async function main() {
         summary: 'Dried organic morels positioned for premium ingredient, gifting, and specialty pantry channels with grade-based brochure pricing.',
         description: 'A premium dried morel line from Huilin with brochure pricing published by grade for higher-value commercial review.',
         richDescription:
-          '<p>Dried Organic Morel Mushroom is one of the highest-value shelf-stable lines in the Huilin brochure, aimed at buyers who need a premium Yunnan mushroom offer without a fresh-chain dependency.</p><p>The supplier lists CNY 820 per kilogram for 5-7 grade and CNY 580 per kilogram for 3-5 grade, giving buyers a clearer commercial basis for premium dried morel sourcing.</p><p>It is positioned for specialty ingredient import, gifting, and curated premium retail programs where grade and quality perception matter.</p>',
+          '<p>Dried Organic Morel Mushroom is one of the highest-value shelf-stable lines in the Huilin brochure, aimed at buyers who need a premium Yunnan mushroom offer without a fresh-chain dependency.</p><p>The supplier lists CNY 820 per kilogram for 5-7 grade and CNY 580 per kilogram for 3-5 grade, giving buyers a clearer commercial basis for premium dried morel sourcing.</p><p>it is suitable for specialty ingredient import, gifting, and curated premium retail programs where grade and quality perception matter.</p>',
         priceMin: '580.00',
         priceMax: '820.00',
         totalStock: 420,
@@ -1086,10 +1086,10 @@ async function main() {
     name: 'West Lake Longjing Tea',
     brand: 'West Lake Reserve',
     model: 'WLT-SPRING-250',
-    summary: 'A spring-picked Longjing tea program prepared for premium retail, gifting, hospitality, and cultural presentation.',
-    description: 'A direct-order tea line that combines origin recognition, refined pack formats, and premium spring leaf grading.',
+    summary: 'Pre-Qingming spring-picked West Lake Longjing tea from Meijiawu, Hangzhou. Premium leaf grade, available in 250 g nitrogen-flushed tin or 1 kg foodservice pouch. Direct-order with published pricing for retail, hospitality, and gifting.',
+    description: 'Origin-verified Longjing (Dragon Well) green tea from the West Lake core production area. Spring harvest, pan-fired, flat-pressed. Direct-order line with two commercial formats.',
     richDescription:
-      '<p>West Lake Longjing Tea is included as a flagship cultural and commercial product, giving the portfolio a category that speaks not only to trade but also to Chinese origin identity, premium gifting, and hospitality service.</p><p>The program combines Meijiawu origin reference, spring harvest detail, retail and foodservice pack options, and the presentation discipline expected by buyers seeking a tea line that can move from display to commercial review without losing its premium narrative.</p><p>Because the product is already structured as a direct-order line, it works well for demonstrations that need to show how a polished portfolio can move from category storytelling into immediate sample and order evaluation.</p>',
+      '<p>West Lake Longjing is China&apos;s most recognized green tea, protected by geographical indication and defined by four characteristics: flat, smooth leaves; pale green-yellow liquor; chestnut-like aroma; and a clean, lingering sweetness. This program sources from tea gardens in Meijiawu village, within the designated West Lake core production zone in Hangzhou.</p><p>Leaves are hand-picked during the pre-Qingming spring window, when amino acid concentration is highest and astringency lowest. Processing follows traditional pan-firing and flat-pressing technique. The finished leaf is graded as premium spring grade.</p><p>Two commercial formats are available: a 250 g nitrogen-flushed tin at USD 72 and a 1 kg foodservice pouch at USD 118. Both are direct-order products with published reference pricing, origin documentation, and sample availability for qualified buyers.</p>',
     tradeMode: TradeMode.DIRECT_PURCHASE,
     priceMin: '72.00',
     priceMax: '118.00',
@@ -1114,10 +1114,10 @@ async function main() {
     name: 'Fresh Jiaobai Stems',
     brand: 'Jiangnan Fresh',
     model: 'JFE-JIAOBAI-5KG',
-    summary: 'Fresh Jiaobai stems prepared for chilled export, specialty retail, and menus seeking a distinctive Chinese vegetable line.',
-    description: 'A seasonal specialty vegetable line combining regional identity, fresh pack planning, and chilled export handling.',
+    summary: 'Fresh water bamboo shoots (Jiaobai) from Suzhou and Huzhou waterfield bases. Seasonal harvest, pre-cooled within 6 hours. Packed in 5 kg chilled cartons for specialty retail, Asian produce distribution, and premium menu use.',
+    description: 'Zizania latifolia stems — a seasonal aquatic vegetable cultivated in the lower Yangtze region. Delicate texture, mild sweetness. Pre-cooled and packed for chilled export within harvest window.',
     richDescription:
-      '<p>Fresh Jiaobai Stems introduce a distinctly Chinese specialty vegetable to the portfolio, helping the site move beyond standard produce and into a more curated presentation of regional agricultural identity.</p><p>The line is organized around lower Yangtze cultivation, fresh harvest timing, chilled carton configuration, and the practical cold-chain decisions required to deliver a delicate product in sound condition.</p><p>For importers, chefs, and specialty retailers, Jiaobai offers a useful example of how the platform can present lesser-known products with enough commercial and logistical clarity to support serious consideration.</p>',
+      '<p>Jiaobai (Zizania latifolia), also known as water bamboo or wild rice stem, is a traditional Jiangnan-region vegetable with a mild, slightly sweet flavor and a crisp-tender texture prized in Chinese and pan-Asian cuisine. Cultivation takes place in managed waterfields around Suzhou and Huzhou, where controlled flooding supports the swollen stem formation that defines commercial-grade Jiaobai.</p><p>Harvest is seasonal. Stems are pre-cooled to below 4°C within six hours of cutting to preserve texture and prevent oxidation. Standard export format is a 5 kg chilled carton with perforated lining for humidity control. Retail tray-pack options are also available for destination-market repacking.</p><p>Buyers typically confirm harvest window, pre-cooling protocol, carton configuration, and destination cold-chain routing before first shipment. This is an inquiry-led product — each order is structured around the buyer&apos;s market window and transit time requirements.</p>',
     tradeMode: TradeMode.INQUIRY_ONLY,
     priceMin: '2.80',
     priceMax: '4.50',
@@ -1142,10 +1142,10 @@ async function main() {
     name: 'Green Asparagus Spears',
     brand: 'Green Shoots',
     model: 'GSP-ASP-11LB',
-    summary: 'Straight green asparagus spears prepared for chilled retail distribution, foodservice supply, and fresh export programs.',
-    description: 'A fresh asparagus export line with sizing standards, carton formats, and reefer-handling visibility.',
+    summary: 'Straight green asparagus spears from Shandong coastal bases. Hydro-cooled, sized 16–22 mm, packed in 11 lb export cartons. Suitable for chilled retail, foodservice, and fresh-produce import programs with reefer logistics support.',
+    description: 'Fresh green asparagus (Asparagus officinalis) for chilled export, retail distribution, and foodservice supply. Grown in Shandong greenhouse and field operations with post-harvest hydro-cooling within 4 hours.',
     richDescription:
-      '<p>Green Asparagus Spears provide the portfolio with a globally familiar fresh category that can be read immediately by retail buyers, distributors, and foodservice operators, while still demonstrating disciplined Chinese export presentation.</p><p>The line is framed through size consistency, hydro-cooling, carton selection, and reefer movement so that the buyer sees not only a vegetable but also a workable export proposition.</p><p>That makes asparagus a useful bridge product within the presentation: familiar enough to be commercially intuitive, yet structured in a way that reinforces the platform&apos;s export-delivery promise.</p>',
+      '<p>Green asparagus from Shandong coastal operations is grown under greenhouse and open-field protocols that prioritize spear straightness, tip tightness, and uniform sizing. Post-harvest, spears are hydro-cooled to remove field heat, graded to 16–22 mm diameter, and packed into standard 11 lb export cartons with moisture-retention lining.</p><p>The line is supported by reefer-container logistics planning, with departure from Qingdao or Shanghai ports depending on destination and shipping schedule. Buyers receive packing specifications, cold-chain temperature logs, and phytosanitary documentation as part of the export file.</p><p>Common commercial discussion points include sizing tolerance, pack configuration, departure scheduling, destination inspection requirements, and volume commitments. The program is positioned as an inquiry-led line so that market-specific parameters are confirmed before first shipment.</p>',
     tradeMode: TradeMode.INQUIRY_ONLY,
     priceMin: '3.20',
     priceMax: '5.80',
@@ -1170,10 +1170,10 @@ async function main() {
     name: 'Halal Curry Chicken Ready Meal',
     brand: 'Eurasia Halal',
     model: 'EHF-CURRY-320',
-    summary: 'A halal-certified curry chicken ready meal with export carton options, labeling support, and private-label potential.',
-    description: 'A direct-order prepared food line for retail, airline catering, institutional channels, and halal export distribution.',
+    summary: 'Halal-certified curry chicken ready meal. 320 g tray, 12-month ambient shelf life. Two case-pack formats: 12 × 320 g (export) and 24 × 250 g (retail shelf). Private-label and bilingual labeling support available.',
+    description: 'A direct-order halal prepared food line from Dezhou, Shandong. Certified production line. Suitable for Gulf retail, Southeast Asian distribution, airline catering, and institutional foodservice.',
     richDescription:
-      '<p>This halal-certified curry chicken ready meal gives the portfolio a finished-food export story that complements the agricultural lines and shows how the platform can also support downstream, value-added food products.</p><p>The program is framed for Gulf markets, Southeast Asian retail, airline catering, and institutional procurement, with attention to halal suitability, case-pack structure, shelf-life, labeling review, and export documentation.</p><p>Because it is already set up as a direct-order line, the product also demonstrates how the site can present packaged food in a way that feels commercially ready rather than purely conceptual.</p>',
+      '<p>This halal-certified curry chicken ready meal is produced on a dedicated halal line in Dezhou, Shandong — a city with established halal food processing capability serving both domestic and export markets. The product is formulated for ambient shelf stability (12 months), making it suitable for containerized export without cold-chain dependency.</p><p>Two commercial case-pack options are published: a 12 × 320 g export case at USD 46 and a 24 × 250 g retail shelf case at USD 52. Both formats support bilingual (English/Arabic) labeling. The product can be supplied under the Eurasia Halal brand or developed as a private-label SKU subject to volume and market discussion.</p><p>Export documentation includes halal certification, certificate of origin, health certificate, packing list, and commercial invoice. Buyers typically confirm case-pack selection, labeling language, private-label scope, and destination regulatory review before first order.</p>',
     tradeMode: TradeMode.DIRECT_PURCHASE,
     priceMin: '46.00',
     priceMax: '52.00',
@@ -1212,16 +1212,16 @@ async function main() {
     data: [
       {
         productId: chineseMittenCrab.id,
-        url: commonsImage('Gekochte_Wollhandkrabben.jpg'),
-        altText: 'Chinese mitten crab export presentation image',
+        url: commonsImage('HK SW 上環 Sheung Wan 永樂街 120 Wing Lok Street shop 成隆行 Shing Lung Hong 大閘蟹 live Chinese mitten crabs water tank December 2021 SS2 03.jpg'),
+        altText: 'Live Chinese mitten crab export presentation image',
         type: ProductImageType.MAIN,
         sortOrder: 0,
         isPrimary: true
       },
       {
         productId: chineseMittenCrab.id,
-        url: commonsImage('Roe_inside_steamed_female_hairy_crab.jpg'),
-        altText: 'Chinese mitten crab premium product detail',
+        url: commonsImage('阳澄湖大闸蟹 生 蒸前.jpg'),
+        altText: 'Chinese mitten crab live product detail before steaming',
         type: ProductImageType.DETAIL,
         sortOrder: 1,
         isPrimary: false
@@ -1712,7 +1712,7 @@ async function main() {
         city: 'Dubai',
         addressLine1: 'Dubai South Logistics District'
       },
-      notes: 'Seeded direct-order showcase order for halal prepared meal export review.',
+      notes: 'Direct order for halal prepared meal export — Dubai South Logistics District delivery.',
       placedAt: now
     },
     create: {
@@ -1733,7 +1733,7 @@ async function main() {
         city: 'Dubai',
         addressLine1: 'Dubai South Logistics District'
       },
-      notes: 'Seeded direct-order showcase order for halal prepared meal export review.',
+      notes: 'Direct order for halal prepared meal export — Dubai South Logistics District delivery.',
       placedAt: now
     }
   });

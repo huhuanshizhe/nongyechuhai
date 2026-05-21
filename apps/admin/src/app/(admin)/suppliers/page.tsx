@@ -9,7 +9,7 @@ export default async function SuppliersPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Suppliers</span>
-        <h1 className="hero-title">供应商审核与经营质量一屏可见。</h1>
+        <h1 className="hero-title">供应商管理</h1>
         <p className="muted">这里集中看准入状态、验证情况、联系方式以及每个供应商当前实际承担的商品、询盘和订单量。</p>
       </div>
       <section className="section-panel">

@@ -9,7 +9,7 @@ export default async function ProductsPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Products</span>
-        <h1 className="hero-title">商品治理不只是上架，还要管交易模式和审核节奏。</h1>
+        <h1 className="hero-title">商品管理</h1>
         <p className="muted">后台从同一列表里同时看商品状态、供应商归属、分类位置、价格锚点和 SKU 复杂度。</p>
       </div>
       <section className="section-panel">

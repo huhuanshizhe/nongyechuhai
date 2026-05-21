@@ -27,8 +27,8 @@ export default async function SupplierInquiriesPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Inquiries</span>
-        <h1 className="hero-title">供应商只看与自己业务相关的买家需求和报价进度。</h1>
-        <p className="muted">RFQ 表单现在已经会直接沉淀到这里，供应商能立刻确认国家、数量、目标价和报价数。</p>
+        <h1 className="hero-title">收到的询盘</h1>
+        <p className="muted">查看买家提交的采购需求，确认国家、数量、目标价格后跟进报价。</p>
       </div>
 
       <section className="section-panel">

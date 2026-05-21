@@ -26,11 +26,11 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <form action={loginAction} className="auth-form">
           <label>
             <span>邮箱</span>
-            <input name="email" placeholder="supplier@nongyechuhai.local" required type="email" />
+            <input name="email" placeholder="supplier@company.com" required type="email" />
           </label>
           <label>
             <span>密码</span>
-            <input name="password" placeholder="Supplier123!" required type="password" />
+            <input name="password" placeholder="••••••••" required type="password" />
           </label>
           <button className="primary-button" type="submit">
             进入供应商中心

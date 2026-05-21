@@ -9,7 +9,7 @@ export default async function ContentPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Content</span>
-        <h1 className="hero-title">内容后台既服务 SEO，也服务买家信任建立。</h1>
+        <h1 className="hero-title">内容管理</h1>
         <p className="muted">当前页面已经能看见内容页发布状态，以及 FAQ 资产挂载到页面或商品的方式。</p>
       </div>
       <div className="split-grid">

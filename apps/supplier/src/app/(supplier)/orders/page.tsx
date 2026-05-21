@@ -27,8 +27,8 @@ export default async function SupplierOrdersPage() {
     <section className="page-stack">
       <div className="page-hero">
         <span className="eyebrow">Orders</span>
-        <h1 className="hero-title">订单跟进页已经能看到真实样例订单和支付状态。</h1>
-        <p className="muted">即使当前仍是 mock payment 阶段，供应商也能从订单号、金额和付款状态判断推进动作。</p>
+        <h1 className="hero-title">订单跟进</h1>
+        <p className="muted">跟踪所有订单的处理状态和支付进度。</p>
       </div>
 
       <div className="summary-grid">
