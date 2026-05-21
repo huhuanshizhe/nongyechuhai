@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-type BadgeVariant = 'neutral' | 'success' | 'warning' | 'error' | 'info' | 'inquiry' | 'direct';
+export type BadgeVariant = 'neutral' | 'success' | 'warning' | 'error' | 'info' | 'inquiry' | 'direct';
 
 type BadgeProps = {
   variant?: BadgeVariant;
@@ -41,7 +41,7 @@ export function Badge({
 }
 
 // Status Badge for Admin/Supplier dashboards
-type StatusType = 'new' | 'pending' | 'approved' | 'rejected' | 'published' | 'draft' | 'quoted' | 'negotiating' | 'closed_won' | 'closed_lost';
+export type StatusType = 'new' | 'pending' | 'approved' | 'rejected' | 'published' | 'draft' | 'quoted' | 'negotiating' | 'closed_won' | 'closed_lost';
 
 const statusToVariant: Record<StatusType, BadgeVariant> = {
   new: 'info',
@@ -81,7 +81,7 @@ export function StatusBadge({ status: status }: { status: StatusType }) {
 }
 
 // Trade Mode Badge
-type TradeMode = 'inquiry' | 'direct';
+export type TradeMode = 'inquiry' | 'direct';
 
 const tradeModeLabels: Record<TradeMode, string> = {
   inquiry: 'Inquiry',

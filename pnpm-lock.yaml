@@ -206,7 +206,18 @@ importers:
         specifier: ^6.18.0
         version: 6.19.3(typescript@5.9.3)
 
-  packages/ui: {}
+  packages/ui:
+    dependencies:
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.0(react@19.2.0)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      react:
+        specifier: ^19.0.0
+        version: 19.2.0
 
 packages:
 
