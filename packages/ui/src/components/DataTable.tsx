@@ -64,7 +64,7 @@ export function DataTable<T>({
                   key={col.key}
                   className="px-[16px] py-[14px] text-[14px] text-[var(--neutral-700)]"
                 >
-                  {col.render ? col.render(item) : (item as Record<string, unknown>)[col.key]}
+                  {col.render ? col.render(item) : String((item as Record<string, unknown>)[col.key] ?? '')}
                 </td>
               ))}
             </tr>
