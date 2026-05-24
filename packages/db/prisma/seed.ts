@@ -51,7 +51,7 @@ function commonsImage(fileName: string) {
 }
 
 function huilinImage(slug: string) {
-  return `/images/huilin-ai/${slug}.svg`;
+  return `/images/huilin/${slug}.jpg`;
 }
 
 function resolveCoverImage(slug: string, fallbackUrl: string) {
