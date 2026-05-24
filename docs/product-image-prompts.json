@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-05-24T13:37:43.242Z",
+  "dryRun": true,
+  "mode": "svg",
+  "shotCountPerProduct": 1,
+  "outputFormat": "svg",
+  "quality": "high",
+  "size": "1536x1024",
+  "items": [
+    {
+      "slug": "chinese-mitten-crab",
+      "productName": "Chinese Mitten Crab",
+      "shots": [
+        {
+          "shot": "hero",
+          "fileName": "hero.webp",
+          "prompt": "Premium commercial photography for a professional agricultural export platform. Realistic, trustworthy, editorial but restrained, warm neutral stone and deep forest accents, soft natural daylight, clean composition, premium B2B catalog quality, accurate food and agricultural textures, no people unless a hand is needed for scale, no text overlay, no logos, no label gibberish. Product: Chinese Mitten Crab. Category: Aquatic products. Create the primary catalog hero image for this product. Scene: Premium live Chinese mitten crabs presented in a disciplined seafood export still life, clean oxygenated transport cues, dark slate surface, subtle cold-chain packaging context, and no market-stall clutter. Buyer context: Signal seasonal premium seafood sourcing, cold-chain competence, and gifting-grade export presentation for importers and hospitality buyers. Composition: landscape 3:2, centered product, room for responsive crop, realistic materials, premium but restrained styling, no clutter. Output intent: Chinese Mitten Crab primary export catalog image Avoid the following: cartoon, illustration, 3d render, cgi, fantasy, surreal, neon lighting, oversaturated colors, supermarket aisle clutter, watermark, text, logo, gibberish packaging, duplicate products, distorted food, pets, cats, dogs, beverages, smoothies, unrelated props.",
+          "revisedPrompt": null
+        }
+      ]
+    },
+    {
+      "slug": "organic-oyster-mushroom",
+      "productName": "Organic Oyster Mushroom",
+      "shots": [
+        {
+          "shot": "hero",
+          "fileName": "hero.webp",
+          "prompt": "Premium commercial photography for a professional agricultural export platform. Realistic, trustworthy, editorial but restrained, warm neutral stone and deep forest accents, soft natural daylight, clean composition, premium B2B catalog quality, accurate food and agricultural textures, no people unless a hand is needed for scale, no text overlay, no logos, no label gibberish. Product: Organic Oyster Mushroom. Category: Premium mushrooms. Create the primary catalog hero image for this product. Scene: Fresh organic oyster mushroom arranged as a refined raw-product still life, meaty pale caps, layered cluster structure, and tender springy texture, presented for a premium export catalog with clean breathing room for landscape crops. Buyer context: Signal verified Yunnan origin, premium ingredient quality, and professional B2B export discipline for importers, specialty distributors, and hospitality buyers. Composition: landscape 3:2, centered product, room for responsive crop, realistic materials, premium but restrained styling, no clutter. Output intent: Organic Oyster Mushroom primary export catalog image Avoid the following: cartoon, illustration, 3d render, cgi, fantasy, surreal, neon lighting, oversaturated colors, supermarket aisle clutter, watermark, text, logo, gibberish packaging, duplicate products, distorted food, pets, cats, dogs, beverages, smoothies, unrelated props.",
+          "revisedPrompt": null
+        }
+      ]
+    }
+  ]
+}

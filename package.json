@@ -7,6 +7,7 @@
     "dev:web": "node tools/dev-app.mjs @nongyechuhai/web",
     "dev:admin": "node tools/dev-app.mjs @nongyechuhai/admin",
     "dev:supplier": "node tools/dev-app.mjs @nongyechuhai/supplier",
+    "images:generate": "tsx tools/generate-product-images.ts",
     "build": "corepack pnpm -r --if-present run build",
     "lint": "corepack pnpm -r --if-present run lint",
     "typecheck": "corepack pnpm -r --if-present run typecheck",

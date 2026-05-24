@@ -1,9 +1,99 @@
+import { existsSync, readdirSync } from 'node:fs';
+import { extname, join } from 'node:path';
 import { cache } from 'react';
 import { Prisma } from '@prisma/client';
 import { prisma } from '@nongyechuhai/db';
+import { getProductImageBrief } from './product-image-briefs';
 
 const fallbackImageUrl =
   'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=1400&q=80';
+
+type ResolvedProductImage = {
+  url: string;
+  alt: string;
+};
+
+type ResolvedProductImageSet = {
+  primary: ResolvedProductImage;
+  gallery: ResolvedProductImage[];
+};
+
+const generatedProductImageRoot = join(process.cwd(), 'public', 'images', 'products');
+const generatedProductImageExtensions = new Set(['.webp', '.png', '.jpg', '.jpeg', '.svg']);
+const generatedProductImageCache = new Map<string, ResolvedProductImageSet | null>();
+
+function getGeneratedImagePriority(fileName: string) {
+  const normalized = fileName.toLowerCase();
+
+  if (normalized.startsWith('hero') || normalized.startsWith('cover') || normalized.startsWith('main')) {
+    return 0;
+  }
+
+  if (normalized.startsWith('detail-1') || normalized.startsWith('detail_1') || normalized === 'detail.webp' || normalized === 'detail.png' || normalized === 'detail.jpg' || normalized === 'detail.jpeg') {
+    return 1;
+  }
+
+  if (normalized.startsWith('detail')) {
+    return 2;
+  }
+
+  return 3;
+}
+
+function buildGeneratedProductImageAlt(slug: string, productName: string, fileName: string) {
+  const brief = getProductImageBrief(slug);
+
+  if (brief) {
+    return getGeneratedImagePriority(fileName) === 0 ? brief.heroAlt : brief.detailAlt;
+  }
+
+  return getGeneratedImagePriority(fileName) === 0
+    ? productName
+    : `${productName} detail image`;
+}
+
+function getGeneratedProductImages(slug: string, productName: string) {
+  if (generatedProductImageCache.has(slug)) {
+    return generatedProductImageCache.get(slug) ?? null;
+  }
+
+  const productDirectory = join(generatedProductImageRoot, slug);
+
+  if (!existsSync(productDirectory)) {
+    generatedProductImageCache.set(slug, null);
+    return null;
+  }
+
+  const files = readdirSync(productDirectory)
+    .filter((fileName) => generatedProductImageExtensions.has(extname(fileName).toLowerCase()))
+    .sort((left, right) => {
+      const priorityDifference = getGeneratedImagePriority(left) - getGeneratedImagePriority(right);
+
+      if (priorityDifference !== 0) {
+        return priorityDifference;
+      }
+
+      return left.localeCompare(right);
+    });
+
+  if (files.length === 0) {
+    generatedProductImageCache.set(slug, null);
+    return null;
+  }
+
+  const gallery = files.map((fileName) => ({
+    url: `/images/products/${slug}/${fileName}`,
+    alt: buildGeneratedProductImageAlt(slug, productName, fileName)
+  }));
+
+  const resolvedImages = {
+    primary: gallery[0],
+    gallery
+  } satisfies ResolvedProductImageSet;
+
+  generatedProductImageCache.set(slug, resolvedImages);
+  return resolvedImages;
+}
 
 const productCardSelect = Prisma.validator<Prisma.ProductSelect>()({
   id: true,
@@ -417,6 +507,21 @@ function getTradeModeDescription(tradeMode: string) {
 }
 
 function getPrimaryImage(product: ProductQueryResult) {
+  const generatedImages = getGeneratedProductImages(product.slug, product.name);
+
+  if (generatedImages?.primary) {
+    return generatedImages.primary;
+  }
+
+  const brief = getProductImageBrief(product.slug);
+
+  if (brief?.fallbackHeroUrl) {
+    return {
+      url: brief.fallbackHeroUrl,
+      alt: brief.heroAlt
+    };
+  }
+
   const image = product.images[0];
 
   if (image) {
@@ -751,17 +856,20 @@ export const getProductDetail = cache(async (slug: string) => {
   });
 
   const baseProduct = mapProductCard(product as ProductDetailQueryResult);
-  const gallery = product.images.length > 0
-    ? product.images.map((image) => ({
-        url: image.url,
-        alt: image.altText || product.name
-      }))
-    : [
-        {
-          url: baseProduct.primaryImageUrl,
-          alt: baseProduct.primaryImageAlt
-        }
-      ];
+  const generatedImages = getGeneratedProductImages(product.slug, product.name);
+  const gallery = generatedImages?.gallery.length
+    ? generatedImages.gallery
+    : product.images.length > 0
+      ? product.images.map((image) => ({
+          url: image.url,
+          alt: image.altText || product.name
+        }))
+      : [
+          {
+            url: baseProduct.primaryImageUrl,
+            alt: baseProduct.primaryImageAlt
+          }
+        ];
 
   const faqItems = product.faqItems.length > 0
     ? product.faqItems
