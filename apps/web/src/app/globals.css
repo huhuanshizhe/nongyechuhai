@@ -711,4 +711,52 @@ h1, h2, h3, h4 {
   .closing-banner { display: grid; gap: var(--space-5); padding: var(--space-8); }
   .portfolio-head { display: grid; gap: var(--space-4); }
   .auth-layout { padding: var(--space-6) 0; }
+
+  /* Product detail mobile improvements */
+  .product-detail__main { grid-template-columns: 1fr; }
+  .product-detail__hero-media { aspect-ratio: 4/3; }
+  .product-detail__gallery-strip { gap: var(--space-2); overflow-x: auto; scroll-snap-type: x mandatory; }
+  .product-detail__gallery-thumb { flex: 0 0 80px; height: 80px; scroll-snap-align: start; }
+  .product-detail__gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Product grid mobile */
+  .product-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+
+  /* Better touch targets */
+  .button { min-height: 48px; padding: 0 var(--space-6); }
+  .button--sm { min-height: 40px; }
+  .header-link { min-height: 44px; }
+  .product-card__link { min-height: 44px; display: inline-flex; align-items: center; }
+
+  /* Not found card mobile */
+  .not-found-card { padding: var(--space-8) var(--space-6); text-align: center; }
+  .not-found-card__icon { display: flex; justify-content: center; margin-bottom: var(--space-6); opacity: 0.5; }
+  .not-found-card .button-row { flex-direction: column; }
+  .not-found-card .button-row .button { width: 100%; }
+}
+
+/* ============================================================
+   19. Responsive — 480px (Small phones)
+   ============================================================ */
+
+@media (max-width: 480px) {
+  :root { --shell-pad: 1rem; }
+
+  .brand-signature__wordmark-farm { font-size: 1.2rem; }
+  .brand-signature__wordmark-etra { font-size: 1.15rem; }
+  .brand-signature__subtitle { display: none; }
+
+  .site-header__eyebrow { font-size: 10px; }
+  .site-header__summary p { font-size: 12px; }
+  .site-header__signals { display: none; }
+
+  .hero-stage { border-radius: var(--radius-lg); }
+  .hero-stage__tag { display: none; }
+  .hero-stage__metrics { gap: var(--space-4); }
+
+  .section-kicker { font-size: 10px; padding: 2px 10px; }
+  .process-index { font-size: 1.5rem; }
+
+  .footer-grid { gap: var(--space-8); }
+  .footer-copy { font-size: var(--text-xs); }
 }

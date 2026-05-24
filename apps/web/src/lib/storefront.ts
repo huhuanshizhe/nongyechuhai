@@ -216,8 +216,8 @@ function numberFromDecimal(value: { toString(): string } | null) {
   return value ? Number(value.toString()) : null;
 }
 
-function formatMoney(value: number, currency: string) {
-  return new Intl.NumberFormat('en-US', {
+function formatMoney(value: number, currency: string, locale = 'en-US') {
+  return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
     maximumFractionDigits: value % 1 === 0 ? 0 : 2
@@ -271,38 +271,52 @@ function formatPriceLabel(
   currency: string,
   priceMin: { toString(): string } | null,
   priceMax: { toString(): string } | null,
-  tradeMode: string
+  tradeMode: string,
+  locale?: string
 ) {
   if (tradeMode === 'INQUIRY_ONLY') {
     const min = numberFromDecimal(priceMin);
     const max = numberFromDecimal(priceMax);
 
     if (min && max) {
-      return `${formatMoney(min, currency)} - ${formatMoney(max, currency)} reference range`;
+      return `${formatMoney(min, currency, locale)} - ${formatMoney(max, currency, locale)} ${locale === 'zh-CN' ? '参考区间' : 'reference range'}`;
     }
 
-    return 'Quoted through inquiry';
+    return locale === 'zh-CN' ? '通过询盘询价' : 'Quoted through inquiry';
   }
 
   const min = numberFromDecimal(priceMin);
   const max = numberFromDecimal(priceMax);
 
   if (min && max && min !== max) {
-    return `${formatMoney(min, currency)} - ${formatMoney(max, currency)}`;
+    return `${formatMoney(min, currency, locale)} - ${formatMoney(max, currency, locale)}`;
   }
 
   if (min) {
-    return `From ${formatMoney(min, currency)}`;
+    return `${locale === 'zh-CN' ? '起价' : 'From'} ${formatMoney(min, currency, locale)}`;
   }
 
   if (max) {
-    return `Up to ${formatMoney(max, currency)}`;
+    return `${locale === 'zh-CN' ? '最高' : 'Up to'} ${formatMoney(max, currency, locale)}`;
   }
 
-  return 'Pricing available on request';
+  return locale === 'zh-CN' ? '可根据需求报价' : 'Pricing available on request';
 }
 
-function humanizeKey(value: string) {
+function humanizeKey(value: string, locale?: string) {
+  if (locale === 'zh-CN') {
+    const zhMap: Record<string, string> = {
+      'Product Form': '产品形态',
+      'Origin Program': '产地项目',
+      'Pack Format': '包装规格',
+      'Shelf Life': '保质期',
+      'Storage': '储存方式',
+      'Grade': '等级',
+      'Min Order': '最小订量'
+    };
+    const normalized = value.replace(/([A-Z])/g, ' $1').replace(/[_-]/g, ' ').trim();
+    return zhMap[normalized] || normalized;
+  }
   return value
     .replace(/([A-Z])/g, ' $1')
     .replace(/[_-]/g, ' ')
@@ -310,25 +324,35 @@ function humanizeKey(value: string) {
     .replace(/\b\w/g, (character) => character.toUpperCase());
 }
 
-function mapSpecHighlights(specsJson: unknown) {
+function mapSpecHighlights(specsJson: unknown, locale?: string) {
   if (!specsJson || typeof specsJson !== 'object' || Array.isArray(specsJson)) {
-    return [
-      { label: 'Origin program', value: 'Confirmed with supplier' },
-      { label: 'Pack format', value: 'Commercial packaging available' }
-    ];
+    return locale === 'zh-CN'
+      ? [
+          { label: '产地项目', value: '已与供应商确认' },
+          { label: '包装规格', value: '可提供商业包装' }
+        ]
+      : [
+          { label: 'Origin program', value: 'Confirmed with supplier' },
+          { label: 'Pack format', value: 'Commercial packaging available' }
+        ];
   }
 
   const entries = Object.entries(specsJson as Record<string, unknown>).slice(0, 4);
 
   if (entries.length === 0) {
-    return [
-      { label: 'Origin program', value: 'Confirmed with supplier' },
-      { label: 'Pack format', value: 'Commercial packaging available' }
-    ];
+    return locale === 'zh-CN'
+      ? [
+          { label: '产地项目', value: '已与供应商确认' },
+          { label: '包装规格', value: '可提供商业包装' }
+        ]
+      : [
+          { label: 'Origin program', value: 'Confirmed with supplier' },
+          { label: 'Pack format', value: 'Commercial packaging available' }
+        ];
   }
 
   return entries.map(([label, value]) => ({
-    label: humanizeKey(label),
+    label: humanizeKey(label, locale),
     value: Array.isArray(value) ? value.join(' / ') : String(value)
   }));
 }

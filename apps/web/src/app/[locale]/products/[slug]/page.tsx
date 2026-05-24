@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
   const isZh = locale === 'zh';
 
   return {
-    title: product?.product.name || (isZh ? 'Product Details' : 'Product Details'),
-    description: product?.product.summary || (isZh ? 'View product details with export information.' : 'View product details with export information.')
+    title: product?.product.seoTitle || product?.product.name || (isZh ? '产品详情' : 'Product Details'),
+    description: product?.product.seoDescription || product?.product.summary || (isZh ? '查看带有出口信息的产品详情。' : 'View product details with export information.')
   };
 }
 

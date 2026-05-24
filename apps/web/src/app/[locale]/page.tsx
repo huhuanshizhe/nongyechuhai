@@ -279,7 +279,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
         <div className="product-grid">
           {homeData.featuredProducts.map((product) => (
-            <ProductCard key={product.slug} product={product} />
+            <ProductCard key={product.slug} product={product} locale={locale} />
           ))}
         </div>
       </section>

@@ -42,16 +42,25 @@ function getStatusTone(value: string) {
     case 'COMPLETED':
     case 'PAID':
     case 'ACTIVE':
+    case 'CLOSED_WON':
+    case 'AUTHORIZED':
       return 'green';
     case 'PENDING':
     case 'PENDING_REVIEW':
     case 'NEW':
     case 'IN_REVIEW':
+    case 'QUOTED':
+    case 'SHIPPED':
+    case 'NEGOTIATING':
+    case 'CONFIRMED':
+    case 'PROCESSING':
       return 'amber';
     case 'REJECTED':
     case 'CANCELLED':
     case 'FAILED':
     case 'SUSPENDED':
+    case 'CLOSED_LOST':
+    case 'EXPIRED':
       return 'red';
     default:
       return 'slate';
