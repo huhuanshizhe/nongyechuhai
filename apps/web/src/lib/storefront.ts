@@ -394,24 +394,36 @@ function formatPriceLabel(
 }
 
 function humanizeKey(value: string, locale?: string) {
-  if (locale === 'zh-CN') {
-    const zhMap: Record<string, string> = {
-      'Product Form': '产品形态',
-      'Origin Program': '产地项目',
-      'Pack Format': '包装规格',
-      'Shelf Life': '保质期',
-      'Storage': '储存方式',
-      'Grade': '等级',
-      'Min Order': '最小订量'
-    };
-    const normalized = value.replace(/([A-Z])/g, ' $1').replace(/[_-]/g, ' ').trim();
-    return zhMap[normalized] || normalized;
-  }
-  return value
+  const normalized = value
     .replace(/([A-Z])/g, ' $1')
     .replace(/[_-]/g, ' ')
     .trim()
     .replace(/\b\w/g, (character) => character.toUpperCase());
+
+  if (locale === 'zh-CN') {
+    const zhMap: Record<string, string> = {
+      'Product Form': '产品形态',
+      'Origin Program': '产地项目',
+      'Origin Region': '产区',
+      'Origin Estate': '核心产区',
+      'Harvest Window': '采收窗口',
+      'Harvest Season': '采摘季',
+      'Pack Format': '包装规格',
+      'Pack Formats': '包装形式',
+      'Cold Chain': '预冷与冷链',
+      'Sizing': '规格尺寸',
+      'Shelf Life': '保质期',
+      'Storage': '储存方式',
+      'Grade': '等级',
+      'Min Order': '最小订量',
+      'Case Pack': '箱规',
+      'Halal Certification': '清真认证'
+    };
+
+    return zhMap[normalized] || normalized;
+  }
+
+  return normalized;
 }
 
 function mapSpecHighlights(specsJson: unknown, locale?: string) {
@@ -496,11 +508,21 @@ function getTradeModeTone(tradeMode: string) {
   return tradeMode === 'DIRECT_PURCHASE' ? 'purchase' : 'inquiry';
 }
 
-function getTradeModeLabel(tradeMode: string) {
+function getTradeModeLabel(tradeMode: string, locale = 'en-US') {
+  if (locale === 'zh-CN') {
+    return tradeMode === 'DIRECT_PURCHASE' ? '直采项目' : '询盘对接项目';
+  }
+
   return tradeMode === 'DIRECT_PURCHASE' ? 'Direct order program' : 'Inquiry program';
 }
 
-function getTradeModeDescription(tradeMode: string) {
+function getTradeModeDescription(tradeMode: string, locale = 'en-US') {
+  if (locale === 'zh-CN') {
+    return tradeMode === 'DIRECT_PURCHASE'
+      ? '该产品已提供参考价格与标准商业包装，适合买家直接进入采购审核。'
+      : '该产品更适合先通过询盘对齐规格、目的地市场与单证要求，再进入正式报价。';
+  }
+
   return tradeMode === 'DIRECT_PURCHASE'
     ? 'Reference pricing and standard commercial packs are already published for direct buyer review.'
     : 'This line should begin through the inquiry desk so specification, destination market, and documentation can be aligned first.';
@@ -544,7 +566,7 @@ function getPrimaryImage(product: ProductQueryResult) {
   };
 }
 
-function mapProductCard(product: ProductQueryResult): StorefrontProductCard {
+function mapProductCard(product: ProductQueryResult, locale = 'en-US'): StorefrontProductCard {
   const primaryImage = getPrimaryImage(product);
   const location = [product.supplier.organization.city, product.supplier.organization.country]
     .filter(Boolean)
@@ -558,10 +580,10 @@ function mapProductCard(product: ProductQueryResult): StorefrontProductCard {
     currency: product.currency,
     priceMinValue: numberFromDecimal(product.priceMin),
     priceMaxValue: numberFromDecimal(product.priceMax),
-    tradeModeLabel: getTradeModeLabel(product.tradeMode),
+    tradeModeLabel: getTradeModeLabel(product.tradeMode, locale),
     tradeModeTone: getTradeModeTone(product.tradeMode),
-    tradeModeDescription: getTradeModeDescription(product.tradeMode),
-    priceLabel: formatPriceLabel(product.currency, product.priceMin, product.priceMax, product.tradeMode),
+    tradeModeDescription: getTradeModeDescription(product.tradeMode, locale),
+    priceLabel: formatPriceLabel(product.currency, product.priceMin, product.priceMax, product.tradeMode, locale),
     primaryImageUrl: primaryImage.url,
     primaryImageAlt: primaryImage.alt,
     categoryName: product.category.name,
@@ -572,19 +594,19 @@ function mapProductCard(product: ProductQueryResult): StorefrontProductCard {
     supplierDescription: product.supplier.description,
     supplierVerified: product.supplier.isVerified,
     model: product.model,
-    specHighlights: mapSpecHighlights(product.specsJson),
+    specHighlights: mapSpecHighlights(product.specsJson, locale),
     seoTitle: product.seoTitle,
     seoDescription: product.seoDescription
   };
 }
 
-function mapVariantTitle(optionValues: unknown) {
+function mapVariantTitle(optionValues: unknown, locale = 'en-US') {
   if (!optionValues || typeof optionValues !== 'object' || Array.isArray(optionValues)) {
-    return 'Standard commercial pack';
+    return locale === 'zh-CN' ? '标准商业包装' : 'Standard commercial pack';
   }
 
   return Object.entries(optionValues as Record<string, unknown>)
-    .map(([label, value]) => `${humanizeKey(label)}: ${String(value)}`)
+    .map(([label, value]) => `${humanizeKey(label, locale)}: ${String(value)}`)
     .join(' · ');
 }
 
@@ -697,7 +719,7 @@ export const getHomepageData = cache(async () => {
   ].slice(0, 3);
 
   return {
-    featuredProducts: featuredProducts.map(mapProductCard),
+    featuredProducts: featuredProducts.map((product) => mapProductCard(product)),
     featuredCategories: categories.map((category) => ({
       slug: category.slug,
       name: category.name,
@@ -786,7 +808,7 @@ export async function getCatalogPageData(filters: CatalogFilters) {
   ]);
 
   const activeCategory = categories.find((category) => category.slug === filters.category) || null;
-  const mappedProducts = products.map(mapProductCard);
+  const mappedProducts = products.map((product) => mapProductCard(product));
   const supplierPrograms = Array.from(
     products.reduce((programs, product) => {
       const location = [product.supplier.organization.city, product.supplier.organization.country]
@@ -853,7 +875,7 @@ export async function getCatalogPageData(filters: CatalogFilters) {
   };
 }
 
-export const getProductDetail = cache(async (slug: string) => {
+export const getProductDetail = cache(async (slug: string, locale = 'en-US') => {
   const product = await prisma.product.findFirst({
     where: {
       slug,
@@ -881,7 +903,7 @@ export const getProductDetail = cache(async (slug: string) => {
     select: productCardSelect
   });
 
-  const baseProduct = mapProductCard(product as ProductDetailQueryResult);
+  const baseProduct = mapProductCard(product as ProductDetailQueryResult, locale);
   const generatedImages = getGeneratedProductImages(product.slug, product.name);
   const gallery = generatedImages?.gallery.length
     ? generatedImages.gallery
@@ -901,7 +923,7 @@ export const getProductDetail = cache(async (slug: string) => {
     ? product.faqItems
     : [
         {
-          question: 'How should commercial discussion start for this line?',
+          question: locale === 'zh-CN' ? '这条产品线应该如何开始商务沟通？' : 'How should commercial discussion start for this line?',
           answer: baseProduct.tradeModeDescription
         }
       ];
@@ -916,12 +938,14 @@ export const getProductDetail = cache(async (slug: string) => {
       faqItems,
       variants: (product.variants || []).map((variant) => ({
         sku: variant.sku,
-        title: mapVariantTitle(variant.optionValues),
-        priceLabel: formatMoney(Number(variant.price.toString()), variant.currency),
-        stockLabel: `Current reference availability: ${variant.stockQty} units`
+        title: mapVariantTitle(variant.optionValues, locale),
+        priceLabel: formatMoney(Number(variant.price.toString()), variant.currency, locale),
+        stockLabel: locale === 'zh-CN'
+          ? `当前参考可用量：${variant.stockQty} 件`
+          : `Current reference availability: ${variant.stockQty} units`
       }))
     } satisfies StorefrontProductDetail,
-    relatedProducts: relatedProducts.map(mapProductCard)
+    relatedProducts: relatedProducts.map((relatedProduct) => mapProductCard(relatedProduct, locale))
   };
 });
 
@@ -935,7 +959,7 @@ export async function getRfqPageData(selectedProductSlug?: string) {
     select: productCardSelect
   });
 
-  const mappedProducts = products.map(mapProductCard);
+  const mappedProducts = products.map((product) => mapProductCard(product));
   const selectedProduct = mappedProducts.find((product) => product.slug === selectedProductSlug) || mappedProducts[0] || null;
 
   return {
