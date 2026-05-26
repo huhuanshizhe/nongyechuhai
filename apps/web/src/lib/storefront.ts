@@ -622,12 +622,31 @@ export const getStorefrontShellData = cache(async () => {
   };
 });
 
+const homepagePriorityProductSlugs = [
+  'green-asparagus-spears',
+  'chinese-mitten-crab',
+  'fresh-jiaobai-stems'
+] as const;
+
 export const getHomepageData = cache(async () => {
-  const [featuredProducts, categories, editorialPage] = await prisma.$transaction([
+  const [priorityProducts, fallbackProducts, categories, editorialPage] = await prisma.$transaction([
     prisma.product.findMany({
       where: {
         status: 'PUBLISHED',
-        deletedAt: null
+        deletedAt: null,
+        slug: {
+          in: [...homepagePriorityProductSlugs]
+        }
+      },
+      select: productCardSelect
+    }),
+    prisma.product.findMany({
+      where: {
+        status: 'PUBLISHED',
+        deletedAt: null,
+        slug: {
+          notIn: [...homepagePriorityProductSlugs]
+        }
       },
       orderBy: [{ publishedAt: 'desc' }, { updatedAt: 'desc' }],
       take: 3,
@@ -669,6 +688,13 @@ export const getHomepageData = cache(async () => {
       }
     })
   ]);
+
+  const featuredProducts = [
+    ...homepagePriorityProductSlugs
+      .map((slug) => priorityProducts.find((product) => product.slug === slug))
+      .filter((product): product is ProductQueryResult => Boolean(product)),
+    ...fallbackProducts
+  ].slice(0, 3);
 
   return {
     featuredProducts: featuredProducts.map(mapProductCard),

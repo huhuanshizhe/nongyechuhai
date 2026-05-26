@@ -118,17 +118,17 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
                   </Link>
                 </div>
                 <nav className="site-nav" aria-label="Primary">
-                  <Link href="/">{t.nav.home}</Link>
-                  <Link href="/products">{t.nav.products}</Link>
-                  <Link href="/about">{t.nav.about}</Link>
-                  <Link href="/rfq">{t.nav.rfq}</Link>
-                  <Link href="/#trade-process">{t.nav.tradeProcess}</Link>
+                  <Link className="site-nav__link" href="/">{t.nav.home}</Link>
+                  <Link className="site-nav__link" href="/products">{t.nav.products}</Link>
+                  <Link className="site-nav__link" href="/about">{t.nav.about}</Link>
+                  <Link className="site-nav__link" href="/rfq">{t.nav.rfq}</Link>
+                  <Link className="site-nav__link" href="/#trade-process">{t.nav.tradeProcess}</Link>
                 </nav>
                 <div className="header-actions">
                   <LanguageSwitcher />
                   {session?.user ? (
                     <>
-                      <Link className="header-link" href="/account">
+                      <Link className="header-link header-link--workspace" href="/account">
                         {t.nav.account}
                       </Link>
                       <Link className="button" href="/rfq">
