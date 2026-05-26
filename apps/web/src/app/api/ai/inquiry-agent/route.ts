@@ -74,8 +74,8 @@ function buildFallbackInquiryAgentReply(options: {
       : 'discovering';
   const productFocus = options.selectedProduct?.name ?? (options.locale === 'zh' ? '通用农产品采购需求' : 'General agricultural sourcing request');
   const briefingSummary = options.locale === 'zh'
-    ? `${playbook.label} 已经介入当前询盘。${productFocus} 的初步询盘已经形成。当前可识别的信息包括${customerCountry ? `目标市场 ${customerCountry}` : '目标市场待确认'}${quantityRequested ? `、试单规模约 ${quantityRequested}` : ''}${packFormat ? `、包装偏好为 ${packFormat}` : ''}，建议继续补齐联系人、正式邮箱，以及行业关键信息后提交。`
-    : `${playbook.label} is now guiding this inquiry. A preliminary brief is taking shape for ${productFocus}. The current signal suggests ${customerCountry ? `a destination market in ${customerCountry}` : 'the destination market still needs confirmation'}${quantityRequested ? `, an initial volume around ${quantityRequested}` : ''}${packFormat ? `, and a preferred pack format of ${packFormat}` : ''}. The next step is to confirm the buyer contact, business email, and the remaining category-specific checkpoints before submission.`;
+    ? `${productFocus} 当前询盘已形成初步摘要。${customerCountry ? `目标市场为 ${customerCountry}` : '目标市场仍待确认'}${quantityRequested ? `，预计数量约 ${quantityRequested}` : ''}${packFormat ? `，包装偏好为 ${packFormat}` : ''}。仍需继续补齐联系人、商务邮箱及关键规格信息。`
+    : `A preliminary summary is now available for ${productFocus}. The current signal suggests ${customerCountry ? `a destination market in ${customerCountry}` : 'the destination market still needs confirmation'}${quantityRequested ? `, an initial volume around ${quantityRequested}` : ''}${packFormat ? `, and a preferred pack format of ${packFormat}` : ''}. The next step is to confirm the buyer contact, business email, and the remaining product details.`;
   const suggestedQuestions = [
     ...playbook.followUpQuestions,
     ...(options.locale === 'zh'
@@ -83,8 +83,8 @@ function buildFallbackInquiryAgentReply(options: {
       : [customerCountry ? 'Please confirm the preferred port and incoterm.' : 'Please add the destination market and arrival city.'])
   ].slice(0, 3);
   const reply = options.locale === 'zh'
-    ? `已收到。我会按“${playbook.label}”来推进这一轮需求判断，优先关注${playbook.commercialFocus.slice(0, 3).join('、')}。${customerCountry ? `我先记录目标市场为 ${customerCountry}。` : ''}${quantityRequested ? `我也先记录试单规模约 ${quantityRequested}。` : ''}接下来请补充联系人姓名、商务邮箱，并优先回答这条线最关键的行业问题：${suggestedQuestions[0] ?? '请确认核心规格和交付条件。'}`
-    : `Understood. I will handle this using the ${playbook.label}, with priority on ${playbook.commercialFocus.slice(0, 3).join(', ')}.${customerCountry ? ` I have tentatively captured ${customerCountry} as the destination market.` : ''}${quantityRequested ? ` I have also captured an initial volume around ${quantityRequested}.` : ''} Next, please add the buyer contact name and business email, then help me close the most important category checkpoint: ${suggestedQuestions[0] ?? 'please confirm the core specification and delivery condition.'}`;
+    ? `已收到。${customerCountry ? `我先记录目标市场为 ${customerCountry}。` : ''}${quantityRequested ? `目前预计数量约为 ${quantityRequested}。` : ''}为了便于我们准备合适的报价和供货方案，请补充联系人姓名、商务邮箱，并先确认：${suggestedQuestions[0] ?? '请确认核心规格和交付条件。'}`
+    : `Understood.${customerCountry ? ` I have noted ${customerCountry} as the destination market.` : ''}${quantityRequested ? ` I have also captured an initial volume around ${quantityRequested}.` : ''} To help our team prepare the right quotation and supply plan, please add the buyer contact name and business email, and first confirm: ${suggestedQuestions[0] ?? 'please confirm the core specification and delivery condition.'}`;
 
   return {
     reply,

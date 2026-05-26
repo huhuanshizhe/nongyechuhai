@@ -20,6 +20,7 @@ export default async function InquiriesPage() {
                 <strong>{item.customerName}</strong>
                 <p>{item.customerCompany} · {item.customerCountry}</p>
                 <span>{item.productName} · {item.supplierName}</span>
+                {item.assistantSummary ? <p>{item.assistantSummary}</p> : null}
               </div>
               <div className="data-row__aside">
                 <span className={`status-chip status-chip--${item.statusTone}`}>{item.status}</span>

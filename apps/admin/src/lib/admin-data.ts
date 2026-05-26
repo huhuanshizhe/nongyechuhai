@@ -67,6 +67,33 @@ function getStatusTone(value: string) {
   }
 }
 
+function readInquiryAssistantSummary(value: unknown) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return null;
+  }
+
+  const root = value as Record<string, unknown>;
+  const rawSnapshot = root.inquiryAgent;
+
+  if (!rawSnapshot || typeof rawSnapshot !== 'object' || Array.isArray(rawSnapshot)) {
+    return null;
+  }
+
+  const summary = (rawSnapshot as Record<string, unknown>).briefingSummary;
+
+  if (typeof summary !== 'string') {
+    return null;
+  }
+
+  const trimmed = summary.trim();
+
+  if (!trimmed) {
+    return null;
+  }
+
+  return trimmed.length > 160 ? `${trimmed.slice(0, 157)}...` : trimmed;
+}
+
 export async function getAdminDashboardData() {
   const [
     pendingSupplierCount,
@@ -127,6 +154,7 @@ export async function getAdminDashboardData() {
         createdAt: true,
         customerName: true,
         customerCountry: true,
+        attachmentsJson: true,
         supplier: {
           select: {
             organization: {
@@ -260,6 +288,7 @@ export async function getAdminDashboardData() {
       statusTone: getStatusTone(item.status),
       customerName: item.customerName,
       customerCountry: item.customerCountry || 'Unknown market',
+      assistantSummary: readInquiryAssistantSummary(item.attachmentsJson),
       supplierName: item.supplier.organization.name,
       productName: item.product?.name || 'General sourcing request',
       quoteCount: item.quotes.length,
@@ -411,6 +440,7 @@ export async function getAdminInquiriesPageData() {
       targetPrice: true,
       currency: true,
       createdAt: true,
+      attachmentsJson: true,
       product: {
         select: {
           name: true
@@ -440,6 +470,7 @@ export async function getAdminInquiriesPageData() {
     customerName: item.customerName,
     customerCompany: item.customerCompany || 'No company',
     customerCountry: item.customerCountry || 'Unknown market',
+    assistantSummary: readInquiryAssistantSummary(item.attachmentsJson),
     productName: item.product?.name || 'General sourcing request',
     supplierName: item.supplier.organization.name,
     quoteCount: item.quotes.length,

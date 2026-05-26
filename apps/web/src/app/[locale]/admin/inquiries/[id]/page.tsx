@@ -9,6 +9,22 @@ export const metadata: Metadata = {
 };
 
 const statusOptions = ['NEW', 'IN_REVIEW', 'QUOTED', 'ACCEPTED', 'REJECTED', 'CLOSED'];
+const readinessLabels: Record<string, string> = {
+  discovering: 'Collecting details',
+  qualified: 'Ready for quote follow-up',
+  ready_to_submit: 'Ready for submission'
+};
+const missingFieldLabels: Record<string, string> = {
+  customerName: 'Contact name',
+  customerCompany: 'Company',
+  customerEmail: 'Business email',
+  customerPhone: 'Phone or WhatsApp',
+  customerCountry: 'Destination market',
+  quantityRequested: 'Target quantity',
+  targetPrice: 'Target price',
+  currency: 'Currency',
+  requirements: 'Requirements'
+};
 
 export default async function AdminInquiryDetailPage({ params }: {
   params: Promise<{ locale: string; id: string }>;
@@ -86,6 +102,55 @@ export default async function AdminInquiryDetailPage({ params }: {
             <p><strong>Supplier:</strong> {inquiry.supplier.organization.name}</p>
           </div>
         </div>
+
+        {inquiry.inquiryAgentSnapshot ? (
+          <div className="inquiry-review__section">
+            <h2>Inquiry Assistant Brief</h2>
+            {inquiry.inquiryAgentSnapshot.briefingSummary ? (
+              <div>
+                <strong>Summary:</strong>
+                <p>{inquiry.inquiryAgentSnapshot.briefingSummary}</p>
+              </div>
+            ) : null}
+
+            <div className="info-list">
+              {inquiry.inquiryAgentSnapshot.readiness ? (
+                <p>
+                  <strong>Progress:</strong> {readinessLabels[inquiry.inquiryAgentSnapshot.readiness] ?? inquiry.inquiryAgentSnapshot.readiness}
+                </p>
+              ) : null}
+              {inquiry.inquiryAgentSnapshot.updatedAt ? (
+                <p>
+                  <strong>Last assistant update:</strong> {new Date(inquiry.inquiryAgentSnapshot.updatedAt).toLocaleString()}
+                </p>
+              ) : null}
+            </div>
+
+            {inquiry.inquiryAgentSnapshot.missingFields.length > 0 ? (
+              <div>
+                <strong>Still needed from buyer:</strong>
+                <ul>
+                  {inquiry.inquiryAgentSnapshot.missingFields.map((field) => (
+                    <li key={field}>{missingFieldLabels[field] ?? field}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            {inquiry.inquiryAgentSnapshot.transcript.length > 0 ? (
+              <div>
+                <strong>Recent assistant conversation:</strong>
+                <div className="info-list">
+                  {inquiry.inquiryAgentSnapshot.transcript.slice(-6).map((message, index) => (
+                    <p key={`${message.role}-${index}`}>
+                      <strong>{message.role === 'assistant' ? 'Assistant' : 'Buyer'}:</strong> {message.content}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
         
         <div className="inquiry-review__quotes">
           <h2>Quotes ({inquiry.quotes.length})</h2>

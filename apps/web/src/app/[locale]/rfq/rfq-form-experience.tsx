@@ -149,7 +149,7 @@ export function RfqFormExperience({
 
     setSyncMessage(syncedCount > 0
       ? (isZh ? `询盘助手已同步 ${syncedCount} 个字段到表单，您仍可继续手动修改。` : `The inquiry assistant synced ${syncedCount} field(s) into the form. You can still edit everything manually.`)
-      : (isZh ? '询盘助手已更新买家简报，暂无新的表单字段可同步。' : 'The inquiry assistant updated the buyer brief. No new form fields needed syncing yet.'));
+      : (isZh ? '询盘助手已更新当前询盘信息，暂无新的表单字段可同步。' : 'The inquiry assistant updated your inquiry details. No new form fields needed syncing yet.'));
   };
 
   return (

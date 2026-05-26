@@ -19,12 +19,35 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
   const isZh = locale === 'zh';
   const panelRef = useRef<HTMLDivElement | null>(null);
   const composerRef = useRef<HTMLTextAreaElement | null>(null);
+  const missingFieldLabels: Record<string, string> = isZh
+    ? {
+        customerName: '联系人姓名',
+        customerCompany: '公司名称',
+        customerEmail: '商务邮箱',
+        customerPhone: '电话或 WhatsApp',
+        customerCountry: '目的地市场',
+        quantityRequested: '目标数量',
+        targetPrice: '目标价格',
+        currency: '币种',
+        requirements: '采购要求'
+      }
+    : {
+        customerName: 'Contact name',
+        customerCompany: 'Company',
+        customerEmail: 'Business email',
+        customerPhone: 'Phone or WhatsApp',
+        customerCountry: 'Destination market',
+        quantityRequested: 'Target quantity',
+        targetPrice: 'Target price',
+        currency: 'Currency',
+        requirements: 'Requirements'
+      };
   const [messages, setMessages] = useState<InquiryAgentMessage[]>([
     {
       role: 'assistant',
       content: isZh
-        ? `您好，我是询盘助手。您可以直接告诉我您想采购什么产品、销往哪个国家、预计数量、包装和认证要求，我会边答复边帮您整理成正式询盘。${selectedProduct?.name ? ` 当前已选产品是 ${selectedProduct.name}。` : ''}`
-        : `Hello, I am your inquiry assistant. Tell me what you need to source, which market you are targeting, expected volume, pack format, and certification requirements. I will answer your questions and organize the details into a qualified inquiry.${selectedProduct?.name ? ` The currently selected product is ${selectedProduct.name}.` : ''}`
+        ? `您好，我是在线询盘助手。您可以直接告诉我想采购的产品、目的地市场、预计数量、包装和认证要求，我会边答复边帮您整理到正式询盘中。${selectedProduct?.name ? ` 当前已选产品是 ${selectedProduct.name}。` : ''}`
+        : `Hello, I am your online inquiry assistant. Tell me what you need to source, which market you are targeting, expected volume, pack format, and certification requirements. I will answer your questions and help prepare a clear inquiry for our team.${selectedProduct?.name ? ` The currently selected product is ${selectedProduct.name}.` : ''}`
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -38,20 +61,20 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
           ? `${selectedProduct.name} 这条线常见的出口包装和起订沟通点有哪些？`
           : '我们是进口商，想了解你们适合怎么开始询盘。',
         '我们准备销往中东市场，需要先确认哪些认证和包装信息？',
-        '请帮我整理一份适合提交询盘的采购需求清单。'
+        '请帮我把当前需求整理成一条清晰的询盘。'
       ]
     : [
         selectedProduct?.name
           ? `What export pack formats and MOQ discussion points should we confirm for ${selectedProduct.name}?`
           : 'We are an importer. Help us start with the right inquiry structure.',
         'We plan to sell into the Middle East. Which certifications and pack details should we confirm first?',
-        'Help me turn our sourcing idea into a submission-ready inquiry brief.'
+        'Help me turn our sourcing idea into a clear inquiry message.'
       ];
 
   const readinessLabels = {
-    discovering: isZh ? '需求摸底中' : 'Discovery in progress',
-    qualified: isZh ? '已具备商务跟进条件' : 'Commercially qualified',
-    ready_to_submit: isZh ? '可直接提交正式询盘' : 'Ready to submit'
+    discovering: isZh ? '正在收集需求' : 'Collecting inquiry details',
+    qualified: isZh ? '可进入报价沟通' : 'Ready for quote follow-up',
+    ready_to_submit: isZh ? '可提交正式询盘' : 'Ready to submit'
   } as const;
 
   useEffect(() => {
@@ -126,13 +149,10 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
     <div className="field field--full inquiry-agent-panel" id="inquiry-agent" ref={panelRef}>
       <div className="inquiry-agent-panel__head">
         <div>
-          <span className="section-kicker">{isZh ? '询盘智能体' : 'Inquiry co-pilot'}</span>
-          <h3>{isZh ? '专业答复业务问题，并逐步补全客户与需求信息' : 'Answer business questions and progressively qualify the buyer brief'}</h3>
+          <span className="section-kicker">{isZh ? '在线询盘助手' : 'Online inquiry assistant'}</span>
+          <h3>{isZh ? '先确认产品、市场、包装与交付要求，再提交正式询盘' : 'Confirm product, market, packaging, and delivery needs before you submit'}</h3>
         </div>
         <div className="inquiry-agent-panel__status">
-          {result?.briefing.industryLabel ? (
-            <span className="status-pill status-pill--slate">{result.briefing.industryLabel}</span>
-          ) : null}
           {result ? (
             <span className={`status-pill ${result.readiness === 'ready_to_submit' ? 'status-pill--green' : result.readiness === 'qualified' ? 'status-pill--earth' : 'status-pill--amber'}`}>
               {readinessLabels[result.readiness]}
@@ -143,8 +163,8 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
 
       <p className="inquiry-agent-panel__intro">
         {isZh
-          ? '先用自然对话说明采购场景、市场、规格和商务限制。智能体会提炼有效信息，并回填到下方正式询盘表单。'
-          : 'Start with natural conversation about market, specification, volume, and commercial constraints. The agent will extract the useful details and sync them into the formal inquiry form below.'}
+          ? '您可以先用自然语言描述采购场景、规格、数量和交付要求。助手会把有效信息同步到下方询盘表单。'
+          : 'Start with a natural description of your product, specification, quantity, and delivery needs. The assistant will sync the useful details into the inquiry form below.'}
       </p>
 
       <div className="inquiry-agent-messages" aria-live="polite">
@@ -198,27 +218,22 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
 
       {result ? (
         <div className="inquiry-agent-briefing">
-          <div className="inquiry-agent-briefing__summary">
-            <strong>{isZh ? '当前买家简报' : 'Current buyer brief'}</strong>
-            <p>{result.briefingSummary}</p>
-          </div>
-
           <div className="inquiry-agent-briefing__grid">
             <div>
-              <strong>{isZh ? '仍待确认' : 'Still needed'}</strong>
+              <strong>{isZh ? '提交前还需确认' : 'Still needed before submission'}</strong>
               {result.missingFields.length > 0 ? (
                 <ul className="inquiry-agent-tag-list">
                   {result.missingFields.map((field) => (
-                    <li key={field}>{field}</li>
+                    <li key={field}>{missingFieldLabels[field] ?? field}</li>
                   ))}
                 </ul>
               ) : (
-                <p>{isZh ? '核心字段已经基本齐备。' : 'Core fields are now mostly complete.'}</p>
+                <p>{isZh ? '主要信息已经齐备，您可以检查表单后提交。' : 'The main details are in place. You can review the form and submit.'}</p>
               )}
             </div>
 
             <div>
-              <strong>{isZh ? '下一步建议' : 'Suggested next questions'}</strong>
+              <strong>{isZh ? '建议下一步确认' : 'Suggested next points to confirm'}</strong>
               {result.briefing.nextQuestions && result.briefing.nextQuestions.length > 0 ? (
                 <ul className="inquiry-agent-list">
                   {result.briefing.nextQuestions.map((item) => (
@@ -226,47 +241,10 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
                   ))}
                 </ul>
               ) : (
-                <p>{isZh ? '可直接检查表单并提交。' : 'You can now review the form and submit.'}</p>
+                <p>{isZh ? '现在可以检查表单并提交。' : 'You can now review the form and submit.'}</p>
               )}
             </div>
           </div>
-
-          {(result.briefing.qualificationChecklist?.length || result.briefing.recommendedDocuments?.length || result.briefing.logisticsNotes?.length) ? (
-            <div className="inquiry-agent-briefing__stack">
-              {result.briefing.qualificationChecklist?.length ? (
-                <div>
-                  <strong>{isZh ? '行业核实清单' : 'Industry qualification checklist'}</strong>
-                  <ul className="inquiry-agent-list">
-                    {result.briefing.qualificationChecklist.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-
-              {result.briefing.recommendedDocuments?.length ? (
-                <div>
-                  <strong>{isZh ? '建议提前准备的文件' : 'Recommended documents to prepare'}</strong>
-                  <ul className="inquiry-agent-list">
-                    {result.briefing.recommendedDocuments.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-
-              {result.briefing.logisticsNotes?.length ? (
-                <div>
-                  <strong>{isZh ? '物流与交付关注点' : 'Logistics and delivery watchpoints'}</strong>
-                  <ul className="inquiry-agent-list">
-                    {result.briefing.logisticsNotes.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </div>
-          ) : null}
         </div>
       ) : null}
     </div>

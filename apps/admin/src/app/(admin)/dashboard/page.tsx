@@ -46,6 +46,7 @@ export default async function DashboardPage() {
                 <div className="data-row__main">
                   <strong>{item.customerName}</strong>
                   <p>{item.productName}</p>
+                  {item.assistantSummary ? <span>{item.assistantSummary}</span> : null}
                   <span>{item.customerCountry} · {item.supplierName}</span>
                 </div>
                 <div className="data-row__aside">
