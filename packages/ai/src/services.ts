@@ -87,6 +87,69 @@ export interface InquiryAgentResult {
   briefing: InquiryAgentBriefing;
 }
 
+function normalizeInquiryAgentText(value: string) {
+  return value
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/(^|[^*])\*([^*\n]+)\*(?=[^*]|$)/g, '$1$2')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+function normalizeInquiryAgentTextList(values?: string[]) {
+  return values?.map((value) => normalizeInquiryAgentText(value)).filter(Boolean);
+}
+
+function normalizeInquiryAgentResult(result: InquiryAgentResult): InquiryAgentResult {
+  return {
+    ...result,
+    reply: normalizeInquiryAgentText(result.reply),
+    suggestedQuestions: normalizeInquiryAgentTextList(result.suggestedQuestions) ?? [],
+    formDraft: {
+      ...result.formDraft,
+      requirements: result.formDraft.requirements
+        ? normalizeInquiryAgentText(result.formDraft.requirements)
+        : result.formDraft.requirements
+    },
+    briefingSummary: normalizeInquiryAgentText(result.briefingSummary),
+    briefing: {
+      ...result.briefing,
+      buyerRole: result.briefing.buyerRole
+        ? normalizeInquiryAgentText(result.briefing.buyerRole)
+        : result.briefing.buyerRole,
+      businessModel: result.briefing.businessModel
+        ? normalizeInquiryAgentText(result.briefing.businessModel)
+        : result.briefing.businessModel,
+      industryLabel: result.briefing.industryLabel
+        ? normalizeInquiryAgentText(result.briefing.industryLabel)
+        : result.briefing.industryLabel,
+      productFocus: result.briefing.productFocus
+        ? normalizeInquiryAgentText(result.briefing.productFocus)
+        : result.briefing.productFocus,
+      destinationMarket: result.briefing.destinationMarket
+        ? normalizeInquiryAgentText(result.briefing.destinationMarket)
+        : result.briefing.destinationMarket,
+      packFormat: result.briefing.packFormat
+        ? normalizeInquiryAgentText(result.briefing.packFormat)
+        : result.briefing.packFormat,
+      certificationsNeeded: normalizeInquiryAgentTextList(result.briefing.certificationsNeeded),
+      incotermPreference: result.briefing.incotermPreference
+        ? normalizeInquiryAgentText(result.briefing.incotermPreference)
+        : result.briefing.incotermPreference,
+      timelineExpectation: result.briefing.timelineExpectation
+        ? normalizeInquiryAgentText(result.briefing.timelineExpectation)
+        : result.briefing.timelineExpectation,
+      painPoints: normalizeInquiryAgentTextList(result.briefing.painPoints),
+      qualificationChecklist: normalizeInquiryAgentTextList(result.briefing.qualificationChecklist),
+      recommendedDocuments: normalizeInquiryAgentTextList(result.briefing.recommendedDocuments),
+      logisticsNotes: normalizeInquiryAgentTextList(result.briefing.logisticsNotes),
+      nextQuestions: normalizeInquiryAgentTextList(result.briefing.nextQuestions)
+    }
+  };
+}
+
 function inferIndustryKey(input: {
   selectedProduct?: InquiryAgentProductContext | null;
   messages?: InquiryAgentMessage[];
@@ -381,7 +444,7 @@ export async function generateInquiryAgentReply(input: {
     .join('\n');
   const selectedProduct = input.selectedProduct
     ? JSON.stringify(input.selectedProduct, null, 2)
-    : 'No specific product preselected.';
+    : 'No source-page product context provided.';
   const formDraft = input.formDraft
     ? JSON.stringify(input.formDraft, null, 2)
     : 'No structured lead data captured yet.';
@@ -405,7 +468,7 @@ Respond in ${responseLanguage}.
 Detected industry playbook:
 ${JSON.stringify(industryPlaybook, null, 2)}
 
-Selected product context:
+Optional source-page product context:
 ${selectedProduct}
 
 Current captured form draft:
@@ -457,7 +520,9 @@ Rules:
 - requirements should be a concise buyer brief suitable for an RFQ form when enough detail exists.
 - missingFields should only list fields that still materially block qualification.
 - use the detected industry playbook to shape the reply, follow-up questions, qualification checklist, document list, and logistics notes.
+- treat the selected product context as an optional starting reference only. The buyer may pivot to another catalog item or ask about a product not currently shown on the platform. Follow the buyer's latest stated product interest over the preloaded context.
 - the reply must never mention playbook, buyer brief, qualification status, or internal data capture.
+- use plain text only; do not use Markdown emphasis like **bold**, single-asterisk emphasis, backticks, or code-style formatting.
 - readiness should be:
   - discovering: early conversation, still broad
   - qualified: enough detail for commercial follow-up but still with gaps
@@ -475,7 +540,7 @@ Rules:
     throw new Error('No response from AI');
   }
 
-  return JSON.parse(content) as InquiryAgentResult;
+  return normalizeInquiryAgentResult(JSON.parse(content) as InquiryAgentResult);
 }
 
 // Translate content between Chinese and English

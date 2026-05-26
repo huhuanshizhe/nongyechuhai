@@ -45,18 +45,6 @@ export default async function RfqPage({ params, searchParams }: RfqPageProps) {
   const [data, session] = await Promise.all([getRfqPageData(resolvedSearchParams.product), auth()]);
   const errorMessage = getErrorMessage(isZh, resolvedSearchParams.error);
 
-  const processSteps = isZh ? [
-    '选择最接近的产品线或从更广泛的品类需求开始。',
-    '一次性提交目的地市场、数量、包装形式、认证及商业备注。',
-    '平台将买家简报路由到相关供应商项目及管理员审核团队。',
-    '合格询盘可进入报价跟进及订单协调阶段。'
-  ] : [
-    'Select the closest showcase line or start from a broader category request.',
-    'Share destination market, quantity, pack format, certification, and commercial notes once.',
-    'The platform routes the buyer brief to the relevant supplier program and admin review team.',
-    'Qualified requests can proceed into quotation follow-up and order coordination.'
-  ];
-
   return (
     <main className="page-shell">
       {resolvedSearchParams.submitted === '1' ? (
@@ -88,61 +76,11 @@ export default async function RfqPage({ params, searchParams }: RfqPageProps) {
       ) : null}
 
       <section className="rfq-layout" data-rise="true">
-        <article className="rfq-story">
-          <div className="section-head">
-            <span className="section-kicker">{isZh ? '询盘中心' : 'Inquiry desk'}</span>
-            <h1 className="section-title">{isZh
-              ? '面向专业农产品买家及出口讨论的询盘表单。'
-              : 'An inquiry form shaped for professional agriculture buyers and export discussions.'}
-            </h1>
-            <p className="section-description">
-              {isZh
-                ? '一次性提交产品、市场、数量、包装及文档需求。同一买家简报可支持供应商跟进、内部审核及报价讨论。'
-                : 'Capture product, market, volume, pack, and documentation needs once. The same buyer brief can then support supplier follow-up, internal review, and quotation discussion.'}
-            </p>
-          </div>
-          <div className="rfq-summary">
-            <strong>{isZh ? '接下来会发生什么' : 'What happens next'}</strong>
-            <ul className="process-list">
-              {processSteps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="rfq-summary">
-            <strong>{isZh ? '建议准备的信息' : 'Recommended information to prepare'}</strong>
-            <ul className="promise-list">
-              <li>{isZh ? '目标进口市场及首选国际贸易术语。' : 'Target import market and preferred incoterm.'}</li>
-              <li>{isZh ? '包装期望、自有品牌需求及文档约束。' : 'Packaging expectation, private label needs, and documentation constraints.'}</li>
-              <li>{isZh ? '初次试单量与后续集装箱计划。' : 'Initial trial quantity versus repeat container plan.'}</li>
-            </ul>
-          </div>
-          <div className="rfq-summary">
-            <strong>{isZh ? '已选产品' : 'Selected product'}</strong>
-            <p>
-              {data.selectedProduct
-                ? `${data.selectedProduct.name} · ${data.selectedProduct.tradeModeLabel}`
-                : (isZh ? '未预选产品。您仍可从一般出口需求开始。' : 'No product preselected. You can still start from a general export request.')}
-            </p>
-          </div>
-          {session?.user ? (
-            <div className="rfq-summary">
-              <strong>{isZh ? '已登录买家' : 'Signed-in buyer'}</strong>
-              <p>{session.user.name || session.user.email} · {isZh ? '您的询盘也将出现在买家工作台供后续跟进。' : 'your inquiry will also appear in Buyer Workspace for later follow-up.'}</p>
-            </div>
-          ) : null}
-        </article>
-
         <section className="rfq-form-panel">
-          <div className="section-head">
-            <span className="section-kicker">{isZh ? '结构化询盘' : 'Structured inquiry'}</span>
-            <h2>{isZh ? '提交买家简报' : 'Submit the buyer brief'}</h2>
-          </div>
           <form action={submitInquiryAction} className="form-grid">
             <RfqFormExperience
               locale={locale}
-              products={data.products as StorefrontProductCard[]}
-              selectedProductSlug={data.selectedProduct?.slug ?? null}
+              selectedProduct={data.selectedProduct as StorefrontProductCard | null}
               defaultName={session?.user?.name ?? ''}
               defaultEmail={session?.user?.email ?? ''}
             />

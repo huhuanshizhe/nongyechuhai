@@ -12,14 +12,12 @@ import { InquiryAgent } from './inquiry-agent';
 
 type RfqFormExperienceProps = {
   locale: string;
-  products: StorefrontProductCard[];
-  selectedProductSlug: string | null;
+  selectedProduct: StorefrontProductCard | null;
   defaultName: string;
   defaultEmail: string;
 };
 
 type FormState = {
-  productSlug: string;
   customerName: string;
   customerCompany: string;
   customerEmail: string;
@@ -33,14 +31,12 @@ type FormState = {
 
 export function RfqFormExperience({
   locale,
-  products,
-  selectedProductSlug,
+  selectedProduct,
   defaultName,
   defaultEmail
 }: RfqFormExperienceProps) {
   const isZh = locale === 'zh';
   const [formState, setFormState] = useState<FormState>({
-    productSlug: selectedProductSlug ?? '',
     customerName: defaultName,
     customerCompany: '',
     customerEmail: defaultEmail,
@@ -55,7 +51,6 @@ export function RfqFormExperience({
   const [agentConversation, setAgentConversation] = useState('');
   const [syncMessage, setSyncMessage] = useState<string | null>(null);
 
-  const selectedProduct = products.find((product) => product.slug === formState.productSlug);
   const selectedProductContext: InquiryAgentProductContext | null = selectedProduct
     ? {
         slug: selectedProduct.slug,
@@ -156,6 +151,7 @@ export function RfqFormExperience({
     <>
       <input type="hidden" name="locale" value={locale} />
       <input type="hidden" name="agentConversation" value={agentConversation} />
+      <input type="hidden" name="sourceProductSlug" value={selectedProduct?.slug ?? ''} />
 
       <InquiryAgent
         locale={locale}
@@ -169,24 +165,6 @@ export function RfqFormExperience({
           <small>{syncMessage}</small>
         </div>
       ) : null}
-
-      <div className="field field--full">
-        <label htmlFor="productSlug">{isZh ? '目标产品' : 'Target product'}</label>
-        <select
-          id="productSlug"
-          name="productSlug"
-          value={formState.productSlug}
-          onChange={(event) => handleFieldChange('productSlug', event.target.value)}
-        >
-          <option value="">{isZh ? '一般出口需求' : 'General export request'}</option>
-          {products.map((product) => (
-            <option key={product.slug} value={product.slug}>
-              {product.name} · {product.tradeModeLabel}
-            </option>
-          ))}
-        </select>
-        <small>{isZh ? '选择最接近的当前产品线，或留空提交更广泛的出口需求。' : 'Choose the closest current showcase line, or leave blank for a broader export request.'}</small>
-      </div>
 
       <div className="field">
         <label htmlFor="customerName">{isZh ? '联系人姓名' : 'Contact name'}</label>

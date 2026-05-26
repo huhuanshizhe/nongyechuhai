@@ -46,8 +46,8 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
     {
       role: 'assistant',
       content: isZh
-        ? `您好，我是在线询盘助手。您可以直接告诉我想采购的产品、目的地市场、预计数量、包装和认证要求，我会边答复边帮您整理到正式询盘中。${selectedProduct?.name ? ` 当前已选产品是 ${selectedProduct.name}。` : ''}`
-        : `Hello, I am your online inquiry assistant. Tell me what you need to source, which market you are targeting, expected volume, pack format, and certification requirements. I will answer your questions and help prepare a clear inquiry for our team.${selectedProduct?.name ? ` The currently selected product is ${selectedProduct.name}.` : ''}`
+        ? `您好，我是在线询盘助手。您可以直接告诉我想采购的产品或品类、目的地市场、预计数量、包装和认证要求，我会边答复边帮您整理到正式询盘中。${selectedProduct?.name ? ` 如果您是从 ${selectedProduct.name} 这个页面进入，我可以先按这个方向继续；如果您要咨询其他产品，也可以直接说明。` : ''}`
+        : `Hello, I am your online inquiry assistant. Tell me what product or category you need to source, which market you are targeting, expected volume, pack format, and certification requirements. I will answer your questions and help prepare a clear inquiry for our team.${selectedProduct?.name ? ` If you arrived from the ${selectedProduct.name} page, I can start from that context, but you can also switch to a different product at any time.` : ''}`
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -58,15 +58,15 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
   const quickPrompts = isZh
     ? [
         selectedProduct?.name
-          ? `${selectedProduct.name} 这条线常见的出口包装和起订沟通点有哪些？`
-          : '我们是进口商，想了解你们适合怎么开始询盘。',
+          ? `如果先从 ${selectedProduct.name} 这条线开始，需要先确认哪些规格、包装和起订量？`
+          : '我们想咨询平台当前没有展示的产品，应该先提供哪些关键信息？',
         '我们准备销往中东市场，需要先确认哪些认证和包装信息？',
         '请帮我把当前需求整理成一条清晰的询盘。'
       ]
     : [
         selectedProduct?.name
-          ? `What export pack formats and MOQ discussion points should we confirm for ${selectedProduct.name}?`
-          : 'We are an importer. Help us start with the right inquiry structure.',
+          ? `If we start with ${selectedProduct.name}, which specifications, pack details, and MOQ points should we confirm first?`
+          : 'We need a product that is not currently shown on the platform. What should we clarify first?',
         'We plan to sell into the Middle East. Which certifications and pack details should we confirm first?',
         'Help me turn our sourcing idea into a clear inquiry message.'
       ];
@@ -150,7 +150,7 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
       <div className="inquiry-agent-panel__head">
         <div>
           <span className="section-kicker">{isZh ? '在线询盘助手' : 'Online inquiry assistant'}</span>
-          <h3>{isZh ? '先确认产品、市场、包装与交付要求，再提交正式询盘' : 'Confirm product, market, packaging, and delivery needs before you submit'}</h3>
+          <h3>{isZh ? '先把采购方向和需求聊清楚，再提交正式询盘' : 'Clarify the sourcing direction first, then submit the formal inquiry'}</h3>
         </div>
         <div className="inquiry-agent-panel__status">
           {result ? (
@@ -163,8 +163,8 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
 
       <p className="inquiry-agent-panel__intro">
         {isZh
-          ? '您可以先用自然语言描述采购场景、规格、数量和交付要求。助手会把有效信息同步到下方询盘表单。'
-          : 'Start with a natural description of your product, specification, quantity, and delivery needs. The assistant will sync the useful details into the inquiry form below.'}
+          ? '您可以直接描述想采购的产品或品类，无论平台当前是否展示。助手会把有效信息同步到下方询盘表单。'
+          : 'Describe the product or category you need, whether it is already listed on the platform or not. The assistant will sync the useful details into the inquiry form below.'}
       </p>
 
       <div className="inquiry-agent-messages" aria-live="polite">
@@ -185,8 +185,8 @@ export function InquiryAgent({ locale, formDraft, selectedProduct, onSync }: Inq
           value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
           placeholder={isZh
-            ? '例如：我们是迪拜进口商，想做清真即食鸡肉餐，先试单 1 个柜，需要英文阿文标签。'
-            : 'Example: We are an importer in Dubai looking at halal ready meals. We want a trial container first and need English/Arabic labeling.'}
+            ? '例如：我们想找平台目录里没有完全对应的冷冻蔬菜产品，先试单 1 个柜，销往迪拜，需要英文阿文标签。'
+            : 'Example: We need a frozen vegetable line that is not exactly shown in the current catalog. We want a trial container for Dubai and need English and Arabic labeling.'}
         />
         <div className="inquiry-agent-actions">
           <button

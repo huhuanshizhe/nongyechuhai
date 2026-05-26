@@ -494,17 +494,8 @@ h1, h2, h3, h4 {
    10. RFQ Form
    ============================================================ */
 
-.rfq-layout { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-8); align-items: start; }
-.rfq-story { grid-column: span 5; display: grid; gap: var(--space-5); padding: var(--space-8); border: 1px solid var(--color-border); background: var(--color-surface); border-radius: var(--radius-2xl); }
-.rfq-story h2 { font-family: var(--font-display); }
-.rfq-story p { margin: 0; line-height: 1.7; color: var(--color-text-secondary); }
-.rfq-story ul { display: grid; gap: var(--space-3); list-style: none; margin: 0; padding: 0; }
-.rfq-story li { color: var(--color-text-muted); font-size: var(--text-sm); }
-.rfq-form-panel { grid-column: span 7; display: grid; gap: var(--space-5); padding: var(--space-8); border: 1px solid var(--color-border); background: var(--color-surface); border-radius: var(--radius-2xl); }
-.rfq-form-panel h2 { font-family: var(--font-display); }
-
-.rfq-summary { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-bg); }
-.rfq-summary strong { display: block; margin-bottom: var(--space-1); }
+.rfq-layout { display: grid; gap: var(--space-4); align-items: start; }
+.rfq-form-panel { display: grid; gap: var(--space-4); padding: var(--space-5); border: 1px solid var(--color-border); background: var(--color-surface); border-radius: var(--radius-2xl); }
 
 .inquiry-agent-panel {
   gap: var(--space-4);
@@ -534,7 +525,7 @@ h1, h2, h3, h4 {
 .inquiry-agent-messages {
   display: grid;
   gap: var(--space-3);
-  max-height: 480px;
+  max-height: 360px;
   padding: var(--space-3);
   overflow: auto;
   border: 1px solid var(--color-border);
@@ -774,7 +765,6 @@ h1, h2, h3, h4 {
   .site-header__signals { justify-content: flex-start; }
   .hero-stage__brief-head { grid-template-columns: 1fr; }
   .portfolio-rail, .catalog-sidebar { position: static; }
-  .catalog-sidebar, .catalog-results, .rfq-story, .rfq-form-panel { grid-column: 1 / -1; }
 
   .hero-stage__main, .hero-stage__visual { padding: var(--space-8); }
 }
@@ -801,7 +791,7 @@ h1, h2, h3, h4 {
 
   .hero-stage__main, .hero-stage__visual, .portfolio-stage__intro,
   .portfolio-stage__filters, .detail-stage__media, .detail-stage__summary,
-  .rfq-story, .rfq-form-panel, .content-prose { padding: var(--space-6); }
+  .rfq-form-panel, .content-prose { padding: var(--space-4); }
 
   .hero-stage__showcase-grid { grid-template-columns: 1fr; }
   .credibility-strip__item { border-right: 0; border-bottom: 1px solid var(--color-border); padding: var(--space-5); }

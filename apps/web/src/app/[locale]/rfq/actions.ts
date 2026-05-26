@@ -31,11 +31,11 @@ function readAgentConversation(formData: FormData) {
   }
 }
 
-function buildRedirectUrl(locale: string, baseProductSlug: string | null, error?: string, reference?: string) {
+function buildRedirectUrl(locale: string, sourceProductSlug: string | null, error?: string, reference?: string) {
   const params = new URLSearchParams();
 
-  if (baseProductSlug) {
-    params.set('product', baseProductSlug);
+  if (sourceProductSlug) {
+    params.set('product', sourceProductSlug);
   }
 
   if (error) {
@@ -58,7 +58,7 @@ export async function submitInquiryAction(formData: FormData) {
   // Get locale from form data for proper redirect
   const locale = readField(formData, 'locale') || routing.defaultLocale;
   
-  const productSlug = readField(formData, 'productSlug') || null;
+  const sourceProductSlug = readField(formData, 'sourceProductSlug') || null;
   const customerName = readField(formData, 'customerName');
   const customerCompany = readField(formData, 'customerCompany') || null;
   const customerEmail = readField(formData, 'customerEmail');
@@ -71,39 +71,26 @@ export async function submitInquiryAction(formData: FormData) {
   const agentConversation = readAgentConversation(formData);
 
   if (!customerName || !customerEmail || !customerCountry || !requirements) {
-    redirect(buildRedirectUrl(locale, productSlug, 'missing-fields'));
+    redirect(buildRedirectUrl(locale, sourceProductSlug, 'missing-fields'));
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
-    redirect(buildRedirectUrl(locale, productSlug, 'invalid-email'));
+    redirect(buildRedirectUrl(locale, sourceProductSlug, 'invalid-email'));
   }
 
-  const selectedProduct = productSlug
-    ? await prisma.product.findUnique({
-        where: { slug: productSlug },
-        select: {
-          id: true,
-          slug: true,
-          supplierId: true
-        }
-      })
-    : null;
+  const fallbackSupplier = await prisma.supplier.findFirst({
+    where: {
+      status: 'APPROVED'
+    },
+    select: {
+      id: true
+    }
+  });
 
-  const fallbackSupplier = selectedProduct
-    ? null
-    : await prisma.supplier.findFirst({
-        where: {
-          status: 'APPROVED'
-        },
-        select: {
-          id: true
-        }
-      });
-
-  const supplierId = selectedProduct?.supplierId ?? fallbackSupplier?.id;
+  const supplierId = fallbackSupplier?.id;
 
   if (!supplierId) {
-    redirect(buildRedirectUrl(locale, productSlug, 'no-supplier'));
+    redirect(buildRedirectUrl(locale, sourceProductSlug, 'no-supplier'));
   }
 
   const inquiryNumber = `INQ-${new Date().toISOString().slice(0, 10).replaceAll('-', '')}-${randomUUID().slice(0, 6).toUpperCase()}`;
@@ -111,7 +98,7 @@ export async function submitInquiryAction(formData: FormData) {
   await prisma.inquiry.create({
     data: {
       inquiryNumber,
-      productId: selectedProduct?.id ?? null,
+      productId: null,
       supplierId,
       buyerUserId,
       customerName,
@@ -128,7 +115,7 @@ export async function submitInquiryAction(formData: FormData) {
             inquiryAgent: agentConversation
           }
         : undefined,
-      sourcePageUrl: productSlug ? `/products/${productSlug}` : '/rfq'
+      sourcePageUrl: sourceProductSlug ? `/products/${sourceProductSlug}` : '/rfq'
     }
   });
 
@@ -136,11 +123,11 @@ export async function submitInquiryAction(formData: FormData) {
   revalidatePath('/products');
   revalidatePath('/account');
 
-  if (productSlug) {
-    revalidatePath(`/products/${productSlug}`);
+  if (sourceProductSlug) {
+    revalidatePath(`/products/${sourceProductSlug}`);
   }
 
-  redirect(buildRedirectUrl(locale, productSlug, undefined, inquiryNumber));
+  redirect(buildRedirectUrl(locale, sourceProductSlug, undefined, inquiryNumber));
 }
 
 export type InquiryDetail = NonNullable<Awaited<ReturnType<typeof getInquiryDetailsRaw>>>;
