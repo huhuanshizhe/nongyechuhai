@@ -11,8 +11,29 @@ export type AiRuntime = z.infer<typeof aiRuntimeSchema>;
 
 export type AiChatRequest<T extends object> = T;
 
+function sanitizeAiEnvValue(value: unknown) {
+  if (typeof value !== 'string') {
+    return value;
+  }
+
+  const trimmed = value.trim();
+
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+
+  return trimmed;
+}
+
 export function readAiRuntime(source: NodeJS.ProcessEnv = process.env): AiRuntime {
-  return aiRuntimeSchema.parse(source);
+  return aiRuntimeSchema.parse({
+    AI_BASE_URL: sanitizeAiEnvValue(source.AI_BASE_URL),
+    AI_MODEL: sanitizeAiEnvValue(source.AI_MODEL),
+    AI_API_KEY: sanitizeAiEnvValue(source.AI_API_KEY)
+  });
 }
 
 function normalizeAiBaseUrl(baseUrl: string) {
