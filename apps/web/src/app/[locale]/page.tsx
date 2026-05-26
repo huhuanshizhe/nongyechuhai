@@ -174,8 +174,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <Link className="button" href="/products">
               {isZh ? '浏览出口产品目录' : 'Explore export portfolio'}
             </Link>
-            <Link className="button button--ghost" href="/rfq">
-              {isZh ? '发起买家询盘' : 'Start buyer inquiry'}
+            <Link className="button button--ghost" href="/rfq#inquiry-agent">
+              {isZh ? '让询盘助手先梳理需求' : 'Let inquiry assistant guide the brief'}
             </Link>
           </div>
           <div className="hero-stage__brief">

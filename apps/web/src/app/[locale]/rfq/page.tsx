@@ -4,6 +4,7 @@ import { Link } from '../../../i18n/routing';
 import { auth } from '../../../auth';
 import { submitInquiryAction } from './actions';
 import { getRfqPageData, type StorefrontProductCard } from '../../../lib/storefront';
+import { RfqFormExperience } from './rfq-form-experience';
 
 type RfqPageProps = {
   params: Promise<{ locale: string }>;
@@ -138,86 +139,13 @@ export default async function RfqPage({ params, searchParams }: RfqPageProps) {
             <h2>{isZh ? '提交买家简报' : 'Submit the buyer brief'}</h2>
           </div>
           <form action={submitInquiryAction} className="form-grid">
-            <input type="hidden" name="locale" value={locale} />
-            <div className="field field--full">
-              <label htmlFor="productSlug">{isZh ? '目标产品' : 'Target product'}</label>
-              <select defaultValue={data.selectedProduct?.slug ?? ''} id="productSlug" name="productSlug">
-                <option value="">{isZh ? '一般出口需求' : 'General export request'}</option>
-                {data.products.map((product: StorefrontProductCard) => (
-                  <option key={product.slug} value={product.slug}>
-                    {product.name} · {product.tradeModeLabel}
-                  </option>
-                ))}
-              </select>
-              <small>{isZh ? '选择最接近的当前产品线，或留空提交更广泛的出口需求。' : 'Choose the closest current showcase line, or leave blank for a broader export request.'}</small>
-            </div>
-
-            <div className="field">
-              <label htmlFor="customerName">{isZh ? '联系人姓名' : 'Contact name'}</label>
-              <input
-                defaultValue={session?.user?.name ?? ''}
-                id="customerName"
-                name="customerName"
-                placeholder={isZh ? '张明' : 'Amelia Harper'}
-                required
-                type="text"
-              />
-            </div>
-
-            <div className="field">
-              <label htmlFor="customerCompany">{isZh ? '公司名称' : 'Company'}</label>
-              <input id="customerCompany" name="customerCompany" placeholder={isZh ? '海港贸易公司' : 'Harbor Foods Trading'} type="text" />
-            </div>
-
-            <div className="field">
-              <label htmlFor="customerEmail">{isZh ? '商务邮箱' : 'Business email'}</label>
-              <input
-                defaultValue={session?.user?.email ?? ''}
-                id="customerEmail"
-                name="customerEmail"
-                placeholder="buyer@company.com"
-                required
-                type="email"
-              />
-            </div>
-
-            <div className="field">
-              <label htmlFor="customerPhone">{isZh ? '电话/WhatsApp' : 'Phone / WhatsApp'}</label>
-              <input id="customerPhone" name="customerPhone" placeholder="+65 ..." type="text" />
-            </div>
-
-            <div className="field">
-              <label htmlFor="customerCountry">{isZh ? '目的地市场' : 'Destination market'}</label>
-              <input id="customerCountry" name="customerCountry" placeholder={isZh ? '新加坡' : 'Singapore'} required type="text" />
-            </div>
-
-            <div className="field">
-              <label htmlFor="quantityRequested">{isZh ? '目标数量' : 'Target quantity'}</label>
-              <input id="quantityRequested" min="1" name="quantityRequested" placeholder="2000" type="number" />
-            </div>
-
-            <div className="field">
-              <label htmlFor="targetPrice">{isZh ? '目标单价' : 'Target unit price'}</label>
-              <input id="targetPrice" min="0" name="targetPrice" placeholder="135.00" step="0.01" type="number" />
-            </div>
-
-            <div className="field">
-              <label htmlFor="currency">{isZh ? '货币' : 'Currency'}</label>
-              <select defaultValue="USD" id="currency" name="currency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="CNY">CNY</option>
-                <option value="SGD">SGD</option>
-                <option value="AED">AED</option>
-              </select>
-            </div>
-
-            <div className="field field--full">
-              <label htmlFor="requirements">{isZh ? '需求说明' : 'Requirements'}</label>
-              <textarea id="requirements" name="requirements" placeholder={isZh
-                ? '描述规格、包装、目的地市场、预期交期及任何文档约束。'
-                : 'Describe specifications, packaging, destination market, expected lead time, and any documentation constraints.'} required />
-            </div>
+            <RfqFormExperience
+              locale={locale}
+              products={data.products as StorefrontProductCard[]}
+              selectedProductSlug={data.selectedProduct?.slug ?? null}
+              defaultName={session?.user?.name ?? ''}
+              defaultEmail={session?.user?.email ?? ''}
+            />
 
             <div className="field field--full">
               <small>

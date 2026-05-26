@@ -10,6 +10,26 @@ function readField(formData: FormData, fieldName: string) {
   return String(formData.get(fieldName) ?? '').trim();
 }
 
+function readAgentConversation(formData: FormData) {
+  const raw = readField(formData, 'agentConversation');
+
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return null;
+    }
+
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
 function buildRedirectUrl(baseProductSlug: string | null, error?: string, reference?: string) {
   const params = new URLSearchParams();
 
@@ -43,6 +63,7 @@ export async function submitInquiryAction(formData: FormData) {
   const targetPrice = readField(formData, 'targetPrice');
   const currency = readField(formData, 'currency') || null;
   const requirements = readField(formData, 'requirements');
+  const agentConversation = readAgentConversation(formData);
 
   if (!customerName || !customerEmail || !customerCountry || !requirements) {
     redirect(buildRedirectUrl(productSlug, 'missing-fields'));
@@ -97,6 +118,11 @@ export async function submitInquiryAction(formData: FormData) {
       targetPrice: targetPrice ? targetPrice : null,
       currency,
       requirements,
+      attachmentsJson: agentConversation
+        ? {
+            inquiryAgent: agentConversation
+          }
+        : undefined,
       sourcePageUrl: productSlug ? `/products/${productSlug}` : '/rfq'
     }
   });
