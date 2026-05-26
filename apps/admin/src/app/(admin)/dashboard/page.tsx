@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getAdminDashboardData } from '../../../lib/admin-data';
 
 export const dynamic = 'force-dynamic';
@@ -51,7 +52,7 @@ export default async function DashboardPage() {
                 </div>
                 <div className="data-row__aside">
                   <span className={`status-chip status-chip--${item.statusTone}`}>{item.status}</span>
-                  <span>{item.inquiryNumber}</span>
+                  <Link href={`/inquiries/${item.inquiryNumber}`}>{item.inquiryNumber}</Link>
                   <span>{item.quoteCount} quotes · {item.createdAt}</span>
                 </div>
               </article>

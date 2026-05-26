@@ -5,6 +5,13 @@ const dateFormatter = new Intl.DateTimeFormat('zh-CN', {
   day: 'numeric'
 });
 
+const dateTimeFormatter = new Intl.DateTimeFormat('zh-CN', {
+  month: 'short',
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit'
+});
+
 const currencyFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -17,6 +24,14 @@ function formatDate(value: Date | null | undefined) {
   }
 
   return dateFormatter.format(value);
+}
+
+function formatDateTime(value: Date | null | undefined) {
+  if (!value) {
+    return '未记录';
+  }
+
+  return dateTimeFormatter.format(value);
 }
 
 function formatCurrency(value: { toString(): string } | null | undefined) {
@@ -67,7 +82,18 @@ function getStatusTone(value: string) {
   }
 }
 
-function readInquiryAssistantSummary(value: unknown) {
+type InquiryAssistantSnapshot = {
+  summary: string | null;
+  readiness: string | null;
+  updatedAt: string | null;
+  missingFields: string[];
+  transcript: Array<{
+    role: 'user' | 'assistant';
+    content: string;
+  }>;
+};
+
+function readInquiryAssistantSnapshot(value: unknown): InquiryAssistantSnapshot | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     return null;
   }
@@ -79,19 +105,44 @@ function readInquiryAssistantSummary(value: unknown) {
     return null;
   }
 
-  const summary = (rawSnapshot as Record<string, unknown>).briefingSummary;
+  const snapshot = rawSnapshot as Record<string, unknown>;
+  const summary = typeof snapshot.briefingSummary === 'string' ? snapshot.briefingSummary.trim() : '';
+  const rawTranscript = Array.isArray(snapshot.transcript) ? snapshot.transcript : [];
 
-  if (typeof summary !== 'string') {
+  return {
+    summary: summary || null,
+    readiness: typeof snapshot.readiness === 'string' ? snapshot.readiness : null,
+    updatedAt: typeof snapshot.updatedAt === 'string' ? snapshot.updatedAt : null,
+    missingFields: Array.isArray(snapshot.missingFields)
+      ? snapshot.missingFields.filter((field): field is string => typeof field === 'string' && field.trim().length > 0)
+      : [],
+    transcript: rawTranscript
+      .filter((item): item is { role: 'user' | 'assistant'; content: string } => {
+        if (!item || typeof item !== 'object' || Array.isArray(item)) {
+          return false;
+        }
+
+        const record = item as Record<string, unknown>;
+
+        return (record.role === 'user' || record.role === 'assistant')
+          && typeof record.content === 'string'
+          && record.content.trim().length > 0;
+      })
+      .map((item) => ({
+        role: item.role,
+        content: item.content.trim()
+      }))
+  };
+}
+
+function readInquiryAssistantSummary(value: unknown) {
+  const snapshot = readInquiryAssistantSnapshot(value);
+
+  if (!snapshot?.summary) {
     return null;
   }
 
-  const trimmed = summary.trim();
-
-  if (!trimmed) {
-    return null;
-  }
-
-  return trimmed.length > 160 ? `${trimmed.slice(0, 157)}...` : trimmed;
+  return snapshot.summary.length > 160 ? `${snapshot.summary.slice(0, 157)}...` : snapshot.summary;
 }
 
 export async function getAdminDashboardData() {
@@ -478,6 +529,117 @@ export async function getAdminInquiriesPageData() {
     targetPrice: item.targetPrice ? formatCurrency(item.targetPrice) : 'TBD',
     createdAt: formatDate(item.createdAt)
   }));
+}
+
+export async function getAdminInquiryDetailData(inquiryNumber: string) {
+  const inquiry = await prisma.inquiry.findUnique({
+    where: {
+      inquiryNumber
+    },
+    select: {
+      inquiryNumber: true,
+      status: true,
+      customerName: true,
+      customerEmail: true,
+      customerPhone: true,
+      customerCompany: true,
+      customerCountry: true,
+      quantityRequested: true,
+      targetPrice: true,
+      currency: true,
+      requirements: true,
+      sourcePageUrl: true,
+      createdAt: true,
+      updatedAt: true,
+      attachmentsJson: true,
+      product: {
+        select: {
+          name: true,
+          category: {
+            select: {
+              name: true
+            }
+          }
+        }
+      },
+      supplier: {
+        select: {
+          organization: {
+            select: {
+              name: true
+            }
+          }
+        }
+      },
+      quotes: {
+        orderBy: {
+          createdAt: 'desc'
+        },
+        select: {
+          quoteNumber: true,
+          status: true,
+          currency: true,
+          totalAmount: true,
+          minOrderQty: true,
+          leadTimeDays: true,
+          validUntil: true,
+          sentAt: true,
+          notes: true
+        }
+      }
+    }
+  });
+
+  if (!inquiry) {
+    return null;
+  }
+
+  const assistantSnapshot = readInquiryAssistantSnapshot(inquiry.attachmentsJson);
+
+  return {
+    inquiryNumber: inquiry.inquiryNumber,
+    status: formatLabel(inquiry.status),
+    statusTone: getStatusTone(inquiry.status),
+    customerName: inquiry.customerName,
+    customerEmail: inquiry.customerEmail,
+    customerPhone: inquiry.customerPhone || '未提供',
+    customerCompany: inquiry.customerCompany || '未提供公司名',
+    customerCountry: inquiry.customerCountry || '未确认市场',
+    quantityRequested: inquiry.quantityRequested ? `${inquiry.quantityRequested} units` : '待确认',
+    targetPrice: inquiry.targetPrice
+      ? `${inquiry.currency || 'USD'} ${Number(inquiry.targetPrice.toString()).toLocaleString('en-US')}`
+      : '待确认',
+    requirements: inquiry.requirements || '尚未整理出详细需求。',
+    sourcePageUrl: inquiry.sourcePageUrl || '未知来源页',
+    createdAt: formatDateTime(inquiry.createdAt),
+    updatedAt: formatDateTime(inquiry.updatedAt),
+    productName: inquiry.product?.name || 'General sourcing request',
+    productCategory: inquiry.product?.category?.name || 'General inquiry',
+    supplierName: inquiry.supplier.organization.name,
+    quoteCount: inquiry.quotes.length,
+    assistant: assistantSnapshot
+      ? {
+          summary: assistantSnapshot.summary,
+          readiness: assistantSnapshot.readiness,
+          updatedAt: assistantSnapshot.updatedAt
+            ? formatDateTime(new Date(assistantSnapshot.updatedAt))
+            : '未记录',
+          missingFields: assistantSnapshot.missingFields,
+          transcript: assistantSnapshot.transcript.slice(-8)
+        }
+      : null,
+    quotes: inquiry.quotes.map((quote) => ({
+      quoteNumber: quote.quoteNumber,
+      status: formatLabel(quote.status),
+      statusTone: getStatusTone(quote.status),
+      amount: quote.totalAmount ? `${quote.currency} ${quote.totalAmount.toString()}` : 'Pending',
+      moq: quote.minOrderQty ? `${quote.minOrderQty}` : 'Not set',
+      leadTime: quote.leadTimeDays ? `${quote.leadTimeDays} days` : 'Not set',
+      validUntil: formatDate(quote.validUntil),
+      sentAt: formatDateTime(quote.sentAt),
+      notes: quote.notes || null
+    }))
+  };
 }
 
 export async function getAdminContentPageData() {
