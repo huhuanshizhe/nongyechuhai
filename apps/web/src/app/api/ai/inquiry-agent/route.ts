@@ -10,6 +10,42 @@ import { createAppAuth } from '@nongyechuhai/auth';
 
 const { auth } = createAppAuth();
 
+async function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function retryWithBackoff<T>(
+  fn: () => Promise<T>,
+  options: {
+    maxRetries?: number;
+    baseDelayMs?: number;
+    onRetry?: (attempt: number, error: unknown) => void;
+  } = {}
+): Promise<T> {
+  const { maxRetries = 3, baseDelayMs = 1000, onRetry } = options;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (attempt === maxRetries) {
+        throw error;
+      }
+
+      const status = (error as { status?: number })?.status;
+      if (status !== 429 && status !== 503 && status !== 502) {
+        throw error;
+      }
+
+      const waitMs = baseDelayMs * Math.pow(2, attempt);
+      onRetry?.(attempt + 1, error);
+      await delay(waitMs);
+    }
+  }
+
+  throw new Error('Unreachable');
+}
+
 function extractQuantity(text: string) {
   const match = text.match(/\b(\d{2,}(?:,\d{3})*)\b/);
 
@@ -228,12 +264,24 @@ export async function POST(request: NextRequest) {
     let result;
 
     try {
-      result = await generateInquiryAgentReply({
-        locale,
-        messages,
-        formDraft,
-        selectedProduct
-      });
+      result = await retryWithBackoff(
+        () => generateInquiryAgentReply({
+          locale,
+          messages,
+          formDraft,
+          selectedProduct
+        }),
+        {
+          maxRetries: 3,
+          baseDelayMs: 1000,
+          onRetry: (attempt, error) => {
+            console.warn(
+              `AI inquiry agent retry ${attempt}:`,
+              error instanceof Error ? error.message : error
+            );
+          }
+        }
+      );
     } catch (agentError) {
       console.warn(
         'AI inquiry agent fallback in use:',
