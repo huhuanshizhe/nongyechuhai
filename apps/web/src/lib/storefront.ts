@@ -150,6 +150,33 @@ const productCardSelect = Prisma.validator<Prisma.ProductSelect>()({
 const productDetailSelect = Prisma.validator<Prisma.ProductSelect>()({
   ...productCardSelect,
   categoryId: true,
+  supplier: {
+    select: {
+      id: true,
+      description: true,
+      isVerified: true,
+      organization: {
+        select: {
+          name: true,
+          country: true,
+          city: true
+        }
+      },
+      certifications: {
+        where: { isPublished: true },
+        orderBy: { sortOrder: 'asc' },
+        select: {
+          id: true,
+          type: true,
+          name: true,
+          issuingBody: true,
+          certificateNumber: true,
+          issuedAt: true,
+          expiresAt: true
+        }
+      }
+    }
+  },
   faqItems: {
     where: {
       isPublished: true
@@ -232,6 +259,12 @@ export type StorefrontProductDetail = StorefrontProductCard & {
     title: string;
     priceLabel: string;
     stockLabel: string;
+  }>;
+  certifications: Array<{
+    type: string;
+    name: string;
+    issuingBody: string | null;
+    certificateNumber: string | null;
   }>;
 };
 
@@ -943,6 +976,12 @@ export const getProductDetail = cache(async (slug: string, locale = 'en-US') => 
         stockLabel: locale === 'zh-CN'
           ? `当前参考可用量：${variant.stockQty} 件`
           : `Current reference availability: ${variant.stockQty} units`
+      })),
+      certifications: (product.supplier.certifications || []).map((cert) => ({
+        type: cert.type,
+        name: cert.name,
+        issuingBody: cert.issuingBody,
+        certificateNumber: cert.certificateNumber
       }))
     } satisfies StorefrontProductDetail,
     relatedProducts: relatedProducts.map((relatedProduct) => mapProductCard(relatedProduct, locale))
@@ -1190,3 +1229,100 @@ export async function getBuyerInquiries(userId: string) {
     productName: inquiry.product?.name || null
   }));
 }
+
+// ── Traceability / Credentials ──
+
+export type SupplierCertificationItem = {
+  id: string;
+  type: string;
+  name: string;
+  issuingBody: string | null;
+  certificateNumber: string | null;
+  issuedAt: string | null;
+  expiresAt: string | null;
+  imageUrl: string | null;
+};
+
+export type SupplierSceneItem = {
+  id: string;
+  title: string;
+  description: string | null;
+  imageUrl: string;
+};
+
+export type SupplierCredential = {
+  supplierId: string;
+  supplierName: string;
+  supplierSlug: string;
+  supplierDescription: string | null;
+  supplierCountry: string | null;
+  supplierCity: string | null;
+  supplierLogoUrl: string | null;
+  supplierVerified: boolean;
+  certifications: SupplierCertificationItem[];
+  scenes: SupplierSceneItem[];
+};
+
+export const getAllSuppliersWithCredentials = cache(async () => {
+  const suppliers = await prisma.supplier.findMany({
+    where: {
+      status: 'APPROVED'
+    },
+    select: {
+      id: true,
+      description: true,
+      logoUrl: true,
+      isVerified: true,
+      organization: {
+        select: {
+          name: true,
+          slug: true,
+          country: true,
+          city: true
+        }
+      },
+      certifications: {
+        where: { isPublished: true },
+        orderBy: { sortOrder: 'asc' },
+        select: {
+          id: true,
+          type: true,
+          name: true,
+          issuingBody: true,
+          certificateNumber: true,
+          issuedAt: true,
+          expiresAt: true,
+          imageUrl: true
+        }
+      },
+      scenes: {
+        where: { isPublished: true },
+        orderBy: { sortOrder: 'asc' },
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          imageUrl: true
+        }
+      }
+    },
+    orderBy: { createdAt: 'asc' }
+  });
+
+  return suppliers.map((supplier) => ({
+    supplierId: supplier.id,
+    supplierName: supplier.organization.name,
+    supplierSlug: supplier.organization.slug,
+    supplierDescription: supplier.description,
+    supplierCountry: supplier.organization.country,
+    supplierCity: supplier.organization.city,
+    supplierLogoUrl: supplier.logoUrl,
+    supplierVerified: supplier.isVerified,
+    certifications: supplier.certifications.map((cert) => ({
+      ...cert,
+      issuedAt: cert.issuedAt?.toISOString() ?? null,
+      expiresAt: cert.expiresAt?.toISOString() ?? null
+    })),
+    scenes: supplier.scenes
+  })) satisfies SupplierCredential[];
+});

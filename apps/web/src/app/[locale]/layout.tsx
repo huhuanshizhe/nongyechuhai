@@ -65,6 +65,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     nav: {
       home: locale === 'zh' ? '首页' : 'Home',
       products: locale === 'zh' ? '出口产品' : 'Export Portfolio',
+      traceability: locale === 'zh' ? '资质与溯源' : 'Credentials',
       about: locale === 'zh' ? '关于我们' : 'About',
       rfq: locale === 'zh' ? '询盘中心' : 'Inquiry Desk',
       tradeProcess: locale === 'zh' ? '贸易流程' : 'Trade Process',
@@ -120,6 +121,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
                 <nav className="site-nav" aria-label="Primary">
                   <Link className="site-nav__link" href="/">{t.nav.home}</Link>
                   <Link className="site-nav__link" href="/products">{t.nav.products}</Link>
+                  <Link className="site-nav__link" href="/traceability">{t.nav.traceability}</Link>
                   <Link className="site-nav__link" href="/about">{t.nav.about}</Link>
                   <Link className="site-nav__link" href="/rfq">{t.nav.rfq}</Link>
                   <Link className="site-nav__link" href="/#trade-process">{t.nav.tradeProcess}</Link>

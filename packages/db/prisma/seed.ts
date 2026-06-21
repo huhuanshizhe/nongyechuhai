@@ -337,6 +337,133 @@ async function main() {
     contactPhone: '+86-189-8827-2512'
   });
 
+  // ── Huilin Certifications ──
+  await prisma.supplierCertification.deleteMany({
+    where: { supplierId: yunnanSupplier.id }
+  });
+
+  await prisma.supplierCertification.createMany({
+    data: [
+      {
+        supplierId: yunnanSupplier.id,
+        type: 'BUSINESS_LICENSE',
+        name: '营业执照',
+        issuingBody: '昆明市盘龙区市场监督管理局',
+        certificateNumber: '91530103MA6K8XXXXX',
+        issuedAt: new Date('2020-03-15'),
+        sortOrder: 1,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        type: 'CUSTOMS_REGISTRATION',
+        name: '海关进出口货物收发货人备案',
+        issuingBody: '昆明海关',
+        certificateNumber: '530196XXXX',
+        issuedAt: new Date('2020-06-01'),
+        sortOrder: 2,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        type: 'EXPORT_FOOD_REGISTRATION',
+        name: '出口食品生产企业备案',
+        issuingBody: '昆明海关',
+        certificateNumber: '5300/XXXXX',
+        issuedAt: new Date('2020-08-20'),
+        expiresAt: new Date('2027-08-19'),
+        sortOrder: 3,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        type: 'GAP',
+        name: 'China GAP (良好农业规范)',
+        issuingBody: '中国质量认证中心 (CQC)',
+        certificateNumber: 'CQC-GAP-2021-XXXX',
+        issuedAt: new Date('2021-02-10'),
+        expiresAt: new Date('2027-02-09'),
+        sortOrder: 4,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        type: 'HACCP',
+        name: 'HACCP 危害分析与关键控制点',
+        issuingBody: 'SGS-CSTC Standards Technical Services',
+        certificateNumber: 'SGS-HACCP-KM-2021-XXXX',
+        issuedAt: new Date('2021-05-15'),
+        expiresAt: new Date('2027-05-14'),
+        sortOrder: 5,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        type: 'ISO22000',
+        name: 'ISO 22000:2018 食品安全管理体系',
+        issuingBody: 'SGS-CSTC Standards Technical Services',
+        certificateNumber: 'SGS-FSMS-KM-2022-XXXX',
+        issuedAt: new Date('2022-01-20'),
+        expiresAt: new Date('2028-01-19'),
+        sortOrder: 6,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        type: 'ORGANIC',
+        name: '有机产品认证',
+        issuingBody: '南京国环有机产品认证中心 (OFDC)',
+        certificateNumber: 'OFDC-2021-ORG-XXXX',
+        issuedAt: new Date('2021-09-01'),
+        expiresAt: new Date('2027-08-31'),
+        sortOrder: 7,
+        isPublished: true
+      }
+    ]
+  });
+
+  // ── Huilin Farming Scenes ──
+  await prisma.supplierScene.deleteMany({
+    where: { supplierId: yunnanSupplier.id }
+  });
+
+  await prisma.supplierScene.createMany({
+    data: [
+      {
+        supplierId: yunnanSupplier.id,
+        title: 'Organic Oyster Mushroom Cultivation House',
+        description: 'Climate-controlled cultivation house at Huilin\'s 700-acre organic demonstration base in Aziying, Kunming. Temperature, humidity, and ventilation are monitored continuously to produce consistent cap size and texture.',
+        imageUrl: 'https://images.unsplash.com/photo-1604919777284-893e523c4afb?auto=format&fit=crop&w=1200&q=80',
+        sortOrder: 1,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        title: 'Morel Mushroom Substrate Preparation',
+        description: 'Organic substrate preparation area at the Huilin innovation center. Substrate composition and sterilization follow certified organic protocols to ensure contamination-free morel cultivation.',
+        imageUrl: 'https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?auto=format&fit=crop&w=1200&q=80',
+        sortOrder: 2,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        title: 'Post-Harvest Processing Facility',
+        description: 'The 3,000 m² innovation center includes post-harvest sorting, grading, and packaging lines designed for export-ready mushroom products across fresh, dried, and retail formats.',
+        imageUrl: 'https://images.unsplash.com/photo-1595475207225-428b62bda831?auto=format&fit=crop&w=1200&q=80',
+        sortOrder: 3,
+        isPublished: true
+      },
+      {
+        supplierId: yunnanSupplier.id,
+        title: 'Aerial View of Huilin Organic Base',
+        description: 'Panoramic view of the 700-acre organic demonstration base located in Muyang Village, Aziying Subdistrict, Panlong District, Kunming — surrounded by Yunnan\'s high-altitude forest ecosystem.',
+        imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+        sortOrder: 4,
+        isPublished: true
+      }
+    ]
+  });
+
   const westLakeSupplier = await upsertSupplierProgram({
     slug: 'west-lake-tea-botanicals',
     name: 'West Lake Tea & Botanicals Co., Ltd.',

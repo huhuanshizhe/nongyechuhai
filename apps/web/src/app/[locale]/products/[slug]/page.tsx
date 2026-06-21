@@ -482,6 +482,15 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 <span className="catalog-chip">{viewModel.supplierLocation}</span>
                 {product.supplierVerified ? <span className="catalog-chip">{copy.supplierVerified}</span> : null}
               </div>
+              {'certifications' in product && product.certifications && (product.certifications as Array<{type: string; name: string}>).length > 0 && (
+                <div className="detail-stage__certs">
+                  {(product.certifications as Array<{type: string; name: string}>).map((cert) => (
+                    <span key={cert.type} className="detail-cert-chip" title={cert.name}>
+                      {cert.type === 'HACCP' ? '🛡' : cert.type === 'ISO22000' ? '📋' : cert.type === 'GAP' ? '🌱' : cert.type === 'ORGANIC' ? '🍃' : '📜'} {cert.name}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="detail-stage__briefs">
