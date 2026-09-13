@@ -237,7 +237,7 @@ export const offerings: Offering[] = [
   {
     id: 'goji-puree',
     name: l('枸杞原浆', 'Goji purée'),
-    image: 'juice-range-editorial.png',
+    image: 'goji-puree-editorial-v2.jpg',
     stages: ['ingredient', 'finished'],
     buyers: all,
     format: l(
@@ -260,7 +260,7 @@ export const offerings: Offering[] = [
   {
     id: 'red-goji-nfc',
     name: l('NFC 红枸杞果汁', 'NFC red goji juice'),
-    image: 'juice-range-editorial.png',
+    image: 'red-goji-nfc-editorial-v2.jpg',
     stages: ['ingredient', 'finished'],
     buyers: all,
     format: l(
@@ -283,7 +283,7 @@ export const offerings: Offering[] = [
   {
     id: 'black-goji-nfc',
     name: l('NFC 黑枸杞果汁', 'NFC black goji juice'),
-    image: 'juice-range-editorial.png',
+    image: 'black-goji-nfc-editorial-v2.jpg',
     stages: ['ingredient', 'finished'],
     buyers: all,
     format: l('非浓缩还原黑枸杞果汁', 'Not-from-concentrate black goji juice'),
@@ -303,7 +303,7 @@ export const offerings: Offering[] = [
   {
     id: 'sea-buckthorn-juice',
     name: l('沙棘汁与原浆', 'Sea buckthorn juice & purée'),
-    image: 'sea-buckthorn-editorial.png',
+    image: 'sea-buckthorn-juice-editorial-v2.jpg',
     stages: ['ingredient', 'finished'],
     buyers: all,
     format: l('果汁、原浆与复配基底', 'Juice, purée and blending bases'),
@@ -323,7 +323,7 @@ export const offerings: Offering[] = [
   {
     id: 'chestnut-rose-juice',
     name: l('刺梨汁', 'Chestnut rose juice · Rosa roxburghii'),
-    image: 'juice-range-editorial.png',
+    image: 'chestnut-rose-juice-editorial-v2.jpg',
     stages: ['ingredient', 'finished'],
     buyers: all,
     format: l(
@@ -496,7 +496,7 @@ export const offerings: Offering[] = [
   {
     id: 'own-label-sachets',
     name: l('原浆小袋与果汁小瓶', 'Purée sachets & juice shots'),
-    image: 'juice-range-editorial.png',
+    image: 'juice-sachets-editorial-v2.jpg',
     stages: ['private-label'],
     buyers: ['brands', 'retail', 'importers', 'specialty'],
     format: l(

@@ -15,6 +15,16 @@ for (const locale of ['en', 'zh']) {
     16,
     'Product and development formats',
   );
+  const juiceImages = [
+    'goji-puree',
+    'red-goji-nfc',
+    'black-goji-nfc',
+    'sea-buckthorn-juice',
+    'chestnut-rose-juice',
+    'juice-sachets',
+  ].map((id) => `${id}-editorial-v2.jpg`);
+  for (const image of juiceImages)
+    assert.ok(html.includes(image), `Distinct juice illustration: ${image}`);
   assert.ok(
     html.includes('rainbow-trout-editorial.png'),
     'Trout catalogue image',
@@ -111,3 +121,28 @@ const image = await fetch(
 assert.equal(image.status, 200);
 assert.ok(image.headers.get('content-type').startsWith('image/'));
 console.log('PASS sitemap and juice-range image. No enquiry sent.');
+const distinctJuiceBodies = new Set();
+for (const id of [
+  'goji-puree',
+  'red-goji-nfc',
+  'black-goji-nfc',
+  'sea-buckthorn-juice',
+  'chestnut-rose-juice',
+  'juice-sachets',
+]) {
+  const response = await fetch(
+    new URL(`/images/brand-v2/${id}-editorial-v2.jpg`, base),
+    { signal: AbortSignal.timeout(40000) },
+  );
+  assert.equal(response.status, 200, id);
+  assert.ok(response.headers.get('content-type').startsWith('image/'), id);
+  distinctJuiceBodies.add(
+    Buffer.from(await response.arrayBuffer()).toString('base64'),
+  );
+}
+assert.equal(
+  distinctJuiceBodies.size,
+  6,
+  'Six genuinely distinct juice illustrations',
+);
+console.log('PASS six unique juice assets.');
