@@ -27,11 +27,11 @@ export function OriginEvidence({ locale }: { locale: string }) {
           <article>
             <div className="ft-origin-photo">
               <Image
-                src="/images/brand-v2/hengtai-about.png"
+                src="/images/brand-v2/supplier-goji-growing-field.jpg"
                 alt={
                   zh
-                    ? '衡源萃官网展示的青海海西枸杞产区'
-                    : 'Goji-growing landscape in Haixi, Qinghai, shown by Hengyuancui'
+                    ? '衡塬萃提供的青海海西枸杞产区实拍'
+                    : 'Goji field in Haixi, Qinghai, photographed and supplied by Hengyuancui'
                 }
                 fill
                 sizes="(max-width: 800px) 100vw, 50vw"

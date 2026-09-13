@@ -73,7 +73,7 @@ export default async function CollectionPage({ params }: Props) {
           <p className="ft-product-note">
             {zh
               ? '具体规格、包装、起订量及交期按产品与目的地确认。图片用于产品系列与应用展示，采购以双方确认的样品和规格为准。'
-              : 'Specifications, packaging, minimum quantities and lead times are confirmed for your product and destination. Collection and serving imagery is illustrative; purchases are based on agreed samples and specifications.'}
+              : 'Specifications, packaging, minimum quantities and lead times are confirmed for your product and destination. Images present the product category or serving ideas; purchases are based on agreed samples and specifications.'}
           </p>
           <Link className="ft-text-link" href="/buying-guide">
             {zh

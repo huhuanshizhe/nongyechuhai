@@ -3,6 +3,7 @@ import {
   valueJourney,
   regionalAdvantages,
   qualityPrinciples,
+  supplierRange,
 } from './advantages.mjs';
 const overseas = 'https://www.farmetra.com/en';
 const email = process.env.CONTACT_EMAIL || 'export@farmetra.com';
@@ -92,7 +93,7 @@ export const pages = [
     <section class="hero">${photo('plateau-hero.png', '高原雪山、河谷与谷物景观', 'hero-image', true)}<div class="container hero-content"><p>青藏高原农产品食品出海平台</p><h1>高原好产品，<br>世界大市场。</h1><p class="hero-description">连接产业带企业与海外市场。<br>让产地优势，成为品牌与产品走向世界的起点。</p><div class="actions">${link('/join', '企业加入平台', 'button light')}${link('/cooperation', '产业合作洽谈', 'text-link white')}</div></div><div class="hero-bottom container"><span>立足青藏高原</span><span>服务农产品与食品产业</span><a href="${overseas}" target="_blank" rel="noopener">访问海外采购官网 ↗</a></div></section>
     ${platformPromise()}${regionalAdvantages()}${valueJourney()}${qualityPrinciples()}
     <section class="pale section"><div class="container"><div class="section-heading"><div><p class="kicker">企业服务</p><h2>把出海需要的能力，<br>接到企业身边。</h2></div>${link('/services', '查看服务体系', 'text-link')}</div><div class="service-grid">${serviceCards()}</div></div></section>
-    <section class="container section origin-split"><div class="origin-photo">${photo('hengtai-about.png', '衡源萃供应伙伴官网展示的枸杞产区')}</div><div class="origin-copy"><p class="kicker">产业资源</p><h2>扎根产地，<br>从真实的产品开始。</h2><p>枸杞、沙棘、高原谷物与蜂产品，是我们展开产业合作的特色方向。围绕企业真实的产品、生产条件和供应能力，共同整理适合海外沟通的产品资料。</p><div class="partner-mini"><strong>衡源萃</strong><span>青海海西 · 枸杞供应伙伴</span></div>${link('/resources', '走近产业与供应伙伴', 'text-link')}</div></section>
+    <section class="container section origin-split"><div class="origin-photo">${photo('supplier-goji-growing-field.jpg', '衡塬萃提供的枸杞基地实拍')}</div><div class="origin-copy"><p class="kicker">产业资源</p><h2>扎根产地，<br>从真实的产品开始。</h2><p>枸杞、沙棘、高原谷物与蜂产品，是我们展开产业合作的特色方向。围绕企业真实的产品、生产条件和供应能力，共同整理适合海外沟通的产品资料。</p><div class="partner-mini"><strong>衡塬萃</strong><span>青海海西 · 枸杞供应伙伴</span></div>${link('/resources', '走近产业与供应伙伴', 'text-link')}</div></section>
     <section class="navy section"><div class="container"><div class="section-heading"><div><p class="kicker">一起参与</p><h2>不同角色，<br>在这里找到合作的位置。</h2></div><p>从一家企业的产品出海，<br>到一条产业带的共同成长。</p></div><div class="role-grid">${[
       [
         '产业带企业',
@@ -143,11 +144,12 @@ export const pages = [
     path: '/resources',
     title: '产业与供应资源',
     description:
-      '发现青藏高原特色产品方向与衡源萃供应伙伴，了解产业资源参与方式。',
+      '发现青藏高原特色产品方向与衡塬萃供应伙伴，了解产业资源参与方式。',
     body: `${intro('产业资源', '好产品的背后，<br>是土地与认真做事的人。', '围绕高原特色农产品与食品，连接愿意做好产品、准备好资料、共同服务海外市场的企业。')}
     ${regionalAdvantages()}
-    <section class="container supplier-feature"><div>${photo('hengtai-about.png', '衡源萃官网展示的枸杞产区', '', true)}</div><div><p class="kicker">枸杞供应伙伴</p><h2>衡源萃</h2><p class="company-name">海西恒泰工贸有限公司</p><p>扎根青海海西，围绕枸杞等高原特色农产品开展种植、加工与销售，产品涉及红枸杞、黑枸杞、枸杞叶茶和蜂蜜。</p><a class="text-link" href="https://www.hengyuancui.com/" target="_blank" rel="noopener">访问企业官网 ↗</a><p class="muted">具体产品、规格与合作条件按企业提供的资料确认。</p></div></section>
+    <section class="container supplier-feature"><div>${photo('supplier-goji-growing-field.jpg', '衡塬萃提供的枸杞基地实拍', '', true)}</div><div><p class="kicker">枸杞供应伙伴</p><h2>衡塬萃</h2><p class="company-name">海西衡泰工贸有限公司</p><p>扎根青海海西，围绕枸杞等高原特色农产品开展种植、加工与销售，产品涉及红枸杞、黑枸杞、枸杞叶茶和蜂蜜。</p><a class="text-link" href="https://www.hengyuancui.com/" target="_blank" rel="noopener">访问企业官网 ↗</a><p class="muted">具体产品、规格与合作条件按企业提供的资料确认。</p></div></section>
     <section class="pale section"><div class="container"><div class="section-heading"><div><p class="kicker">特色品类</p><h2>从高原风味，<br>打开产品合作的可能。</h2></div><p>以下为产业合作与产品开发方向，具体供给以企业资料和采购确认结果为准。</p></div><div class="filters" role="group" aria-label="按品类筛选">${['全部', '浆果', '谷物', '蜂产品', '水产'].map((x, i) => `<button type="button" data-filter="${x}" aria-pressed="${i === 0}">${x}</button>`).join('')}</div><div class="product-grid">${products.map(([name, img, copy, cat]) => `<article class="product-card" data-category="${cat}">${photo(img, name + '产品展示')}<div><h3>${name}</h3><p>${copy}</p></div></article>`).join('')}</div><p id="filter-status" class="muted" role="status">共 ${products.length} 个特色品类</p></div></section>
+    ${supplierRange()}
     ${qualityPrinciples()}
     <section class="container section origin-split"><div class="origin-copy"><h2>您的产品，<br>也可以从这里出发。</h2><p>欢迎具有明确产品、供应能力和合法经营资质的农业与食品企业洽谈合作。平台不以展示图片替代企业审核，也不将品类介绍作为产品认证。</p>${link('/join', '了解加入方式')}</div><div class="origin-photo">${photo('hengtai-origin.jpg', '供应伙伴官网展示的枸杞采收')}</div></section>${cta()}`,
   },

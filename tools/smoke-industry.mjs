@@ -45,8 +45,19 @@ for (const path of paths) {
     ])
       assert.ok(html.includes(phrase), `Origin evidence ${path}: ${phrase}`);
   }
-  if (path === '/resources')
+  if (path === '/resources') {
     assert.equal((html.match(/class="product-card"/g) || []).length, 7);
+    assert.ok(
+      html.includes('supplier-range-grid'),
+      'Real supplier product gallery',
+    );
+    assert.ok(
+      html.includes('supplier-fresh-locked-goji-jar.webp'),
+      'Actual preserved goji pack',
+    );
+    assert.ok(html.includes('海西衡泰工贸有限公司'), 'Supplier legal name');
+    assert.ok(html.includes('衡塬萃'), 'Supplier brand spelling');
+  }
   assert.ok(
     html.includes('https://www.farmetra.com/en'),
     `Overseas link: ${path}`,

@@ -9,6 +9,16 @@ await mkdir(resolve(out, 'assets'), { recursive: true });
 for (const name of ['style.css', 'origin.css', 'app.js'])
   await copyFile(resolve(root, 'src', name), resolve(out, name));
 const images = [
+  'supplier-red-goji-berries.jpg',
+  'supplier-black-goji-jar.jpg',
+  'supplier-fresh-locked-goji-jar.jpg',
+  'supplier-goji-blossom-honey.jpg',
+  'supplier-red-goji-box.jpg',
+  'supplier-goji-sprout-tea-jar.jpg',
+  'supplier-goji-leaf-tea-box.jpg',
+  'supplier-goji-growing-field.jpg',
+  'supplier-goji-field-rows.jpg',
+  'supplier-goji-harvest-closeup.jpg',
   'goji-editorial.png',
   'rainbow-trout-editorial.png',
   'sea-buckthorn-editorial.png',

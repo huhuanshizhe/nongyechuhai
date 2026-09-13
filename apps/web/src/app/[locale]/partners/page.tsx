@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { Link } from '../../../i18n/routing';
 import { EditorialHero } from '../../../components/EditorialHero';
 import { BrandContactBand } from '../../../components/BrandContactBand';
+import { SupplierProductGallery } from '../../../components/SupplierProductGallery';
 import { highlandMetadata } from '../../../lib/highland';
 export async function generateMetadata({
   params,
@@ -14,7 +15,7 @@ export async function generateMetadata({
     locale,
     { zh: '合作伙伴', en: 'Our partners' },
     {
-      zh: '认识我们的枸杞供应伙伴衡源萃，与高原生产者建立连接。',
+      zh: '认识我们的枸杞供应伙伴衡塬萃，与高原生产者建立连接。',
       en: 'Meet Hengyuancui, our goji sourcing partner, and connect with plateau producers.',
     },
     '/partners',
@@ -32,8 +33,8 @@ export default async function PartnersPage({
     <main className="ft-main">
       <EditorialHero
         compact
-        image="/images/brand-v2/hengtai-about.png"
-        alt={zh ? '衡源萃枸杞种植基地' : 'Hengyuancui goji growing base'}
+        image="/images/brand-v2/supplier-goji-growing-field.jpg"
+        alt={zh ? '衡塬萃枸杞种植基地' : 'Hengyuancui goji growing base'}
         title={
           zh ? (
             <>
@@ -60,10 +61,10 @@ export default async function PartnersPage({
           <span className="ft-section-label">
             {zh ? '枸杞供应伙伴' : 'Our goji sourcing partner'}
           </span>
-          <h2>{zh ? '衡源萃' : 'Hengyuancui'}</h2>
+          <h2>{zh ? '衡塬萃' : 'Hengyuancui'}</h2>
           <p className="ft-supplier-profile__name">
             {zh
-              ? '海西恒泰工贸有限公司'
+              ? '海西衡泰工贸有限公司'
               : 'Haixi Hengtai Industry and Trade Co., Ltd.'}
           </p>
           <p>
@@ -86,17 +87,17 @@ export default async function PartnersPage({
               rel="noopener noreferrer"
               className="ft-text-link"
             >
-              {zh ? '访问衡源萃官网' : 'Visit Hengyuancui'}
+              {zh ? '访问衡塬萃官网' : 'Visit Hengyuancui'}
             </a>
           </div>
         </div>
         <div className="ft-supplier-profile__image">
           <Image
-            src="/images/brand-v2/hengtai-origin.jpg"
+            src="/images/brand-v2/supplier-goji-harvest-closeup.jpg"
             alt={
               zh
-                ? '衡源萃基地的枸杞采收工作'
-                : 'Goji harvesting shown by Hengyuancui'
+                ? '衡塬萃提供的成熟枸杞挂果实拍'
+                : 'Ripe goji berries photographed and supplied by Hengyuancui'
             }
             fill
             sizes="(max-width: 800px) 100vw, 50vw"
@@ -107,7 +108,7 @@ export default async function PartnersPage({
         <figure>
           <div>
             <Image
-              src="/images/brand-v2/hengtai-about.png"
+              src="/images/brand-v2/supplier-goji-field-rows.jpg"
               alt={zh ? '枸杞种植基地' : 'Goji growing base'}
               fill
               sizes="(max-width: 800px) 100vw, 33vw"
@@ -120,9 +121,11 @@ export default async function PartnersPage({
         <figure>
           <div>
             <Image
-              src="/images/brand-v2/hengtai-field.jpg"
+              src="/images/brand-v2/supplier-red-goji-berries.jpg"
               alt={
-                zh ? '成盘整理的红枸杞' : 'Red goji berries arranged on trays'
+                zh
+                  ? '供应商提供的红枸杞干果实拍'
+                  : 'Supplier photograph of dried red goji berries'
               }
               fill
               sizes="(max-width: 800px) 100vw, 33vw"
@@ -135,10 +138,10 @@ export default async function PartnersPage({
         <figure>
           <div className="ft-supplier-gallery__pack">
             <Image
-              src="/images/brand-v2/hengtai-red-goji.jpg"
+              src="/images/brand-v2/supplier-red-goji-box.jpg"
               alt={
                 zh
-                  ? '衡源萃红枸杞包装'
+                  ? '衡塬萃红枸杞包装'
                   : 'Hengyuancui red goji retail packaging'
               }
               fill
@@ -146,10 +149,11 @@ export default async function PartnersPage({
             />
           </div>
           <figcaption>
-            {zh ? '衡源萃红枸杞产品' : 'Hengyuancui red goji'}
+            {zh ? '衡塬萃红枸杞产品' : 'Hengyuancui red goji'}
           </figcaption>
         </figure>
       </section>
+      <SupplierProductGallery locale={locale} />
       <section className="ft-container ft-section ft-intro">
         <span className="ft-section-label">
           {zh ? '一起打开更多可能' : 'Grow the connection'}

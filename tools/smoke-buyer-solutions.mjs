@@ -12,8 +12,50 @@ for (const locale of ['en', 'zh']) {
   const html = await page(`/${locale}/collections`);
   assert.equal(
     (html.match(/class="ft-offering-card"/g) || []).length,
-    15,
+    16,
     'Product and development formats',
+  );
+  assert.ok(
+    html.includes('rainbow-trout-editorial.png'),
+    'Trout catalogue image',
+  );
+  assert.ok(html.includes('topic=rainbow-trout'), 'Dedicated trout enquiry');
+  for (const asset of [
+    'supplier-red-goji-berries.jpg',
+    'supplier-black-goji-jar.jpg',
+    'supplier-fresh-locked-goji-jar.jpg',
+    'supplier-goji-blossom-honey.jpg',
+    'supplier-red-goji-box.jpg',
+    'supplier-goji-sprout-tea-jar.jpg',
+    'supplier-goji-leaf-tea-box.jpg',
+  ]) {
+    assert.ok(html.includes(asset), `Supplier product image: ${asset}`);
+  }
+  assert.ok(html.includes('id="supplier-range"'), 'Supplier product gallery');
+  assert.ok(
+    html.includes('Dried, fresh-locked berries') ||
+      html.includes('锁鲜干燥果实'),
+    'Preservation wording matches dried product',
+  );
+  assert.ok(
+    html.includes(
+      locale === 'zh' ? '高原冷水虹鳟' : 'Highland cold-water rainbow trout',
+    ),
+    'Trout catalogue entry',
+  );
+  const fish = await page(
+    `/${locale}/collections?stage=primary&buyer=foodservice`,
+  );
+  assert.ok(
+    fish.includes(
+      locale === 'zh' ? '高原冷水虹鳟' : 'Highland cold-water rainbow trout',
+    ),
+    'Trout buyer and format filters',
+  );
+  const fishEnquiry = await page(`/${locale}/sourcing?topic=rainbow-trout`);
+  assert.ok(
+    /<option[^>]*value="rainbow-trout"[^>]*selected/.test(fishEnquiry),
+    'Trout enquiry topic prefill',
   );
   const selected = await page(
     `/${locale}/collections?buyer=manufacturers&stage=ingredient&focus=vitamin-c`,

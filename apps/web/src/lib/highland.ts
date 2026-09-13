@@ -6,7 +6,7 @@ export const directions = [
   {
     slug: 'goji',
     category: 'berries',
-    image: '/images/brand-v2/goji-editorial.png',
+    image: '/images/brand-v2/supplier-goji-on-branch.jpg',
     name: { zh: '高原红枸杞', en: 'Red goji berries' },
     description: {
       zh: '一抹明亮的红，带来柔和果甜与丰富的食用灵感。',
@@ -14,7 +14,7 @@ export const directions = [
     },
     formats: {
       zh: '干果、原浆、NFC 果汁与锁鲜果实',
-      en: 'Dried berries, purée, NFC juice and fresh-preserved fruit',
+      en: 'Dried berries, purée, NFC juice and fresh-locked dried berries',
     },
     applications: {
       zh: '零食、谷物早餐、茶饮与烘焙',
@@ -107,7 +107,10 @@ export const directions = [
       zh: '深色小果与紫蓝色茶汤，为茶饮时刻增添一份趣味。',
       en: 'Dark little berries with a striking infusion, made for a slower tea moment.',
     },
-    formats: { zh: '干果、NFC 黑枸杞果汁与茶饮组合', en: 'Dried berries, NFC black goji juice and infusion blends' },
+    formats: {
+      zh: '干果、NFC 黑枸杞果汁与茶饮组合',
+      en: 'Dried berries, NFC black goji juice and infusion blends',
+    },
     applications: {
       zh: '冲泡茶饮、特色零售与礼赠',
       en: 'Botanical infusions, speciality retail and gifting',

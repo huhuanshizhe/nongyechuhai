@@ -120,7 +120,13 @@ export function BuyerCatalogue({
         ? '请提供适用规格、样品、包装选项、起订量、交期与目的地所需文件。'
         : 'Please share applicable specifications, samples, packaging options, MOQ, lead times and destination documentation.',
     ].join('\n');
-    return `/sourcing?${new URLSearchParams({ brief, ...(buyer === 'all' ? {} : { buyer }), ...(items.some((item) => item.development) ? { topic: 'product-development' } : {}) })}`;
+    const topic =
+      items.length === 1 && items[0].id === 'rainbow-trout'
+        ? 'rainbow-trout'
+        : items.some((item) => item.development)
+          ? 'product-development'
+          : '';
+    return `/sourcing?${new URLSearchParams({ brief, ...(buyer === 'all' ? {} : { buyer }), ...(topic ? { topic } : {}) })}`;
   }
   return (
     <div id="formats" className="ft-buyer-catalogue">
@@ -131,8 +137,8 @@ export function BuyerCatalogue({
           </span>
           <h2>
             {zh
-              ? '从一颗果实，到一款品牌食品。'
-              : 'From whole berries to your own food range.'}
+              ? '从高原食材，到您的食品系列。'
+              : 'From highland foods to your own product range.'}
           </h2>
         </div>
         <p>
@@ -209,8 +215,8 @@ export function BuyerCatalogue({
             onChange={(e) => setQuery(e.target.value)}
             placeholder={
               zh
-                ? '例如 NFC、原浆、果汁、早餐'
-                : 'Try NFC, purée, juice or breakfast'
+                ? '例如 虹鳟、NFC、原浆、果汁'
+                : 'Try trout, NFC, purée or juice'
             }
           />
         </label>
@@ -252,25 +258,39 @@ export function BuyerCatalogue({
       <div className="ft-offering-grid">
         {visible.map((item) => (
           <article key={item.id} className="ft-offering-card">
-            <div className="ft-offering-image">
+            <div
+              className={`ft-offering-image${item.packshot ? ' ft-offering-image--packshot' : ''}`}
+            >
               <Image
                 src={`/images/brand-v2/${item.image}`}
                 alt={
-                  zh
-                    ? `${localize(item.name, locale)}的食材或应用示意`
-                    : `Ingredient or serving illustration for ${localize(item.name, locale)}`
+                  item.supplierPhoto
+                    ? zh
+                      ? `供应商提供的${localize(item.name, locale)}实拍`
+                      : `Supplier photograph of ${localize(item.name, locale)}`
+                    : zh
+                      ? `${localize(item.name, locale)}的食材或应用示意`
+                      : `Ingredient or serving illustration for ${localize(item.name, locale)}`
                 }
                 fill
                 sizes="(max-width: 650px) 100vw, (max-width: 1050px) 50vw, 33vw"
               />
               <span>
-                {item.development
+                {item.supplierPhoto
                   ? zh
-                    ? '联合开发选项'
-                    : 'Development option'
-                  : zh
-                    ? '采购产品形态'
-                    : 'Sourcing format'}
+                    ? '供应商产品实拍'
+                    : 'Supplier product photo'
+                  : item.regional
+                    ? zh
+                      ? '产区采购方向'
+                      : 'Regional sourcing'
+                    : item.development
+                      ? zh
+                        ? '联合开发选项'
+                        : 'Development option'
+                      : zh
+                        ? '采购产品形态'
+                        : 'Sourcing format'}
               </span>
             </div>
             <div className="ft-offering-body">
@@ -465,8 +485,8 @@ export function BuyerCatalogue({
       )}
       <p className="ft-offering-footnote">
         {zh
-          ? '开发选项按配方、加工及包装条件沟通打样。图片为食材与应用示意；规格、营养含量、认证与出口条件按具体产品和目标市场确认。'
-          : 'Development options are discussed through recipe, processing and packaging briefs. Ingredient and serving imagery is illustrative. Specifications, nutrient content, certification and export requirements are confirmed for each product and market.'}
+          ? '开发选项按配方、加工及包装条件沟通打样。标注实拍的图片由供应商提供，其余为食材与应用示意；规格、营养含量、认证与出口条件按具体产品和目标市场确认。'
+          : 'Development options are discussed through recipe, processing and packaging briefs. Labelled product photographs are supplier-provided; other ingredient and serving imagery is illustrative. Specifications, nutrient content, certification and export requirements are confirmed for each product and market.'}
       </p>
     </div>
   );

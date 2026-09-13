@@ -75,11 +75,11 @@ export default async function AboutPage({
       <section className="ft-container ft-feature">
         <div className="ft-feature__image">
           <Image
-            src="/images/brand-v2/hengtai-about.png"
+            src="/images/brand-v2/supplier-goji-field-rows.jpg"
             alt={
               zh
-                ? '衡源萃官网展示的海西枸杞基地'
-                : 'Haixi goji growing base shown on Hengyuancui’s website'
+                ? '衡塬萃提供的海西枸杞基地实拍'
+                : 'Haixi goji field photograph supplied by Hengyuancui'
             }
             fill
             sizes="(max-width: 800px) 100vw, 50vw"
@@ -96,7 +96,7 @@ export default async function AboutPage({
           </h2>
           <p>
             {zh
-              ? '衡源萃的枸杞故事，扎根于青海海西。通过生产者的介绍和真实的基地记录，我们让产地不只停留在包装上的一个地名。'
+              ? '衡塬萃的枸杞故事，扎根于青海海西。通过生产者的介绍和真实的基地记录，我们让产地不只停留在包装上的一个地名。'
               : 'Hengyuancui’s goji story is rooted in Haixi, Qinghai. Producer introductions and actual growing-base records help make origin more than a place name on a pack.'}
           </p>
           <Link href="/partners" className="ft-text-link">

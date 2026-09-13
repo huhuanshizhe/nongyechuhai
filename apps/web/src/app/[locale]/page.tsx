@@ -113,8 +113,12 @@ export default async function HomePage({
       <section className="ft-story">
         <div className="ft-story__image">
           <Image
-            src="/images/highland/plateau-hero.png"
-            alt={zh ? '青藏高原风土意境' : 'A sense of the plateau landscape'}
+            src="/images/brand-v2/supplier-goji-on-branch.jpg"
+            alt={
+              zh
+                ? '供应商提供的高原枸杞挂果实拍'
+                : 'Supplier photograph of goji berries on the branch'
+            }
             fill
             sizes="(max-width: 800px) 100vw, 55vw"
           />
@@ -175,11 +179,11 @@ export default async function HomePage({
           <div className="ft-partner-highlight__photos">
             <div>
               <Image
-                src="/images/brand-v2/hengtai-about.png"
+                src="/images/brand-v2/supplier-goji-growing-field.jpg"
                 alt={
                   zh
-                    ? '衡源萃官网展示的枸杞种植基地'
-                    : 'Goji growing base shown by Hengyuancui'
+                    ? '衡塬萃提供的枸杞种植基地实拍'
+                    : 'Goji field photograph supplied by Hengyuancui'
                 }
                 fill
                 sizes="(max-width: 800px) 100vw, 40vw"
@@ -187,11 +191,11 @@ export default async function HomePage({
             </div>
             <div>
               <Image
-                src="/images/brand-v2/hengtai-origin.jpg"
+                src="/images/brand-v2/supplier-goji-branch-portrait.jpg"
                 alt={
                   zh
-                    ? '衡源萃基地枸杞采收'
-                    : 'Goji harvest at the Hengyuancui growing base'
+                    ? '衡塬萃提供的枸杞枝头挂果实拍'
+                    : 'Goji berries on a branch, supplied by Hengyuancui'
                 }
                 fill
                 sizes="(max-width: 800px) 50vw, 25vw"
@@ -204,12 +208,12 @@ export default async function HomePage({
             </span>
             <h2>
               {zh
-                ? '衡源萃\n根植青海海西。'
+                ? '衡塬萃\n根植青海海西。'
                 : 'Hengyuancui.\nRooted in Haixi, Qinghai.'}
             </h2>
             <p>
               {zh
-                ? '海西恒泰工贸有限公司农业板块，专注枸杞等高原特色农产品。从真实的生产者出发，认识食材背后的土地与用心。'
+                ? '海西衡泰工贸有限公司农业板块，专注枸杞等高原特色农产品。从真实的生产者出发，认识食材背后的土地与用心。'
                 : 'The agriculture division of Haixi Hengtai Industry and Trade Co., Ltd. focuses on goji and other plateau agricultural products. Meet the producer and the place behind the ingredient.'}
             </p>
             <Link className="ft-text-link" href="/partners">

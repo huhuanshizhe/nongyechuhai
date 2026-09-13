@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { HighlandCollections } from '../../../components/HighlandCollections';
 import { BrandContactBand } from '../../../components/BrandContactBand';
 import { BuyerCatalogue } from '../../../components/BuyerCatalogue';
+import { SupplierProductGallery } from '../../../components/SupplierProductGallery';
 import { Link } from '../../../i18n/routing';
 import { highlandMetadata } from '../../../lib/highland';
 export async function generateMetadata({
@@ -15,8 +16,8 @@ export async function generateMetadata({
     locale,
     { zh: '高原产品', en: 'Our products' },
     {
-      zh: '探索枸杞原浆、NFC 果汁、沙棘汁、刺梨汁、锁鲜枸杞、谷物原料与贴牌食品开发。',
-      en: 'Explore goji purée, NFC juices, sea buckthorn, chestnut rose juice, fresh-preserved berries, grains and private-label development.',
+      zh: '探索高原冷水虹鳟、枸杞原浆、NFC 果汁、沙棘汁、刺梨汁、锁鲜枸杞、谷物原料与贴牌食品开发。',
+      en: 'Explore highland rainbow trout, goji purée, NFC juices, sea buckthorn, chestnut rose juice, fresh-locked berries, grains and private-label development.',
     },
     '/collections',
   );
@@ -47,9 +48,17 @@ export default async function CollectionsPage({
             </h1>
             <p>
               {zh
-                ? '枸杞原浆、NFC 红黑枸杞果汁、沙棘汁、刺梨汁与锁鲜枸杞。按产品形式、应用和业务类型，组织您的采购选择。'
-                : 'Goji purée, red and black goji NFC juices, sea buckthorn juice, chestnut rose juice and fresh-preserved berries. Explore by format, application and business type.'}
+                ? '从高原冷水虹鳟，到枸杞原浆、NFC 红黑枸杞果汁、沙棘汁、刺梨汁与锁鲜枸杞。按产品形式、应用和业务类型，组织您的采购选择。'
+                : 'From cold-water rainbow trout to goji purée, red and black goji NFC juices, sea buckthorn juice, chestnut rose juice and fresh-locked berries. Explore by format, application and business type.'}
             </p>
+            <div className="ft-actions">
+              <a className="ft-button ft-button--compact" href="#formats">
+                {zh ? '浏览采购目录' : 'Explore sourcing formats'} ↓
+              </a>
+              <a className="ft-text-link" href="#supplier-range">
+                {zh ? '查看实拍包装' : 'See supplier product photos'} ↗
+              </a>
+            </div>
           </div>
           <div className="ft-catalogue-hero__image">
             <Image
@@ -75,6 +84,7 @@ export default async function CollectionsPage({
           initialFocus={query.focus}
         />
       </section>
+      <SupplierProductGallery locale={locale} />
       <section className="ft-container ft-catalogue-solutions-link">
         <h2>
           {zh

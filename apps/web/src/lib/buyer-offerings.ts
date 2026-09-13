@@ -53,7 +53,7 @@ export const buyerTypes = [
     ),
     formats: l(
       '果汁与饮品基底、锁鲜枸杞、谷物碗原料与蜂蜜',
-      'Juices and beverage bases, fresh-preserved goji, grains for bowls and honey',
+      'Juices and beverage bases, fresh-locked dried goji, grains for bowls and honey',
     ),
     work: l(
       '按杯量、出品风味、储存方式与后厨使用场景选择规格。',
@@ -133,8 +133,8 @@ export const supplyStages = [
     id: 'primary',
     name: l('初级产品', 'Whole foods'),
     copy: l(
-      '干果、原粮与完整食材',
-      'Dried berries, whole grains and pantry foods',
+      '干果、原粮与高原冷水鱼',
+      'Dried berries, whole grains and cold-water fish',
     ),
   },
   {
@@ -175,6 +175,9 @@ export type Offering = {
   value: Localized;
   specs: Localized;
   development?: boolean;
+  regional?: boolean;
+  supplierPhoto?: boolean;
+  packshot?: boolean;
   origin?: Localized;
 };
 const all: BuyerId[] = buyerTypes.map((b) => b.id);
@@ -182,7 +185,8 @@ export const offerings: Offering[] = [
   {
     id: 'dried-goji',
     name: l('红枸杞干果', 'Dried red goji berries'),
-    image: 'goji-editorial.png',
+    image: 'supplier-red-goji-berries.jpg',
+    supplierPhoto: true,
     stages: ['primary', 'finished'],
     buyers: all,
     format: l(
@@ -200,6 +204,34 @@ export const offerings: Offering[] = [
     specs: l(
       '果粒规格、含水率、异物与微生物指标、包装',
       'Berry grade, moisture, foreign matter, microbiological specifications and packs',
+    ),
+  },
+  {
+    id: 'rainbow-trout',
+    name: l('高原冷水虹鳟', 'Highland cold-water rainbow trout'),
+    image: 'rainbow-trout-editorial.png',
+    stages: ['primary', 'ingredient'],
+    buyers: ['manufacturers', 'brands', 'foodservice', 'retail', 'importers'],
+    format: l(
+      '整鱼、去内脏鱼与鱼片 · 冰鲜或冷冻规格沟通',
+      'Whole, gutted and fillet formats · Discuss chilled or frozen specifications',
+    ),
+    use: l(
+      '煎烤主菜、酒店餐饮、零售冷冻鱼与食品加工',
+      'Pan-seared and oven-baked dishes, hospitality menus, frozen retail fish and food processing',
+    ),
+    value: l(
+      '细腻鱼肉与鲜明的鱼片色泽，让高原产地故事延伸到水产菜单与冷链食品系列。',
+      'Delicate flesh and distinctive fillet colour bring a highland origin story to seafood menus and cold-chain food ranges.',
+    ),
+    specs: l(
+      '鱼种与养殖来源、重量分级、带皮或去皮、去刺要求、冷链温度、包装、批次追溯及目的地准入文件',
+      'Species and farm origin, weight grades, skin-on or skin-off, deboning, cold-chain temperatures, packaging, batch traceability and destination import documents',
+    ),
+    regional: true,
+    origin: l(
+      '青海冷水鱼产区采购方向。具体供应企业、加工规格、可供数量与出口适用性按采购需求确认；虹鳟不等同于大西洋鲑。',
+      'A sourcing opportunity from Qinghai’s cold-water fish region. Suppliers, processing formats, available volumes and export suitability are confirmed against your brief. Rainbow trout is distinct from Atlantic salmon.',
     ),
   },
   {
@@ -317,31 +349,35 @@ export const offerings: Offering[] = [
   },
   {
     id: 'fresh-preserved-goji',
-    name: l('锁鲜枸杞', 'Fresh-preserved goji berries'),
-    image: 'hengtai-origin.jpg',
+    name: l('锁鲜枸杞', 'Fresh-locked goji berries'),
+    image: 'supplier-fresh-locked-goji-jar.jpg',
+    supplierPhoto: true,
+    packshot: true,
     stages: ['primary', 'finished'],
     buyers: all,
     format: l(
-      '锁鲜果实 · 按工艺与保存条件选规格',
-      'Preserved fruit · Select by process and storage conditions',
+      '锁鲜干燥果实 · 瓶装与散装规格沟通',
+      'Dried, fresh-locked berries · Discuss jars and bulk formats',
     ),
     use: l(
-      '果粒饮品、酸奶、早餐碗与特色零售',
-      'Fruit drinks, yoghurt, breakfast bowls and speciality retail',
+      '冲泡、早餐搭配、干果组合与特色零售',
+      'Infusions, breakfast pairings, dried-fruit mixes and speciality retail',
     ),
     value: l(
-      '区别于传统干果的果实体验，围绕质地与使用便捷性开发。',
-      'A fruit experience beyond dried berries, developed around texture and ease of use.',
+      '以果粒完整度、干燥质地与包装便利性选品；锁鲜为产品工艺定位，不表示未经加工的鲜果。',
+      'Choose by berry integrity, dried texture and convenient packs. Fresh-locked describes the product positioning, not unprocessed fresh fruit.',
     ),
     specs: l(
-      '锁鲜工艺、温控要求、果粒完整度、解冻或使用方法、保质期',
-      'Preservation process, temperature requirements, fruit integrity, preparation and shelf life',
+      '干燥与锁鲜工艺、含水率、果粒规格、储存条件、包装与保质期',
+      'Drying and preservation process, moisture, berry grade, storage, packs and shelf life',
     ),
   },
   {
     id: 'black-goji-dried',
     name: l('黑枸杞干果', 'Dried black goji berries'),
-    image: 'black-goji-editorial.png',
+    image: 'supplier-black-goji-jar.jpg',
+    supplierPhoto: true,
+    packshot: true,
     stages: ['primary', 'finished'],
     buyers: ['brands', 'foodservice', 'retail', 'importers', 'specialty'],
     format: l(
@@ -411,7 +447,9 @@ export const offerings: Offering[] = [
   {
     id: 'honey',
     name: l('蜂蜜原料与零售装', 'Honey · Bulk & retail'),
-    image: 'honey-editorial.png',
+    image: 'supplier-goji-blossom-honey.jpg',
+    supplierPhoto: true,
+    packshot: true,
     stages: ['primary', 'ingredient', 'finished'],
     buyers: all,
     format: l(
