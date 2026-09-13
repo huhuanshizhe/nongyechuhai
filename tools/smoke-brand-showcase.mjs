@@ -90,6 +90,8 @@ for (const path of [
   '/zh/sourcing?direction=black-goji',
   '/en/sourcing?direction=goji',
   '/zh/sourcing?topic=partnership',
+  '/en/sourcing?topic=rainbow-trout',
+  '/zh/sourcing?topic=rainbow-trout',
 ]) {
   try {
     const r = await fetch(new URL(path, base));
@@ -98,7 +100,9 @@ for (const path of [
       ? 'black-goji'
       : path.includes('partnership')
         ? 'partnership'
-        : 'goji';
+        : path.includes('rainbow-trout')
+          ? 'rainbow-trout'
+          : 'goji';
     assert.ok(
       new RegExp('<option[^>]*value="' + selected + '"[^>]*selected').test(
         html,

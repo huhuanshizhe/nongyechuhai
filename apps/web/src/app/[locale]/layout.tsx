@@ -10,6 +10,7 @@ import { highlandSocialImage } from '../../lib/highland';
 import '../globals.css';
 import '../highland.css';
 import '../brand.css';
+import '../origin.css';
 type Props = { children: ReactNode; params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;

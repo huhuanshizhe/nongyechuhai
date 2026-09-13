@@ -16,8 +16,8 @@ export function ContactComposer({
   const [status, setStatus] = useState('');
   const selected = directions.some((item) => item.slug === initialTopic)
     ? initialTopic
-    : initialTopic === 'partnership'
-      ? 'partnership'
+    : initialTopic === 'partnership' || initialTopic === 'rainbow-trout'
+      ? initialTopic
       : '';
   function compose(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,9 +30,13 @@ export function ContactComposer({
         ? zh
           ? '合作交流'
           : 'Partnership'
-        : zh
-          ? '产品咨询'
-          : 'Product enquiry';
+        : get('topic') === 'rainbow-trout'
+          ? zh
+            ? '虹鳟采购咨询'
+            : 'Rainbow trout sourcing'
+          : zh
+            ? '产品咨询'
+            : 'Product enquiry';
     const subject = `Farmetra | ${topic}`;
     const text = [
       (zh ? '姓名' : 'Name') + ': ' + get('name'),
@@ -102,6 +106,9 @@ export function ContactComposer({
             ))}
             <option value="partnership">
               {zh ? '合作交流' : 'Partnership'}
+            </option>
+            <option value="rainbow-trout">
+              {zh ? '虹鳟采购咨询' : 'Rainbow trout sourcing'}
             </option>
           </select>
         </label>

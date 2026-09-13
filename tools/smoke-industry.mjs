@@ -11,7 +11,7 @@ const paths = [
   '/contact',
   '/privacy',
 ];
-const assets = new Set();
+const assets = new Set(['/origin.css']);
 for (const path of paths) {
   const response = await fetch(new URL(path, base), {
     signal: AbortSignal.timeout(40000),
@@ -20,6 +20,33 @@ for (const path of paths) {
   const html = await response.text();
   assert.ok(html.includes('<h1>'), `Heading: ${path}`);
   assert.ok(html.includes('lang="zh-CN"'), `Language: ${path}`);
+  if (path === '/') {
+    assert.ok(
+      html.includes(
+        '把企业零散的产品能力，组织成海外买家能够理解、比较、询价和持续合作的供应方案',
+      ),
+      'Core platform slogan',
+    );
+    for (const phrase of ['看得懂', '比得清', '能询价', '持续合作', '具体交付'])
+      assert.ok(html.includes(phrase), phrase);
+  }
+  if (path === '/' || path === '/resources') {
+    for (const phrase of [
+      '45.23',
+      '20',
+      '绿色有机认证面积',
+      '3.8',
+      '2025',
+      '区域数据',
+      '不等同于全部取得有机认证',
+      'rainbow-trout-editorial.webp',
+      'www.qinghai.gov.cn',
+      'www.qhio.gov.cn',
+    ])
+      assert.ok(html.includes(phrase), `Origin evidence ${path}: ${phrase}`);
+  }
+  if (path === '/resources')
+    assert.equal((html.match(/class="product-card"/g) || []).length, 7);
   assert.ok(
     html.includes('https://www.farmetra.com/en'),
     `Overseas link: ${path}`,

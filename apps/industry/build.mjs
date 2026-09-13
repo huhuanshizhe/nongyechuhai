@@ -6,10 +6,11 @@ import sharp from 'sharp';
 const root = dirname(fileURLToPath(import.meta.url));
 const out = resolve(root, 'dist');
 await mkdir(resolve(out, 'assets'), { recursive: true });
-for (const name of ['style.css', 'app.js'])
+for (const name of ['style.css', 'origin.css', 'app.js'])
   await copyFile(resolve(root, 'src', name), resolve(out, name));
 const images = [
   'goji-editorial.png',
+  'rainbow-trout-editorial.png',
   'sea-buckthorn-editorial.png',
   'barley-editorial.png',
   'quinoa-editorial.png',

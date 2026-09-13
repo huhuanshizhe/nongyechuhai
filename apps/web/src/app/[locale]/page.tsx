@@ -4,6 +4,10 @@ import { Link } from '../../i18n/routing';
 import { EditorialHero } from '../../components/EditorialHero';
 import { EditorialProductCard } from '../../components/EditorialProductCard';
 import { BrandContactBand } from '../../components/BrandContactBand';
+import {
+  OriginEvidence,
+  OriginPrinciples,
+} from '../../components/OriginEvidence';
 import { directions, highlandMetadata } from '../../lib/highland';
 export async function generateMetadata({
   params,
@@ -103,6 +107,7 @@ export default async function HomePage({
           ))}
         </div>
       </section>
+      <OriginEvidence locale={locale} />
       <section className="ft-story">
         <div className="ft-story__image">
           <Image
@@ -211,6 +216,7 @@ export default async function HomePage({
           </div>
         </div>
       </section>
+      <OriginPrinciples locale={locale} />
       <BrandContactBand locale={locale} />
     </main>
   );

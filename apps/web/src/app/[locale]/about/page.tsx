@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { Link } from '../../../i18n/routing';
 import { EditorialHero } from '../../../components/EditorialHero';
 import { BrandContactBand } from '../../../components/BrandContactBand';
+import { OriginEvidence } from '../../../components/OriginEvidence';
 import { highlandMetadata } from '../../../lib/highland';
 export async function generateMetadata({
   params,
@@ -181,6 +182,7 @@ export default async function AboutPage({
           </div>
         </div>
       </section>
+      <OriginEvidence locale={locale} />
       <BrandContactBand locale={locale} />
     </main>
   );

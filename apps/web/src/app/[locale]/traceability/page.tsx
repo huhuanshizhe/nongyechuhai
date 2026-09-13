@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { EditorialHero } from '../../../components/EditorialHero';
 import { BrandContactBand } from '../../../components/BrandContactBand';
+import { OriginPrinciples } from '../../../components/OriginEvidence';
 import { highlandMetadata } from '../../../lib/highland';
 export async function generateMetadata({
   params,
@@ -119,6 +120,7 @@ export default async function QualityPage({
             : 'Tell us the intended use, destination and documents you need. Every category and every market deserves its own careful conversation.'}
         </p>
       </section>
+      <OriginPrinciples locale={locale} />
       <BrandContactBand locale={locale} />
     </main>
   );

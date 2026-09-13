@@ -1,3 +1,9 @@
+import {
+  platformPromise,
+  valueJourney,
+  regionalAdvantages,
+  qualityPrinciples,
+} from './advantages.mjs';
 const overseas = 'https://www.farmetra.com/en';
 const email = process.env.CONTACT_EMAIL || 'export@farmetra.com';
 const escape = (s) =>
@@ -51,6 +57,12 @@ const products = [
   ['藜麦', 'quinoa-editorial.png', '谷物原料与复合食品', '谷物'],
   ['黑枸杞', 'black-goji-editorial.png', '干果、冲泡与特色食品', '浆果'],
   ['蜂蜜', 'honey-editorial.png', '天然甜味与零售食品', '蜂产品'],
+  [
+    '冷水鱼 · 虹鳟',
+    'rainbow-trout-editorial.png',
+    '区域特色产业 · 加工、冷链与出口协同方向',
+    '水产',
+  ],
 ];
 const serviceCards = () =>
   services
@@ -78,7 +90,7 @@ export const pages = [
       '青藏高原农产品食品出海平台，连接产业带企业、供应链伙伴与海外市场，共建产品国际化、海外展示和采购协同能力。',
     body: `
     <section class="hero">${photo('plateau-hero.png', '高原雪山、河谷与谷物景观', 'hero-image', true)}<div class="container hero-content"><p>青藏高原农产品食品出海平台</p><h1>高原好产品，<br>世界大市场。</h1><p class="hero-description">连接产业带企业与海外市场。<br>让产地优势，成为品牌与产品走向世界的起点。</p><div class="actions">${link('/join', '企业加入平台', 'button light')}${link('/cooperation', '产业合作洽谈', 'text-link white')}</div></div><div class="hero-bottom container"><span>立足青藏高原</span><span>服务农产品与食品产业</span><a href="${overseas}" target="_blank" rel="noopener">访问海外采购官网 ↗</a></div></section>
-    <section class="container section proposition"><div><p class="kicker">从产业资源，到市场连接</p><h2>出海，不止把产品<br>放到一个网站上。</h2></div><div><p class="lead">产品需要被理解，企业需要被看见，合作需要有人持续推进。</p><p>我们围绕产品国际化、海外品牌展示和供应链协同，组织企业、市场与专业服务资源，为高原特色产业建立面向海外的共同窗口。</p>${link('/about', '了解平台架构', 'text-link')}</div></section>
+    ${platformPromise()}${regionalAdvantages()}${valueJourney()}${qualityPrinciples()}
     <section class="pale section"><div class="container"><div class="section-heading"><div><p class="kicker">企业服务</p><h2>把出海需要的能力，<br>接到企业身边。</h2></div>${link('/services', '查看服务体系', 'text-link')}</div><div class="service-grid">${serviceCards()}</div></div></section>
     <section class="container section origin-split"><div class="origin-photo">${photo('hengtai-about.png', '衡源萃供应伙伴官网展示的枸杞产区')}</div><div class="origin-copy"><p class="kicker">产业资源</p><h2>扎根产地，<br>从真实的产品开始。</h2><p>枸杞、沙棘、高原谷物与蜂产品，是我们展开产业合作的特色方向。围绕企业真实的产品、生产条件和供应能力，共同整理适合海外沟通的产品资料。</p><div class="partner-mini"><strong>衡源萃</strong><span>青海海西 · 枸杞供应伙伴</span></div>${link('/resources', '走近产业与供应伙伴', 'text-link')}</div></section>
     <section class="navy section"><div class="container"><div class="section-heading"><div><p class="kicker">一起参与</p><h2>不同角色，<br>在这里找到合作的位置。</h2></div><p>从一家企业的产品出海，<br>到一条产业带的共同成长。</p></div><div class="role-grid">${[
@@ -123,6 +135,7 @@ export const pages = [
     description:
       '产品国际化、海外展示、采购对接与供应链协同，为产业带企业提供可约定、可交付的出海服务。',
     body: `${intro('企业服务', '让出海的每一步，<br>都有具体的工作承接。', '围绕企业已有的产品与能力，选择适合当前阶段的服务。服务范围、成果、周期和费用在启动前明确。')}
+    ${valueJourney()}
     <section class="container service-editorial">${services.map(([t, c, list, img], i) => `<article class="service-row ${i === 1 ? 'reverse' : ''}">${photo(img, t)}<div><h2>${t}</h2><p class="lead">${c}</p><ul class="check-list">${list.map((x) => `<li>${x}</li>`).join('')}</ul><p class="muted">${['交付围绕规格档案、外文内容、图片与图册等可核对的成果展开。', '根据服务约定开展内容维护、需求记录与沟通跟进，不承诺询盘或销售结果。', '具体检测、认证、通关和物流工作由符合条件的专业主体按约执行。'][i]}</p>${link('/contact?type=enterprise', '咨询这项服务', 'text-link')}</div></article>`).join('')}</section>
     <section class="navy section"><div class="container"><div class="section-heading"><h2>根据阶段选服务，<br>根据交付谈合作。</h2></div><div class="role-grid"><article><h3>产品准备</h3><p>适合尚未建立海外资料的企业。梳理产品、图片、包装与外文内容，建立基础展示资产。</p></article><article><h3>持续运营</h3><p>适合需要长期维护海外窗口的企业。围绕内容、渠道和需求跟进约定周期服务。</p></article><article><h3>专项协同</h3><p>适合已有明确项目或采购需求的企业。按样品、包装、文件或交付协调等专项工作合作。</p></article></div><p class="section-note">费用按服务内容与工作量协商。第三方费用单独确认；不承诺订单、销售额、利润或融资结果。</p></div></section>${cta()}`,
   },
@@ -132,8 +145,10 @@ export const pages = [
     description:
       '发现青藏高原特色产品方向与衡源萃供应伙伴，了解产业资源参与方式。',
     body: `${intro('产业资源', '好产品的背后，<br>是土地与认真做事的人。', '围绕高原特色农产品与食品，连接愿意做好产品、准备好资料、共同服务海外市场的企业。')}
+    ${regionalAdvantages()}
     <section class="container supplier-feature"><div>${photo('hengtai-about.png', '衡源萃官网展示的枸杞产区', '', true)}</div><div><p class="kicker">枸杞供应伙伴</p><h2>衡源萃</h2><p class="company-name">海西恒泰工贸有限公司</p><p>扎根青海海西，围绕枸杞等高原特色农产品开展种植、加工与销售，产品涉及红枸杞、黑枸杞、枸杞叶茶和蜂蜜。</p><a class="text-link" href="https://www.hengyuancui.com/" target="_blank" rel="noopener">访问企业官网 ↗</a><p class="muted">具体产品、规格与合作条件按企业提供的资料确认。</p></div></section>
-    <section class="pale section"><div class="container"><div class="section-heading"><div><p class="kicker">特色品类</p><h2>从高原风味，<br>打开产品合作的可能。</h2></div><p>以下为产业合作与产品开发方向，具体供给以企业资料和采购确认结果为准。</p></div><div class="filters" role="group" aria-label="按品类筛选">${['全部', '浆果', '谷物', '蜂产品'].map((x, i) => `<button type="button" data-filter="${x}" aria-pressed="${i === 0}">${x}</button>`).join('')}</div><div class="product-grid">${products.map(([name, img, copy, cat]) => `<article class="product-card" data-category="${cat}">${photo(img, name + '产品展示')}<div><h3>${name}</h3><p>${copy}</p></div></article>`).join('')}</div><p id="filter-status" class="muted" role="status">共 6 个特色品类</p></div></section>
+    <section class="pale section"><div class="container"><div class="section-heading"><div><p class="kicker">特色品类</p><h2>从高原风味，<br>打开产品合作的可能。</h2></div><p>以下为产业合作与产品开发方向，具体供给以企业资料和采购确认结果为准。</p></div><div class="filters" role="group" aria-label="按品类筛选">${['全部', '浆果', '谷物', '蜂产品', '水产'].map((x, i) => `<button type="button" data-filter="${x}" aria-pressed="${i === 0}">${x}</button>`).join('')}</div><div class="product-grid">${products.map(([name, img, copy, cat]) => `<article class="product-card" data-category="${cat}">${photo(img, name + '产品展示')}<div><h3>${name}</h3><p>${copy}</p></div></article>`).join('')}</div><p id="filter-status" class="muted" role="status">共 ${products.length} 个特色品类</p></div></section>
+    ${qualityPrinciples()}
     <section class="container section origin-split"><div class="origin-copy"><h2>您的产品，<br>也可以从这里出发。</h2><p>欢迎具有明确产品、供应能力和合法经营资质的农业与食品企业洽谈合作。平台不以展示图片替代企业审核，也不将品类介绍作为产品认证。</p>${link('/join', '了解加入方式')}</div><div class="origin-photo">${photo('hengtai-origin.jpg', '供应伙伴官网展示的枸杞采收')}</div></section>${cta()}`,
   },
   {
