@@ -1,0 +1,15 @@
+{
+  "name": "@nongyechuhai/industry",
+  "private": true,
+  "dependencies": {
+    "sharp": "0.34.5"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node preview.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
