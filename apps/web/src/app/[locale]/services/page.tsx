@@ -76,6 +76,12 @@ export default async function ServicesPage({
             ? '您关注口感、配方与消费者，我们帮助您梳理产地、产品形态与供应对接，让每一次沟通更接近真正的需求。'
             : 'You know your customers and the food you want to create. We help connect your brief with origin, product formats and the right sourcing conversation.'}
         </p>
+        <Link className="ft-text-link" href="/solutions">
+          {zh
+            ? '查看食品工厂、品牌、餐饮与零售方案'
+            : 'Explore manufacturing, private-label, foodservice & retail solutions'}{' '}
+          →
+        </Link>
       </section>
       <section className="ft-container ft-feature">
         <div className="ft-feature__image">

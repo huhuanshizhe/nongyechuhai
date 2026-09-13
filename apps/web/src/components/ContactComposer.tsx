@@ -2,21 +2,28 @@
 import { type FormEvent, useState } from 'react';
 import { directions, localize } from '../lib/highland';
 import { buildBriefMailto } from '../lib/highland-intake';
+import { buyerTypes } from '../lib/buyer-offerings';
 export function ContactComposer({
   locale,
   email,
   initialTopic,
+  initialBrief = '',
+  initialBuyer = '',
 }: {
   locale: string;
   email: string;
   initialTopic?: string;
+  initialBrief?: string;
+  initialBuyer?: string;
 }) {
   const zh = locale === 'zh';
   const [preview, setPreview] = useState('');
   const [status, setStatus] = useState('');
   const selected = directions.some((item) => item.slug === initialTopic)
     ? initialTopic
-    : initialTopic === 'partnership' || initialTopic === 'rainbow-trout'
+    : initialTopic === 'partnership' ||
+        initialTopic === 'rainbow-trout' ||
+        initialTopic === 'product-development'
       ? initialTopic
       : '';
   function compose(event: FormEvent<HTMLFormElement>) {
@@ -34,14 +41,23 @@ export function ContactComposer({
           ? zh
             ? '虹鳟采购咨询'
             : 'Rainbow trout sourcing'
-          : zh
-            ? '产品咨询'
-            : 'Product enquiry';
+          : get('topic') === 'product-development'
+            ? zh
+              ? '贴牌与产品开发'
+              : 'Private label & product development'
+            : zh
+              ? '产品咨询'
+              : 'Product enquiry';
     const subject = `Farmetra | ${topic}`;
     const text = [
       (zh ? '姓名' : 'Name') + ': ' + get('name'),
       (zh ? '邮箱' : 'Email') + ': ' + get('email'),
       (zh ? '企业' : 'Company') + ': ' + get('company'),
+      (zh ? '业务类型' : 'Buyer type') +
+        ': ' +
+        (buyerTypes.find((b) => b.id === get('buyer'))?.name[
+          zh ? 'zh' : 'en'
+        ] || get('buyer')),
       (zh ? '目的地' : 'Destination') + ': ' + get('destination'),
       (zh ? '预计数量' : 'Expected quantity') + ': ' + get('quantity'),
       (zh ? '产品 / 合作' : 'Product / partnership') + ': ' + topic,
@@ -86,6 +102,24 @@ export function ContactComposer({
           />
         </label>
         <label>
+          {zh ? '您的业务类型' : 'Your business type'}
+          <select
+            name="buyer"
+            defaultValue={
+              buyerTypes.some((b) => b.id === initialBuyer) ? initialBuyer : ''
+            }
+          >
+            <option value="">
+              {zh ? '请选择业务类型' : 'Select your business'}
+            </option>
+            {buyerTypes.map((b) => (
+              <option key={b.id} value={b.id}>
+                {localize(b.name, locale)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
           {zh ? '预计数量（含单位）' : 'Expected quantity (with unit)'}
           <input
             name="quantity"
@@ -110,6 +144,9 @@ export function ContactComposer({
             <option value="rainbow-trout">
               {zh ? '虹鳟采购咨询' : 'Rainbow trout sourcing'}
             </option>
+            <option value="product-development">
+              {zh ? '贴牌与产品开发' : 'Private label & product development'}
+            </option>
           </select>
         </label>
       </div>
@@ -120,6 +157,7 @@ export function ContactComposer({
           rows={5}
           required
           maxLength={1800}
+          defaultValue={initialBrief}
           placeholder={
             zh
               ? '产品、用途、目标市场，或一个新的合作想法。'

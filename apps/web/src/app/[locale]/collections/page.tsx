@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { HighlandCollections } from '../../../components/HighlandCollections';
 import { BrandContactBand } from '../../../components/BrandContactBand';
+import { BuyerCatalogue } from '../../../components/BuyerCatalogue';
+import { Link } from '../../../i18n/routing';
 import { highlandMetadata } from '../../../lib/highland';
 export async function generateMetadata({
   params,
@@ -13,18 +15,21 @@ export async function generateMetadata({
     locale,
     { zh: '高原产品', en: 'Our products' },
     {
-      zh: '枸杞、沙棘、谷物与蜂蜜，探索高原特色食品和食材。',
-      en: 'Explore goji berries, sea buckthorn, grains and honey. Distinctive food and ingredients from the plateau.',
+      zh: '探索枸杞原浆、NFC 果汁、沙棘汁、刺梨汁、锁鲜枸杞、谷物原料与贴牌食品开发。',
+      en: 'Explore goji purée, NFC juices, sea buckthorn, chestnut rose juice, fresh-preserved berries, grains and private-label development.',
     },
     '/collections',
   );
 }
 export default async function CollectionsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ buyer?: string; stage?: string; focus?: string }>;
 }) {
   const { locale } = await params;
+  const query = await searchParams;
   setRequestLocale(locale);
   const zh = locale === 'zh';
   return (
@@ -37,22 +42,22 @@ export default async function CollectionsPage({
             </span>
             <h1>
               {zh
-                ? '风味，\n有更多可能。'
-                : 'A world of flavour.\nA place of origin.'}
+                ? '从特色原料，\n到您的品牌食品。'
+                : 'Whole foods. Ingredients.\nYour next branded range.'}
             </h1>
             <p>
               {zh
-                ? '从完整食材到食品灵感，发现属于高原的颜色、质地与风味。'
-                : 'Discover the colours, textures and flavours of the plateau, from whole ingredients to new food ideas.'}
+                ? '枸杞原浆、NFC 红黑枸杞果汁、沙棘汁、刺梨汁与锁鲜枸杞。按产品形式、应用和业务类型，组织您的采购选择。'
+                : 'Goji purée, red and black goji NFC juices, sea buckthorn juice, chestnut rose juice and fresh-preserved berries. Explore by format, application and business type.'}
             </p>
           </div>
           <div className="ft-catalogue-hero__image">
             <Image
-              src="/images/brand-v2/food-table-editorial.png"
+              src="/images/brand-v2/juice-range-editorial.png"
               alt={
                 zh
-                  ? '高原食材的餐桌搭配'
-                  : 'An inviting table of plateau ingredients'
+                  ? '特色果汁与原浆小袋的包装概念示意'
+                  : 'Fruit juices and a purée pouch, illustrative packaging concepts'
               }
               fill
               priority
@@ -62,6 +67,38 @@ export default async function CollectionsPage({
         </div>
       </section>
       <section className="ft-container ft-section">
+        <BuyerCatalogue
+          key={`${query.buyer || ''}-${query.stage || ''}-${query.focus || ''}`}
+          locale={locale}
+          initialBuyer={query.buyer}
+          initialStage={query.stage}
+          initialFocus={query.focus}
+        />
+      </section>
+      <section className="ft-container ft-catalogue-solutions-link">
+        <h2>
+          {zh
+            ? '从您的业务出发，找到采购路径。'
+            : 'Find a sourcing route for your business.'}
+        </h2>
+        <Link href="/solutions" className="ft-button">
+          {zh ? '客户方案与食材价值' : 'Buyer solutions & ingredient profiles'}{' '}
+          →
+        </Link>
+      </section>
+      <section className="ft-container ft-section">
+        <div className="ft-heading">
+          <div>
+            <span className="ft-section-label">
+              {zh ? '按食材探索产地与风味' : 'Explore by ingredient'}
+            </span>
+            <h2>
+              {zh
+                ? '认识食材，读懂来处。'
+                : 'Meet the ingredient. Know its origin.'}
+            </h2>
+          </div>
+        </div>
         <HighlandCollections locale={locale} />
       </section>
       <BrandContactBand locale={locale} />

@@ -9,6 +9,7 @@ export function BrandNavigation({ locale }: { locale: string }) {
   const pathname = usePathname();
   const links = [
     ['/collections', zh ? '高原产品' : 'Our products'],
+    ['/solutions', zh ? '采购与贴牌' : 'Buyer solutions'],
     ['/about', zh ? '产地故事' : 'Our origins'],
     ['/services', zh ? '服务与支持' : 'How we help'],
     ['/partners', zh ? '合作伙伴' : 'Our partners'],

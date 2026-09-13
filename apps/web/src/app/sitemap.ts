@@ -40,6 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }> = [
     { path: '', priority: 1.0, changeFrequency: 'weekly' }, // Home
     { path: '/collections', priority: 0.9, changeFrequency: 'weekly' },
+    { path: '/solutions', priority: 0.9, changeFrequency: 'monthly' },
     ...directions.map((item) => ({
       path: `/collections/${item.slug}`,
       priority: 0.85,

@@ -4,7 +4,12 @@ import { ContactComposer } from '../../../components/ContactComposer';
 import { highlandMetadata } from '../../../lib/highland';
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ direction?: string; topic?: string }>;
+  searchParams: Promise<{
+    direction?: string;
+    topic?: string;
+    brief?: string;
+    buyer?: string;
+  }>;
 };
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
@@ -62,6 +67,10 @@ export default async function ContactPage({ params, searchParams }: Props) {
             locale={locale}
             email={email}
             initialTopic={query.direction || query.topic}
+            initialBrief={
+              typeof query.brief === 'string' ? query.brief.slice(0, 1800) : ''
+            }
+            initialBuyer={query.buyer}
           />
         </div>
       </section>

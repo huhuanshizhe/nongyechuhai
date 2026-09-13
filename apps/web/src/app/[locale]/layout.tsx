@@ -11,6 +11,7 @@ import '../globals.css';
 import '../highland.css';
 import '../brand.css';
 import '../origin.css';
+import '../buyer.css';
 type Props = { children: ReactNode; params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -80,6 +81,9 @@ export default async function LocaleLayout({ children, params }: Props) {
                 <h2>{zh ? '发现高原' : 'Discover'}</h2>
                 <Link href="/collections">
                   {zh ? '特色产品' : 'Our products'}
+                </Link>
+                <Link href="/solutions">
+                  {zh ? '采购与贴牌方案' : 'Buyer solutions & private label'}
                 </Link>
                 <Link href="/about">{zh ? '产地故事' : 'Our origins'}</Link>
                 <Link href="/traceability">

@@ -4,6 +4,7 @@ import { Link } from '../../i18n/routing';
 import { EditorialHero } from '../../components/EditorialHero';
 import { EditorialProductCard } from '../../components/EditorialProductCard';
 import { BrandContactBand } from '../../components/BrandContactBand';
+import { SupplyRoutes } from '../../components/BuyerSolutions';
 import {
   OriginEvidence,
   OriginPrinciples,
@@ -85,6 +86,7 @@ export default async function HomePage({
           </span>
         </div>
       </div>
+      <SupplyRoutes locale={locale} />
       <section className="ft-container ft-section">
         <div className="ft-heading">
           <div>

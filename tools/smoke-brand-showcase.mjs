@@ -12,6 +12,7 @@ const products = [
 const paths = [
   '',
   '/services',
+  '/solutions',
   '/about',
   '/partners',
   '/traceability',
