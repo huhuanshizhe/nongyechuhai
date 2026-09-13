@@ -14,7 +14,9 @@ export function LanguageSwitcher() {
   const ariaLabel = currentLocale === 'zh' ? 'Switch to English' : '切换到中文';
 
   const switchLocale = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
+    router.replace(pathname + window.location.search + window.location.hash, {
+      locale: newLocale,
+    });
   };
 
   return (
@@ -25,7 +27,13 @@ export function LanguageSwitcher() {
         onClick={() => switchLocale(nextLocale)}
         aria-label={ariaLabel}
       >
-        <svg className="language-switcher__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg
+          className="language-switcher__icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
           <circle cx="12" cy="12" r="10" />
           <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
         </svg>

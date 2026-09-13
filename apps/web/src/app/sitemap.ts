@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { prisma } from '@nongyechuhai/db';
+import { directions } from '../lib/highland';
 
 // ── Config ──
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.farmetra.com';
@@ -29,14 +29,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: Array<{
     path: string;
     priority: number;
-    changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+    changeFrequency:
+      | 'always'
+      | 'hourly'
+      | 'daily'
+      | 'weekly'
+      | 'monthly'
+      | 'yearly'
+      | 'never';
   }> = [
-    { path: '',              priority: 1.0, changeFrequency: 'weekly'  }, // Home
-    { path: '/products',     priority: 0.9, changeFrequency: 'weekly'  }, // Export Portfolio
-    { path: '/traceability', priority: 0.8, changeFrequency: 'weekly'  }, // Credentials
-    { path: '/rfq',          priority: 0.8, changeFrequency: 'weekly'  }, // Inquiry Desk
-    { path: '/about',        priority: 0.7, changeFrequency: 'monthly' }, // About
-    { path: '/login',        priority: 0.5, changeFrequency: 'monthly' }, // Buyer Login
+    { path: '', priority: 1.0, changeFrequency: 'weekly' }, // Home
+    { path: '/collections', priority: 0.9, changeFrequency: 'weekly' },
+    ...directions.map((item) => ({
+      path: `/collections/${item.slug}`,
+      priority: 0.85,
+      changeFrequency: 'monthly' as const,
+    })),
+    { path: '/services', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/buying-guide', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/partners', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/sourcing', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/privacy', priority: 0.4, changeFrequency: 'monthly' },
+    { path: '/traceability', priority: 0.8, changeFrequency: 'weekly' }, // Credentials
+    { path: '/about', priority: 0.7, changeFrequency: 'monthly' }, // About
   ];
 
   const entries: MetadataRoute.Sitemap = [];
@@ -52,37 +67,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         alternates: buildAlternates(page.path),
       });
     }
-  }
-
-  // ── Dynamic: Product detail pages ──
-  try {
-    const products = await prisma.product.findMany({
-      where: {
-        status: 'PUBLISHED',
-        deletedAt: null,
-      },
-      select: {
-        slug: true,
-        updatedAt: true,
-      },
-      orderBy: { updatedAt: 'desc' },
-    });
-
-    for (const product of products) {
-      const path = `/products/${product.slug}`;
-      for (const locale of locales) {
-        entries.push({
-          url: `${siteUrl}/${locale}${path}`,
-          lastModified: product.updatedAt,
-          changeFrequency: 'weekly' as const,
-          priority: 0.85,
-          alternates: buildAlternates(path),
-        });
-      }
-    }
-  } catch {
-    // If DB is unavailable at request time (e.g. cold start), skip dynamic entries.
-    // Google will re-crawl and pick them up on subsequent requests.
   }
 
   return entries;

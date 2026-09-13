@@ -1,245 +1,125 @@
+import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
-import type { Metadata } from 'next';
-import { getAllSuppliersWithCredentials, type SupplierCredential } from '../../../lib/storefront';
-import { Link } from '../../../i18n/routing';
-
-type TraceabilityPageProps = {
+import { EditorialHero } from '../../../components/EditorialHero';
+import { BrandContactBand } from '../../../components/BrandContactBand';
+import { highlandMetadata } from '../../../lib/highland';
+export async function generateMetadata({
+  params,
+}: {
   params: Promise<{ locale: string }>;
-};
-
-function getCopy(locale: string) {
-  const isZh = locale === 'zh';
-
-  return {
-    heroKicker: isZh ? '资质与溯源' : 'Credentials & Traceability',
-    heroTitle: isZh ? '农产品出海，信任是第一生产力' : 'In agricultural export, trust is the primary currency',
-    heroDescription: isZh
-      ? '我们公开展示每一项供应商资质、国际第三方合规认证以及养殖/种植实景，帮助您在商业决策前建立完整的溯源认知。'
-      : 'We publicly display every supplier credential, international third-party compliance certification, and farming/cultivation scene to help you build complete traceability awareness before making commercial decisions.',
-    certKicker: isZh ? '合规认证' : 'Compliance Certifications',
-    sceneKicker: isZh ? '养殖/种植场景' : 'Farming & Cultivation Scenes',
-    verifiedLabel: isZh ? '已认证供应商' : 'Verified Supplier',
-    supplierSince: isZh ? '供应商' : 'Supplier',
-    noCerts: isZh ? '该供应商认证信息正在收集中。' : 'Certification information for this supplier is being collected.',
-    noScenes: isZh ? '养殖/种植场景图片正在收集中。' : 'Farming and cultivation scene images are being collected.',
-    footerTitle: isZh ? '准备发起询盘？' : 'Ready to start an inquiry?',
-    footerDescription: isZh
-      ? '在了解供应商资质后，进入询盘中心明确您的采购需求。'
-      : 'After reviewing supplier credentials, head to the inquiry desk to specify your sourcing requirements.',
-    goToRfq: isZh ? '进入询盘中心' : 'Go to Inquiry Desk',
-    browseProducts: isZh ? '浏览出口产品' : 'Browse Export Portfolio',
-    certTypeLabels: {
-      BUSINESS_LICENSE: isZh ? '营业执照' : 'Business License',
-      CUSTOMS_REGISTRATION: isZh ? '海关备案' : 'Customs Registration',
-      EXPORT_FOOD_REGISTRATION: isZh ? '出口食品生产企业备案' : 'Export Food Production Registration',
-      GAP: 'GAP',
-      HACCP: 'HACCP',
-      ISO22000: 'ISO 22000',
-      ORGANIC: isZh ? '有机认证' : 'Organic Certification',
-      OTHER: isZh ? '其他认证' : 'Other Certification'
-    } as Record<string, string>
-  };
-}
-
-export async function generateMetadata({ params }: TraceabilityPageProps): Promise<Metadata> {
+}) {
   const { locale } = await params;
-  const isZh = locale === 'zh';
-
-  return {
-    title: isZh ? '资质与溯源' : 'Credentials & Traceability',
-    description: isZh
-      ? '查看供应商营业执照、海关备案、出口食品生产企业备案及GAP、HACCP、ISO22000等国际第三方合规认证，以及养殖/种植实景。'
-      : 'Review supplier business licenses, customs registration, export food production registration, and international certifications including GAP, HACCP, ISO22000, plus farming and cultivation scenes.'
-  };
-}
-
-function CertBadge({ type, name, issuingBody, certificateNumber, issuedAt, expiresAt, locale }: {
-  type: string;
-  name: string;
-  issuingBody: string | null;
-  certificateNumber: string | null;
-  issuedAt: string | null;
-  expiresAt: string | null;
-  locale: string;
-}) {
-  const isZh = locale === 'zh';
-  const now = new Date();
-  const isValid = !expiresAt || new Date(expiresAt) > now;
-
-  return (
-    <article className={`credential-badge${isValid ? '' : ' credential-badge--expired'}`}>
-      <div className="credential-badge__icon">
-        {type === 'HACCP' ? '🛡' : type === 'ISO22000' ? '📋' : type === 'GAP' ? '🌱' : type === 'ORGANIC' ? '🍃' : '📜'}
-      </div>
-      <div className="credential-badge__body">
-        <strong>{name}</strong>
-        {issuingBody && <span className="credential-badge__issuer">{issuingBody}</span>}
-        {certificateNumber && (
-          <span className="credential-badge__number">
-            {isZh ? '编号: ' : 'No.: '}{certificateNumber}
-          </span>
-        )}
-        <div className="credential-badge__dates">
-          {issuedAt && (
-            <span>{isZh ? '发证: ' : 'Issued: '}{new Date(issuedAt).toLocaleDateString(isZh ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'short' })}</span>
-          )}
-          {expiresAt && (
-            <span className={isValid ? '' : 'credential-badge__date--expired'}>
-              {isZh ? '有效期至: ' : 'Valid until: '}{new Date(expiresAt).toLocaleDateString(isZh ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'short' })}
-            </span>
-          )}
-        </div>
-      </div>
-    </article>
+  return highlandMetadata(
+    locale,
+    { zh: '品质与细节', en: 'Quality matters' },
+    {
+      zh: '从产地、产品规格到包装与资料，在细节里认识食材。',
+      en: 'Get to know ingredients through origin, specifications, packaging and product documentation.',
+    },
+    '/traceability',
   );
 }
-
-function SceneCard({ title, description, imageUrl, locale }: {
-  title: string;
-  description: string | null;
-  imageUrl: string;
-  locale: string;
+export default async function QualityPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
 }) {
-  return (
-    <article className="scene-card">
-      <div className="scene-card__media">
-        <img alt={title} src={imageUrl} loading="lazy" />
-      </div>
-      <div className="scene-card__body">
-        <h4>{title}</h4>
-        {description && <p>{description}</p>}
-      </div>
-    </article>
-  );
-}
-
-function SupplierCredentialsSection({ supplier, locale }: {
-  supplier: SupplierCredential;
-  locale: string;
-}) {
-  const copy = getCopy(locale);
-  const isZh = locale === 'zh';
-
-  return (
-    <section className="credential-supplier" data-rise="true">
-      <div className="credential-supplier__head">
-        <div>
-          <span className="section-kicker">{copy.supplierSince}</span>
-          <h2>{supplier.supplierName}</h2>
-          {supplier.supplierDescription && (
-            <p className="credential-supplier__desc">{supplier.supplierDescription}</p>
-          )}
-          <div className="credential-supplier__meta">
-            {supplier.supplierCountry && (
-              <span className="catalog-chip">{[supplier.supplierCountry, supplier.supplierCity].filter(Boolean).join(', ')}</span>
-            )}
-            {supplier.supplierVerified && (
-              <span className="catalog-chip">{copy.verifiedLabel}</span>
-            )}
-          </div>
-        </div>
-        <div className="button-row">
-          <Link className="button button--earth" href="/products">
-            {copy.browseProducts}
-          </Link>
-        </div>
-      </div>
-
-      {/* Certifications */}
-      <div className="credential-section">
-        <span className="section-kicker">{copy.certKicker}</span>
-        <h3>{isZh ? '国际第三方合规认证' : 'International Third-Party Compliance Certifications'}</h3>
-        {supplier.certifications.length > 0 ? (
-          <div className="credential-grid">
-            {supplier.certifications.map((cert) => (
-              <CertBadge
-                key={cert.id}
-                type={cert.type}
-                name={cert.name}
-                issuingBody={cert.issuingBody}
-                certificateNumber={cert.certificateNumber}
-                issuedAt={cert.issuedAt}
-                expiresAt={cert.expiresAt}
-                locale={locale}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="credential-empty">{copy.noCerts}</p>
-        )}
-      </div>
-
-      {/* Scenes */}
-      <div className="credential-section">
-        <span className="section-kicker">{copy.sceneKicker}</span>
-        <h3>{isZh ? '产品养殖/种植实景' : 'Farming & Cultivation Scenes'}</h3>
-        {supplier.scenes.length > 0 ? (
-          <div className="scene-grid">
-            {supplier.scenes.map((scene) => (
-              <SceneCard
-                key={scene.id}
-                title={scene.title}
-                description={scene.description}
-                imageUrl={scene.imageUrl}
-                locale={locale}
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="credential-empty">{copy.noScenes}</p>
-        )}
-      </div>
-    </section>
-  );
-}
-
-export default async function TraceabilityPage({ params }: TraceabilityPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const copy = getCopy(locale);
-
-  const suppliers = await getAllSuppliersWithCredentials();
-
+  const zh = locale === 'zh';
   return (
-    <main className="page-shell">
-      {/* Hero */}
-      <section className="traceability-hero" data-rise="true">
-        <span className="section-kicker">{copy.heroKicker}</span>
-        <h1 className="hero-title">{copy.heroTitle}</h1>
-        <p className="hero-stage__lead">{copy.heroDescription}</p>
+    <main className="ft-main">
+      <EditorialHero
+        compact
+        image="/images/brand-v2/hengtai-field.jpg"
+        alt={zh ? '枸杞原料整理场景' : 'Goji berries arranged for handling'}
+        title={
+          zh ? (
+            <>
+              品质，
+              <br />
+              藏在每个细节里。
+            </>
+          ) : (
+            <>
+              The difference
+              <br />
+              is in the details.
+            </>
+          )
+        }
+        description={
+          zh
+            ? '好的产品对话，从了解产地、规格、加工和用途开始。'
+            : 'A good product conversation starts with origin, specifications, processing and intended use.'
+        }
+      />
+      <section className="ft-container ft-section ft-intro">
+        <span className="ft-section-label">
+          {zh ? '品质与细节' : 'Quality matters'}
+        </span>
+        <h2>
+          {zh
+            ? '看见食材，也看见它的来路。'
+            : 'Know the ingredient.\nUnderstand its journey.'}
+        </h2>
+        <p>
+          {zh
+            ? '我们从具体产品出发，与供应伙伴沟通产地、加工、包装和资料要求，让采购团队在关键问题上得到更清晰的信息。'
+            : 'We start with the specific product, working through origin, processing, packaging and documentation with supply partners so buying teams can ask the right questions.'}
+        </p>
       </section>
-
-      {/* Supplier Credential Sections */}
-      {suppliers.length > 0 ? (
-        suppliers.map((supplier) => (
-          <SupplierCredentialsSection key={supplier.supplierId} supplier={supplier} locale={locale} />
-        ))
-      ) : (
-        <section className="section-card" data-rise="true">
-          <div className="section-head">
-            <h2>{locale === 'zh' ? '供应商资质信息正在收集中' : 'Supplier credential information is being collected'}</h2>
-            <p className="section-description">
-              {locale === 'zh'
-                ? '目前暂无已认证供应商的资质数据。请联系平台运营团队了解更多信息。'
-                : 'No verified supplier credential data is available yet. Please contact the platform operations team for more information.'}
-            </p>
-          </div>
-        </section>
-      )}
-
-      {/* Footer CTA */}
-      <section className="closing-banner" data-rise="true">
-        <div>
-          <span className="section-kicker">{locale === 'zh' ? '下一步' : 'Next Step'}</span>
-          <h2 className="section-title">{copy.footerTitle}</h2>
-          <p>{copy.footerDescription}</p>
-        </div>
-        <div className="button-row">
-          <Link className="button" href="/rfq">
-            {copy.goToRfq}
-          </Link>
-        </div>
+      <section className="ft-container ft-quality-grid">
+        {[
+          {
+            image: '/images/brand-v2/hengtai-about.png',
+            title: zh ? '清晰的来源' : 'A clear origin',
+            copy: zh
+              ? '产地与生产者，是产品故事的起点。通过来源资料和基地介绍，了解食材背后的土地。'
+              : 'Origin and producer are the starting point. Source records and growing-base introductions bring the place behind the ingredient into view.',
+          },
+          {
+            image: '/images/brand-v2/goji-editorial.png',
+            title: zh ? '适合的规格' : 'The right specification',
+            copy: zh
+              ? '颗粒、风味、加工方式与包装，应围绕实际用途讨论，让选品贴近您的产品需求。'
+              : 'Size, flavour, processing and packaging should be discussed around the intended use, keeping sourcing close to your product brief.',
+          },
+          {
+            image: '/images/brand-v2/hengtai-red-goji.jpg',
+            title: zh ? '认真对待资料' : 'Attention to documentation',
+            copy: zh
+              ? '以目标市场和具体产品为基础，沟通所需规格资料、检测记录与包装信息。'
+              : 'Use the destination and specific product as the basis for discussing required specifications, test records and pack information.',
+          },
+        ].map(({ image, title, copy }) => (
+          <article key={title}>
+            <div>
+              <Image
+                src={image}
+                alt={title}
+                fill
+                sizes="(max-width: 800px) 100vw, 33vw"
+              />
+            </div>
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </article>
+        ))}
       </section>
+      <section className="ft-container ft-section ft-quality-note">
+        <h2>
+          {zh
+            ? '您的标准，是沟通的起点。'
+            : 'Your requirements set the conversation.'}
+        </h2>
+        <p>
+          {zh
+            ? '请告诉我们产品用途、目标市场与需要的资料。不同品类与市场，值得分别认真对待。'
+            : 'Tell us the intended use, destination and documents you need. Every category and every market deserves its own careful conversation.'}
+        </p>
+      </section>
+      <BrandContactBand locale={locale} />
     </main>
   );
 }

@@ -1,89 +1,187 @@
+import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { Link } from '../../../i18n/routing';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'About',
-  description: 'Learn about farmetra\'s approach to agricultural export sourcing and supplier qualification.'
-};
-
-export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+import { EditorialHero } from '../../../components/EditorialHero';
+import { BrandContactBand } from '../../../components/BrandContactBand';
+import { highlandMetadata } from '../../../lib/highland';
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return highlandMetadata(
+    locale,
+    { zh: '产地故事', en: 'Our origins' },
+    {
+      zh: '从青藏高原出发，认识食物背后的土地与生产者。',
+      en: 'Discover the places and producers behind food from the Qinghai–Tibet Plateau.',
+    },
+    '/about',
+  );
+}
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const isZh = locale === 'zh';
-
+  const zh = locale === 'zh';
   return (
-    <main className="page-shell">
-      <section className="section-block" data-rise="true">
-        <div className="section-head">
-          <span className="section-kicker">{isZh ? '关于我们' : 'About'}</span>
-          <h1 className="section-title">
-            {isZh
-              ? 'farmetra将农产品采购转化为结构化的跨境销售工作流'
-              : 'How farmetra turns agricultural sourcing into a structured cross-border sales workflow'}
-          </h1>
-          <p className="section-description">
-            {isZh
-              ? '产品发现、供应商资质、出口文档、冷链规划及买家跟进整合为一个操作系统。'
-              : 'Product discovery, supplier qualification, export documentation, cold-chain planning, and buyer follow-up are presented as one operating system.'}
+    <main className="ft-main">
+      <EditorialHero
+        image="/images/highland/plateau-hero.png"
+        alt={
+          zh ? '高原河谷与雪山' : 'An open plateau valley beneath snow peaks'
+        }
+        title={
+          zh ? (
+            <>
+              每一种风味，
+              <br />
+              都有它的来处。
+            </>
+          ) : (
+            <>
+              Every flavour
+              <br />
+              starts somewhere.
+            </>
+          )
+        }
+        description={
+          zh
+            ? '走近青藏高原，认识食物背后的山川、土地与生产者。'
+            : 'Get closer to the landscapes, the land and the producers behind food from the Qinghai–Tibet Plateau.'
+        }
+      />
+      <section className="ft-container ft-section ft-intro">
+        <span className="ft-section-label">
+          {zh ? '我们是 Farmetra' : 'We are Farmetra'}
+        </span>
+        <h2>
+          {zh
+            ? '让有来处的食物，\n被更多人认识。'
+            : 'Good food deserves\na wider world.'}
+        </h2>
+        <p>
+          {zh
+            ? '我们把青藏高原的特色食品，介绍给世界。从浆果到谷物，从原料到食品，Farmetra 用全球采购能够理解的方式，连接产品、产地与合作伙伴。'
+            : 'We introduce distinctive plateau foods to a wider world. From berries to grains, from ingredients to finished food ideas, Farmetra brings products, origins and partners into a language global buyers can work with.'}
+        </p>
+      </section>
+      <section className="ft-container ft-feature">
+        <div className="ft-feature__image">
+          <Image
+            src="/images/brand-v2/hengtai-about.png"
+            alt={
+              zh
+                ? '衡源萃官网展示的海西枸杞基地'
+                : 'Haixi goji growing base shown on Hengyuancui’s website'
+            }
+            fill
+            sizes="(max-width: 800px) 100vw, 50vw"
+          />
+        </div>
+        <div className="ft-feature__copy">
+          <span className="ft-section-label">
+            {zh ? '走近青海海西' : 'Closer to Haixi, Qinghai'}
+          </span>
+          <h2>
+            {zh
+              ? '风土不是背景，\n是食物的一部分。'
+              : 'Origin is not a backdrop.\nIt is part of the food.'}
+          </h2>
+          <p>
+            {zh
+              ? '衡源萃的枸杞故事，扎根于青海海西。通过生产者的介绍和真实的基地记录，我们让产地不只停留在包装上的一个地名。'
+              : 'Hengyuancui’s goji story is rooted in Haixi, Qinghai. Producer introductions and actual growing-base records help make origin more than a place name on a pack.'}
           </p>
-        </div>
-
-        <div className="editorial-panel editorial-panel--statement">
-          <div className="editorial-panel__copy">
-            <h2>{isZh ? '平台定位' : 'Platform Positioning'}</h2>
-            <p>
-              {isZh
-                ? 'farmetra不是杂乱的B2B市场列表。我们面向进口商、分销商、零售采购团队及机构买家，提供经过筛选的农产品供应项目，每个产品线都有品类逻辑、供应商背景及商业路线框架。'
-                : 'farmetra is not a cluttered B2B marketplace listing. We present vetted agricultural supply programs for importers, distributors, retail sourcing teams, and institutional buyers. Each supply line is framed with category logic, supplier context, and commercial route before quotation discussion begins.'}
-            </p>
-            <p>
-              {isZh
-                ? '买家可以审核包装、合规方向及执行适配，无需翻阅杂乱的通用市场信息。平台将采购、文档、冷链规划及跟进整合为统一的商业工作流。'
-                : 'Importers and sourcing teams can review packaging, compliance direction, and execution fit without digging through generic marketplace clutter. The platform presents sourcing, documentation, cold-chain planning, and follow-up as one commercial workflow.'}
-            </p>
-          </div>
-        </div>
-
-        <div className="statement-rail">
-          <article>
-            <span className="pill">{isZh ? '供应商筛选' : 'Supplier Qualification'}</span>
-            <h3>{isZh ? '认证项目展示' : 'Vetted Program Presentation'}</h3>
-            <p>
-              {isZh
-                ? '供应商展示经过筛选，体现商业规范而非堆砌无差异化列表。'
-                : 'Supplier representation is curated to signal commercial discipline, not to inflate the catalog with undifferentiated listings.'}
-            </p>
-          </article>
-          <article>
-            <span className="pill">{isZh ? '买家工作流' : 'Buyer Workflow'}</span>
-            <h3>{isZh ? '结构化询盘' : 'Structured Inquiry'}</h3>
-            <p>
-              {isZh
-                ? '市场、数量、认证、包装及交付需求在同一对话链中保持追踪。'
-                : 'Market, quantity, certification, packaging, and delivery requirements remain attached to the same conversation from first brief to follow-up.'}
-            </p>
-          </article>
-          <article>
-            <span className="pill">{isZh ? '响应承诺' : 'Response Commitment'}</span>
-            <h3>{isZh ? '48小时首次响应' : '48-Hour First Response'}</h3>
-            <p>
-              {isZh
-                ? '询盘处理保持市场、包装及交付上下文从首次询盘开始。'
-                : 'Inquiry handling is structured to preserve market, pack, and delivery context from the first brief.'}
-            </p>
-          </article>
-        </div>
-
-        <div className="button-row">
-          <Link className="button" href="/products">
-            {isZh ? '浏览出口产品' : 'Explore Export Portfolio'}
-          </Link>
-          <Link className="button button--ghost" href="/rfq">
-            {isZh ? '发起询盘' : 'Start Inquiry'}
+          <Link href="/partners" className="ft-text-link">
+            {zh ? '认识枸杞供应伙伴' : 'Meet our goji partner'}
           </Link>
         </div>
       </section>
+      <section className="ft-container ft-section ft-origin-gallery">
+        <figure>
+          <div>
+            <Image
+              src="/images/brand-v2/hengtai-origin.jpg"
+              alt={
+                zh ? '枸杞基地采收场景' : 'Goji harvesting at the growing base'
+              }
+              fill
+              sizes="(max-width: 800px) 100vw, 60vw"
+            />
+          </div>
+          <figcaption>
+            {zh
+              ? '采收的时刻，是产地故事最真实的一页。'
+              : 'The harvest brings the origin story to life.'}
+          </figcaption>
+        </figure>
+        <figure>
+          <div>
+            <Image
+              src="/images/brand-v2/goji-editorial.png"
+              alt={zh ? '一碗红枸杞' : 'A bowl of red goji berries'}
+              fill
+              sizes="(max-width: 800px) 100vw, 35vw"
+            />
+          </div>
+          <figcaption>
+            {zh
+              ? '从一颗果实，到更多餐桌。'
+              : 'From one small berry to more tables.'}
+          </figcaption>
+        </figure>
+      </section>
+      <section className="ft-values-section">
+        <div className="ft-container">
+          <div className="ft-heading">
+            <h2>{zh ? '我们在意的事。' : 'What matters to us.'}</h2>
+          </div>
+          <div className="ft-service-columns">
+            {(zh
+              ? [
+                  [
+                    '看见真实产地',
+                    '与生产者沟通，让产品有清晰的来源，让品牌故事有真实的起点。',
+                  ],
+                  [
+                    '尊重食材本身',
+                    '关注风味、规格、加工与食用场景，以适合产品的方式呈现它。',
+                  ],
+                  [
+                    '连接长久合作',
+                    '理解品牌与采购需求，把每次沟通落在具体的产品和细节上。',
+                  ],
+                ]
+              : [
+                  [
+                    'A clear sense of origin',
+                    'Connect with producers so that products have a clear source and brand stories have a real starting point.',
+                  ],
+                  [
+                    'Respect for the ingredient',
+                    'Pay attention to flavour, specification, processing and how the food will actually be used.',
+                  ],
+                  [
+                    'Thoughtful relationships',
+                    'Understand the brand and buyer brief, and keep the conversation grounded in the product and its details.',
+                  ],
+                ]
+            ).map(([title, copy]) => (
+              <article key={title}>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <BrandContactBand locale={locale} />
     </main>
   );
 }

@@ -7,6 +7,17 @@
 
 @import '../../../../packages/ui/src/design-tokens.css';
 
+:root {
+  --ft-ink: #24372b;
+  --ft-green: #244d38;
+  --ft-muted: #697569;
+  --ft-white: #ffffff;
+  --ft-mist: #f2f6f2;
+  --ft-berry: #b7373d;
+  --ft-body: 'DM Sans', 'Microsoft YaHei', sans-serif;
+  --ft-display: 'DM Serif Display', 'Songti SC', SimSun, serif;
+}
+
 /* ============================================================
    1. Reset & Base
    ============================================================ */

@@ -1,0 +1,12 @@
+.git
+node_modules
+**/node_modules
+**/.next
+**/dist
+**/*.tsbuildinfo
+.env*
+docs
+*.docx
+*.pptx
+generate-bp-*.js
+.vercel-tmp
