@@ -55,7 +55,7 @@ export function BrandNavigation({ locale }: { locale: string }) {
         <div className="ft-header__actions">
           <LanguageSwitcher />
           <Link className="ft-button ft-button--compact" href="/sourcing">
-            {zh ? '联系我们' : 'Let’s talk'}
+            {zh ? '联系我们' : 'Contact'}
           </Link>
         </div>
       </div>
